@@ -39,6 +39,55 @@ class CasesController
     }
 
     /**
+     * solveR_1
+     * 
+     * @param CaseDTO $oldCase
+     * @return void
+     */
+    public function solveR_1(CaseDTO $oldCase)  {
+        $date = $this->subtractDaysFromDate($oldCase->getDate(), 1);
+        $this->addNewFollowingToCase($oldCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
+        $this->saveCase($oldCase);
+    }
+
+    /**
+     * Restar n días de una fecha
+     * 
+     * @param date fecha a usar
+     * @param number_of_days número de días a restar 
+     * 
+     * @return resultDate
+     */
+    public function subtractDaysFromDate($date, $number_of_days)
+    {
+        $dateTime = new DateTime($date);
+        $resultDate = $dateTime->sub(new DateInterval('P'.$number_of_days.'D'));        
+        $resultDate = $resultDate->format('Y-m-d');
+
+        return $resultDate;
+    }
+
+    /**
+     * Crea un seguimiento nuevo asociado al caso existente
+     * 
+     * @param CaseDTO $caseDTO
+     * @return void
+     */
+    public function addNewFollowingToCase(&$caseDTO, $date, $status)
+    {
+        $followingDTO = new FollowingDTO();
+        $followingDTO->setCaseId($caseDTO->getId());
+        $followingDTO->setDate($date);
+        $followingDTO->setStatus($status);
+
+        $followings = $caseDTO->getFollowings();
+        array_unshift($followings, $followingDTO);
+        $caseDTO->setFollowings($followings);
+
+        $this->saveCase($caseDTO);
+    }
+
+    /**
      * Divide el caso en seguimientos que respetan el flujo normal del sistema.
      * Los seguimentos en el primer grupo quedarán en el caso existente los demás se asignará a nuevos casos.
      * La fecha de apertura del caso existente permanecerá igual.
@@ -54,7 +103,7 @@ class CasesController
     {
 
         $mainCaseDTO = $this->updateOldCase($oldCaseDTO, [$oldCaseDTO->getFollowings()[0], $oldCaseDTO->getFollowings()[1]]);
-        $newCasesDTO = $this->createNewsCases($oldCaseDTO, $arrIdentifiers);
+        $newCasesDTO = $this->createNewCases($oldCaseDTO, $arrIdentifiers);
 
         $cases = array_merge($mainCaseDTO, $newCasesDTO);
 
@@ -71,9 +120,9 @@ class CasesController
      * @param int[] $arrIdentifiers
      * @return CaseDTO[]
      */
-    public function createNewsCases($oldCaseDTO, $arrIdentifiers)
+    public function createNewCases($oldCaseDTO, $arrIdentifiers)
     {
-        $newsCasesDTO = array();
+        $newCasesDTO = array();
 
         for ($i = 1; $i <= count($arrIdentifiers); $i++) {
             $groupFollowings = $arrIdentifiers[$i];
@@ -86,10 +135,10 @@ class CasesController
 
             $newCase = $this->caseDAO->save($caseDTO);
 
-            $newsCasesDTO[] = $newCase;
+            $newCasesDTO[] = $newCase;
         }
 
-        return $newsCasesDTO;
+        return $newCasesDTO;
     }
 
     /**
@@ -171,9 +220,13 @@ class CasesController
             }
         }
 
-        if (count($caseDTO->getFollowings()) > 0) {
-            foreach ($caseDTO->getFollowings() as $followingsDTO) {
-                $this->followingDAO->update($followingsDTO);
+        if(count($caseDTO->getFollowings())>0){
+            foreach($caseDTO->getFollowings() as $followingDTO){
+                if(is_null($followingDTO->getId())){
+                    $this->followingDAO->save($followingDTO);    
+                }else{
+                    $this->followingDAO->update($followingDTO);
+                }
             }
         }
     }
