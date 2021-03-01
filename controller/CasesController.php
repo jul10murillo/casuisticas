@@ -41,25 +41,62 @@ class CasesController
     /**
      * solveR_1
      * 
-     * @param CaseDTO $oldCase
+     * @param CaseDTO $currentCase
      * @return void
      */
-    public function solveR_1(CaseDTO $oldCase)  {
-        $date = $this->subtractDaysFromDate($oldCase->getDate(), 1);
-        $this->addNewFollowingToCase($oldCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
-        $this->saveCase($oldCase);
+    public function solveR_1(CaseDTO $currentCase)
+    {
+        $date = $this->subtractDaysFromDate($currentCase->getDate(), 1);
+        $this->addNewFollowingToCase($currentCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
+        $this->saveCase($currentCase);
     }
 
     /**
      * solveD_1
      * 
-     * @param CaseDTO $oldCase
+     * @param CaseDTO $currentCase
      * @return void
      */
-    public function solveD_1(CaseDTO $oldCase)  {
-        $date = $this->subtractDaysFromDate($oldCase->getDate(), 1);
-        $this->addNewFollowingToCase($oldCase, $date, Constants::HEALTH_STATUS_SUSPICIOUS);
-        $this->saveCase($oldCase);
+    public function solveD_1(CaseDTO $currentCase)
+    {
+        $date = $this->subtractDaysFromDate($currentCase->getDate(), 1);
+        $this->addNewFollowingToCase($currentCase, $date, Constants::HEALTH_STATUS_SUSPICIOUS);
+        $this->saveCase($currentCase);
+    }
+
+    /**
+     * solveCR_11
+     * 
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveCR_11(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $confirmed_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_CONFIRMED);
+        $recovered_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_RECOVERED);
+
+        $recovered_following->setDate($this->addDaysToDate($confirmed_following->getDate(), '1'));
+        $this->saveCase($currentCase);
+    }
+
+    /**
+     * Buscar seguimiento por estado
+     *
+     * @param array $followings
+     * @param string $status
+     * @return FollowingDTO $followingDTO
+     */
+    public function searchFollowingByStatus($followings, $status)
+    {
+        $followingDTO = null;
+        foreach ($followings as $following) {
+            if($following->getStatus() == $status){
+                $followingDTO = $following;
+            }
+        }
+        return $followingDTO;
     }
 
     /**
@@ -74,6 +111,23 @@ class CasesController
     {
         $dateTime = new DateTime($date);
         $resultDate = $dateTime->sub(new DateInterval('P'.$number_of_days.'D'));        
+        $resultDate = $resultDate->format('Y-m-d');
+
+        return $resultDate;
+    }
+
+    /**
+     * Agregar n días de una fecha
+     * 
+     * @param date fecha a usar
+     * @param number_of_days número de días a sumar 
+     * 
+     * @return resultDate
+     */
+    public function addDaysToDate($date, $number_of_days)
+    {
+        $dateTime = new DateTime($date);
+        $resultDate = $dateTime->add(new DateInterval('P'.$number_of_days.'D'));        
         $resultDate = $resultDate->format('Y-m-d');
 
         return $resultDate;
