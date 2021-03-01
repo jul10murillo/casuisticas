@@ -51,6 +51,18 @@ class CasesController
     }
 
     /**
+     * solveD_1
+     * 
+     * @param CaseDTO $oldCase
+     * @return void
+     */
+    public function solveD_1(CaseDTO $oldCase)  {
+        $date = $this->subtractDaysFromDate($oldCase->getDate(), 1);
+        $this->addNewFollowingToCase($oldCase, $date, Constants::HEALTH_STATUS_SUSPICIOUS);
+        $this->saveCase($oldCase);
+    }
+
+    /**
      * Restar n días de una fecha
      * 
      * @param date fecha a usar
