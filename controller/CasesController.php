@@ -83,7 +83,7 @@ class CasesController
         $this->saveCase($currentCase);
     }
 
- /**
+    /**
      * solveCRCR_1234
      * 
      * @param CaseDTO $currentCase
@@ -141,6 +141,115 @@ class CasesController
         $this->saveCase($currentCase); 
     }
 
+    /**
+     * solveSDSDSD_123456
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSDSDSD_123456(CaseDTO $currentCase)
+    {
+        $arrIdentifiers = [[1, 2], [3, 4], [5,6]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+        return $cases;  
+    }
+
+    /**
+     * solveSCRSR_11234
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSCRSR_11234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $suspicius_following = $this->searchFollowingsByStatus($followings, Constants::HEALTH_STATUS_SUSPICIOUS);
+        $confirmed_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_CONFIRMED);
+        $recovered_following = $this->searchFollowingsByStatus($followings, Constants::HEALTH_STATUS_RECOVERED);    
+        
+        $suspicius_following[0]->setDate($this->subtractDaysFromDate($confirmed_following->getDate(), '1'));
+
+        $currentCase->setFollowings([]);
+
+        $currentCase->setFollowings([
+            $suspicius_following[0], 
+            $confirmed_following, 
+            $recovered_following[0], 
+            $suspicius_following[1], 
+            $recovered_following[1]
+        ]);
+
+        $this->saveCase($currentCase); 
+    }
+
+    /**
+     * solveSDCR_1234
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSDCR_1234(CaseDTO $currentCase)
+    {
+        $arrIdentifiers = [[1, 2], [3, 4]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+        return $cases;  
+    } 
+
+    /**
+     * solveSC_11
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSC_11(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $suspicius_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_SUSPICIOUS);
+        $confirmed_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_CONFIRMED);
+
+        $suspicius_following->setDate($this->subtractDaysFromDate($confirmed_following->getDate(), '1'));
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$suspicius_following, $confirmed_following]);
+
+        $this->saveCase($currentCase); 
+    }
+
+    /**
+     * solveSDSCR_12345
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSDSCR_12345(CaseDTO $currentCase){
+        $arrIdentifiers = [[1, 2], [3, 4, 5]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+        return $cases;  
+    }
+
+ /**
+  * solveF_1 
+    *
+    * @param CaseDTO $currentCase
+    * @return void
+  */
+    public function solveF_1(CaseDTO $currentCase){
+     
+        $followings = $currentCase->getFollowings();
+        $deceased_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_DESEASED);
+
+        $date =  $this->subtractDaysFromDate($deceased_following->getDate(), '1');
+
+        $this->addNewFollowingToCase($currentCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
+        $this->saveCase($currentCase);
+      
+
+
+    }
+
+
 
    
     /**
@@ -162,6 +271,24 @@ class CasesController
     }
 
     /**
+     * Buscar los seguimientos de un caso por estado
+     *
+     * @param array $followings
+     * @param string $status
+     * @return void
+     */
+    public function searchFollowingsByStatus($followings, $status)
+    {
+        $followings_array = [];
+        foreach ($followings as $following) {
+            if($following->getStatus() == $status){
+                $followings_array[] = $following;
+            }
+        }
+        return $followings_array;
+    }
+
+    /**
      * Restar n días de una fecha
      * 
      * @param date fecha a usar
@@ -169,10 +296,10 @@ class CasesController
      * 
      * @return resultDate
      */
-    public function subtractDaysFromDate($date, $number_of_days)
+    public function subtractDaysFromDate($date, $numberOfDays)
     {
         $dateTime = new DateTime($date);
-        $resultDate = $dateTime->sub(new DateInterval('P'.$number_of_days.'D'));        
+        $resultDate = $dateTime->sub(new DateInterval('P'.$numberOfDays.'D'));        
         $resultDate = $resultDate->format('Y-m-d');
 
         return $resultDate;
