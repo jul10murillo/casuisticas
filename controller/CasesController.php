@@ -30,9 +30,7 @@ class CasesController
     {
         
         $oldCase = $this->caseDAO->getById($idOldCase);
-
         $arrIdentifiers = [[1, 2], [3, 4]];
-
         $cases = $this->caseDivider($oldCase, $arrIdentifiers);
 
         return $cases;
@@ -78,9 +76,73 @@ class CasesController
         $recovered_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_RECOVERED);
 
         $recovered_following->setDate($this->addDaysToDate($confirmed_following->getDate(), '1'));
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$confirmed_following, $recovered_following]);
+
         $this->saveCase($currentCase);
     }
 
+ /**
+     * solveCRCR_1234
+     * 
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveCRCR_1234(CaseDTO $currentCase)
+    {
+        $arrIdentifiers = [[1, 2], [3, 4]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+        return $cases;       
+    } 
+
+
+    /**
+     * solveSD_11
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSD_11(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $suspicius_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_SUSPICIOUS);
+        $discarted_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_DISCARDED);
+
+        $discarted_following->setDate($this->addDaysToDate($suspicius_following->getDate(), '1'));
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$suspicius_following, $discarted_following]);
+
+        $this->saveCase($currentCase);
+    }
+
+
+    /**
+    * solveSCR_112
+    * 
+    * @param CaseDTO $currentCase
+    * @return void
+    */
+    public function solveSCR_112(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $suspicius_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_SUSPICIOUS);
+        $confirmed_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_CONFIRMED);
+        $recovered_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_RECOVERED);
+
+        $suspicius_following->setDate($this->subtractDaysFromDate($confirmed_following->getDate(), '1'));
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$suspicius_following, $confirmed_following, $recovered_following]);
+
+        $this->saveCase($currentCase); 
+    }
+
+
+   
     /**
      * Buscar seguimiento por estado
      *
@@ -132,6 +194,7 @@ class CasesController
 
         return $resultDate;
     }
+
 
     /**
      * Crea un seguimiento nuevo asociado al caso existente
