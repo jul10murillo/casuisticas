@@ -353,10 +353,10 @@ class CasesController
      */
     public function solveSDSD_1123(CaseDTO $currentCase)
     {
-       $following = $currentCase->getFollowings();
+       $followings = $currentCase->getFollowings();
 
-       $suspicius_following =  $this->searchFollowingsByStatus($following, constants::HEALTH_STATUS_SUSPICIOUS);
-       $discarted_following = $this->searchFollowingBysStatus($followings, Constants::HEALTH_STATUS_DISCARDED); 
+       $suspicius_following =  $this->searchFollowingsByStatus($followings, constants::HEALTH_STATUS_SUSPICIOUS);
+       $discarted_following =  $this->searchFollowingsByStatus($followings, Constants::HEALTH_STATUS_DISCARDED); 
 
        $currentCase->setfollowings([]);
        $currentCase->setFollowings($suspicius_following[0],$discarted_following[1] );
