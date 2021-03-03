@@ -16,7 +16,7 @@ class DataController
         $check_history = $this->checkHistory($cases); //Comprobamos el orden de la historia de los casos
         $check_status  = $this->checkOrder($check_history); //Comprobamos si el caso está bien o hay que corregirlo
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
-        $this->startSolveBadCases($group_status['casos_malos']);
+        $this->startSolveBadCases($badCases);
     }
 
     /**
