@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,6 +9,15 @@
 class DataController
 {
 
+    public function init()
+    {
+        $data          = $this->getData();
+        $cases         = $this->groupHistory($data['cases']); //Grupo de estados (Casos)
+        $check_history = $this->checkHistory($cases); //Comprobamos el orden de la historia de los casos
+        $check_status  = $this->checkOrder($check_history); //Comprobamos si el caso está bien o hay que corregirlo
+        $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
+        $this->startSolveBadCases($group_status['casos_malos']);
+    }
 
     /**
      * Obtener los datos del archivo csv
@@ -16,8 +25,8 @@ class DataController
      */
     public function getData()
     {
-        $csv_archivo = fopen(dirname(__DIR__, 1) . '/assets/import/Extraccion.csv', 'r');
-        $i = 0;
+        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/Extraccion.csv', 'r');
+        $i            = 0;
         while (($registro_csv = fgetcsv($csv_archivo)) !== false) {
             $i++;
             if ($i > 1) {
@@ -30,13 +39,13 @@ class DataController
             $data[$row] = explode(';', $value[0]);
         }
 
-        $new_data = [];
+        $new_data           = [];
         $new_data['people'] = [];
         foreach ($data as $row) {
             if (is_numeric($row[0])) {
                 $new_data['cases'][$row[0]] = [$row[1], $row[2], $this->classifyCases($row[4]), $this->classifyCases($row[5])];
                 if (!isset($new_data['people'][$row[1]])) {
-                    $persona = [
+                    $persona                     = [
                         $this->title($row[7]), $row[6], $this->title($row[8]), $this->title($row[9]), $this->title($row[10] . ' - ' . $row[11]), $this->title($row[13])
                     ];
                     $new_data['people'][$row[1]] = $persona;
@@ -82,8 +91,6 @@ class DataController
             "\\N"             => null,
         ];
 
-
-
         $status = str_replace(array('\'', '"'), '', $status);
         return $classification[$status];
     }
@@ -100,7 +107,8 @@ class DataController
         foreach ($data as $value) {
             if (isset($group[$value[0]])) {
                 array_push($group[$value[0]], [$value[1], $value[2], $value[3]]);
-            } else {
+            }
+            else {
                 $group[$value[0]] = [];
                 array_push($group[$value[0]], [$value[1], $value[2], $value[3]]);
             }
@@ -121,23 +129,23 @@ class DataController
      */
     public function checkHistory($cases)
     {
-        $orderCase = [];
+        $orderCase  = [];
         $orderDates = [];
 
         $result = [];
 
         foreach ($cases as $case => $status) {
             $last_date = "";
-            $id = null;
+            $id        = null;
             foreach ($status as $value) {
                 if ($id != $case) {
                     $num = 0;
                 }
-                $num = $this->checkDates($value[0], $num, $last_date);
-                $orderCase[$case] .= $value[1];
+                $num               = $this->checkDates($value[0], $num, $last_date);
+                $orderCase[$case]  .= $value[1];
                 $orderDates[$case] .= $num;
-                $id = $case;
-                $last_date = $value[0];
+                $id                = $case;
+                $last_date         = $value[0];
             }
             $result[$case] = $orderCase[$case] . '_' . $orderDates[$case];
         }
@@ -154,12 +162,12 @@ class DataController
      */
     private function checkDates($first_date, $num, $last_date = "")
     {
-        $equals = false;
-        $last_date = str_replace(array('\'', '"'), '', $last_date);
+        $equals       = false;
+        $last_date    = str_replace(array('\'', '"'), '', $last_date);
         $initial_date = date("Y-m-d", strtotime($last_date));
         if ($first_date != "") {
             $first_date = str_replace(array('\'', '"'), '', $first_date);
-            $end_date = date("Y-m-d", strtotime($first_date));
+            $end_date   = date("Y-m-d", strtotime($first_date));
             if ($end_date == $initial_date) {
                 $equals = true;
             }
@@ -176,13 +184,14 @@ class DataController
      */
     public function groupByStatus($check_status)
     {
-        $good_cases = [];
-        $bad_cases = [];
+        $good_cases      = [];
+        $bad_cases       = [];
         $cases_to_divide = [];
         foreach ($check_status['casos_malos'] as $key => $value) {
             if (isset($bad_cases[$value])) {
                 array_push($bad_cases[$value], $key);
-            } else {
+            }
+            else {
                 $bad_cases[$value] = [];
                 array_push($bad_cases[$value], $key);
             }
@@ -190,7 +199,8 @@ class DataController
         foreach ($check_status['casos_buenos'] as $key => $value) {
             if (isset($good_cases[$value])) {
                 array_push($good_cases[$value], $key);
-            } else {
+            }
+            else {
                 $good_cases[$value] = [];
                 array_push($good_cases[$value], $key);
             }
@@ -198,7 +208,8 @@ class DataController
         foreach ($check_status['casos_para_dividir'] as $key => $value) {
             if (isset($cases_to_divide[$value])) {
                 array_push($cases_to_divide[$value], $key);
-            } else {
+            }
+            else {
                 $cases_to_divide[$value] = [];
                 array_push($cases_to_divide[$value], $key);
             }
@@ -214,8 +225,8 @@ class DataController
      */
     public function checkOrder($check_history)
     {
-        $good_cases = [];
-        $bad_cases = [];
+        $good_cases      = [];
+        $bad_cases       = [];
         $cases_to_divide = [];
 
         foreach ($check_history as $case => $history) {
@@ -245,49 +256,49 @@ class DataController
                     $good_cases[$case] = $history;
                     break;
                 case 'SDSDSD_123455':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SDSDSD_123456':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SDSDS_12345':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SDSD_1123':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SDSD_1233':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SDSD_1234':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SCRSCR_112334':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SCRS_1234':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SDSCR_12334':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SDSCR_12345':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SDSC_1234':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SDSDSCR_1234556':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'SDSDSCR_1234567':
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
                 case 'CR_12':
                     $good_cases[$case] = $history;
                     break;
                 default:
-                    $bad_cases[$case] = $history;
+                    $bad_cases[$case]  = $history;
                     break;
             }
         }
@@ -301,8 +312,8 @@ class DataController
      */
     public function countByStatus($check_status)
     {
-        $good_cases = [];
-        $bad_cases = [];
+        $good_cases      = [];
+        $bad_cases       = [];
         $cases_to_divide = [];
 
         foreach ($check_status['casos_malos'] as $id => $case) {
@@ -342,7 +353,7 @@ class DataController
      */
     public function getPeople($status, $people)
     {
-        $tigo = [
+        $tigo     = [
             'SR_12', 'SCRSCR_112334', 'CD_12', 'CSRDR_12345',
             'SCDR_1123', 'SCDR_1234', 'SDCS_1233', 'SCDRSR_112234',
             'CRCRDRDR_11234567', 'SCRSRV_112345', 'UCR_123',
@@ -370,7 +381,7 @@ class DataController
         foreach ($personas as $value) {
             for ($i = 0; $i < 7; $i++) {
                 $value[$i] = str_replace('"', '', $value[$i]);
-                $template .= trim($value[$i]) != '' &&  trim($value[$i]) != '-' ? '"' . $value[$i] . '";' : '"No";';
+                $template  .= trim($value[$i]) != '' && trim($value[$i]) != '-' ? '"' . $value[$i] . '";' : '"No";';
             }
             $template = rtrim($template, ';');
             $template .= '<br>';
@@ -378,4 +389,60 @@ class DataController
 
         return $template;
     }
+
+    /**
+     * 
+     * @param type $badCases
+     * @return string
+     */
+    function startSolveBadCases($badCases)
+    {
+        try {
+            $caseController   = new CasesController();
+            $countNoFunctions = 0;
+            $countFunctions   = 0;
+
+            foreach ($badCases as $key => $badCase) {
+                $function = 'solve' . $key;
+                if (method_exists($caseController, $function)) {
+                    foreach ($badCase as $key => $idCase) {
+                        try {
+                            $response = $caseController->$function($idCase);
+                        }
+                        catch (\Throwable $th) {
+                            $response = 'Error en la función :' . $function . ' id: ' . $idCase;
+                        }
+                    }
+                    print_r($key);
+                    echo '<br>';
+                    print_r($response);
+                    echo '<hr>';
+                    echo '<br>';
+                    $countFunctions++;
+                }
+                else {
+                    echo 'No existe la funcion para el caso: ';
+                    print_r($key);
+                    echo '<br>';
+                    print_r($badCase);
+                    echo '<hr>';
+                    echo '<br>';
+                    $countNoFunctions++;
+                }
+            }
+            echo '<hr>';
+            echo '<br>';
+            echo ' Total Casos sin funciones: ';
+            print_r($countNoFunctions);
+            echo '<hr>';
+            echo '<br>';
+            echo ' Total Casos solucionados: ';
+            print_r($countFunctions);
+        }
+        catch (\Throwable $th) {
+            return 'Error';
+        }
+        return 'finalizado';
+    }
+
 }
