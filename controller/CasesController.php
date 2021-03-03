@@ -630,7 +630,8 @@ class CasesController
     }
 
  
-    public function solveDS_12(CaseDTO $currentCase){
+    public function solveDS_12(CaseDTO $currentCase)
+    {
         
         $followings = $currentCase->getFollowings();
         
@@ -647,6 +648,18 @@ class CasesController
 
     }
 
+    public function SVD_122(CaseDTO $currentCase){
+
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[0], $followings[2] );
+          
+        $this->saveCase($currentCase);
+
+        return $currentCase;
+        
+    }
     /**
      * Buscar seguimiento por estado
      *
