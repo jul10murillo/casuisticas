@@ -6,6 +6,12 @@ require_once __DIR__ . "/controller/CasesController.php";
 
 $dataController = new DataController();
 $data = $dataController->getData();
+$cases = $dataController->groupHistory($data['cases']);               //Grupo de estados (Casos)
+$check_history = $dataController->checkHistory($cases);                       //Comprobamos el orden de la historia de los casos
+$check_status = $dataController->checkOrder($check_history);                 //Comprobamos si el caso está bien o hay que corregirlo
+$group_status = $dataController->groupByStatus($check_status);               //Agrupamos los casos por estado
+$count_status = $dataController->countByStatus($group_status);               //Contamos los casos por estado
+$people = $dataController->getPeople($check_status, $data['people']);  //personas por casos 
 
 main($group_status);
 exit;
@@ -24,7 +30,7 @@ function startSolveBadCases($badCases) {
         $caseController = new CasesController();
         $countNoFunctions = 0;
         $countFunctions = 0;
-        
+
         foreach ($badCases as $key => $badCase) {
             $function = 'solve' . $key;
             if (method_exists($caseController, $function)) {
