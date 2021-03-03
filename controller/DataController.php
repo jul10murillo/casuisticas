@@ -16,11 +16,7 @@ class DataController
         $check_history = $this->checkHistory($cases); //Comprobamos el orden de la historia de los casos
         $check_status  = $this->checkOrder($check_history); //Comprobamos si el caso está bien o hay que corregirlo
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
-<<<<<<< HEAD
         $this->startSolveBadCases($group_status['casos_malos']);
-=======
-        $this->startSolveBadCases($badCases);
->>>>>>> 34fbbf63697388802465bc9744b252aeb1923a78
     }
 
     /**
@@ -111,8 +107,7 @@ class DataController
         foreach ($data as $value) {
             if (isset($group[$value[0]])) {
                 array_push($group[$value[0]], [$value[1], $value[2], $value[3]]);
-            }
-            else {
+            } else {
                 $group[$value[0]] = [];
                 array_push($group[$value[0]], [$value[1], $value[2], $value[3]]);
             }
@@ -194,8 +189,7 @@ class DataController
         foreach ($check_status['casos_malos'] as $key => $value) {
             if (isset($bad_cases[$value])) {
                 array_push($bad_cases[$value], $key);
-            }
-            else {
+            } else {
                 $bad_cases[$value] = [];
                 array_push($bad_cases[$value], $key);
             }
@@ -203,8 +197,7 @@ class DataController
         foreach ($check_status['casos_buenos'] as $key => $value) {
             if (isset($good_cases[$value])) {
                 array_push($good_cases[$value], $key);
-            }
-            else {
+            } else {
                 $good_cases[$value] = [];
                 array_push($good_cases[$value], $key);
             }
@@ -212,8 +205,7 @@ class DataController
         foreach ($check_status['casos_para_dividir'] as $key => $value) {
             if (isset($cases_to_divide[$value])) {
                 array_push($cases_to_divide[$value], $key);
-            }
-            else {
+            } else {
                 $cases_to_divide[$value] = [];
                 array_push($cases_to_divide[$value], $key);
             }
@@ -412,8 +404,7 @@ class DataController
                     foreach ($badCase as $key => $idCase) {
                         try {
                             $response = $caseController->$function($idCase);
-                        }
-                        catch (\Throwable $th) {
+                        } catch (\Throwable $th) {
                             $response = 'Error en la función :' . $function . ' id: ' . $idCase;
                         }
                     }
@@ -423,8 +414,7 @@ class DataController
                     echo '<hr>';
                     echo '<br>';
                     $countFunctions++;
-                }
-                else {
+                } else {
                     echo 'No existe la funcion para el caso: ';
                     print_r($key);
                     echo '<br>';
@@ -442,11 +432,9 @@ class DataController
             echo '<br>';
             echo ' Total Casos solucionados: ';
             print_r($countFunctions);
-        }
-        catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             return 'Error';
         }
         return 'finalizado';
     }
-
 }
