@@ -609,7 +609,7 @@ class CasesController
      */
     public function caseDivider($oldCaseDTO, $arrIdentifiers)
     {
-
+        
         $mainCaseDTO = $this->updateOldCase($oldCaseDTO, [$oldCaseDTO->getFollowings()[0], $oldCaseDTO->getFollowings()[1]]);
         $newCasesDTO = $this->createNewCases($oldCaseDTO, $arrIdentifiers);
 
@@ -639,7 +639,7 @@ class CasesController
 
             $caseDTO->setDocument($oldCaseDTO->getDocument());
 
-            $caseDTO->addFollowingsToCase($caseDTO, $this->getFollowingsByPositions($oldCaseDTO, $groupFollowings));
+            $caseDTO->setFollowings($this->getFollowingsByPositions($oldCaseDTO, $groupFollowings));
 
             $newCase = $this->caseDAO->save($caseDTO);
 
@@ -672,11 +672,15 @@ class CasesController
      */
     public function updateOldCase($oldCaseDTO, $followingsDTO)
     {
+        
         $caseDTO = new CaseDTO();
-
-        $caseDTO->setId(end($oldCaseDTO->getId()));
-        $this->addFollowingsToCase($caseDTO, $followingsDTO);
-
+        
+        $caseDTO->setId($oldCaseDTO->getId());
+        
+        $caseDTO->setDocument($oldCaseDTO->getDocument());
+        
+        $this->changeCaseToLastFollowing($caseDTO, $followingsDTO);
+        
         $this->caseDAO->update($caseDTO);
     }
 
@@ -685,12 +689,13 @@ class CasesController
      * @param CaseDTO $caseDTO
      * @param FollowingDTO[] $followingsDTO
      */
-    public function addFollowingsToCase(&$caseDTO, $followingsDTO)
+    public function changeCaseToLastFollowing(&$caseDTO, $followingsDTO)
     {
         $caseDTO->setDate($followingsDTO[count($followingsDTO) - 1]->getDate());
+        
         $caseDTO->setHealthStatus($followingsDTO[count($followingsDTO) - 1]->getStatus());
-
         $caseDTO->setFollowings($followingsDTO);
+
     }
 
     /**
