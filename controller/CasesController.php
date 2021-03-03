@@ -698,7 +698,7 @@ class CasesController
         $arrIdentifiers = [[1, 2], [3]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
-        return $case;
+        return $cases;
     }
 
     public function solveSVD_122(CaseDTO $currentCase)
@@ -744,7 +744,15 @@ class CasesController
 
         return $currentCase;
        
-    }   
+    } 
+    
+    public function solveSDC_123(CaseDTO $currentCase)
+    {
+        $arrIdentifiers = [[1, 2], [3]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
 
 
     /**
