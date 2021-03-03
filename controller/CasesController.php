@@ -47,6 +47,8 @@ class CasesController
         $date = $this->subtractDaysFromDate($currentCase->getDate(), 1);
         $this->addNewFollowingToCase($currentCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
         $this->saveCase($currentCase);
+
+        return $currentCase;
     }
 
     /**
@@ -60,6 +62,8 @@ class CasesController
         $date = $this->subtractDaysFromDate($currentCase->getDate(), 1);
         $this->addNewFollowingToCase($currentCase, $date, Constants::HEALTH_STATUS_SUSPICIOUS);
         $this->saveCase($currentCase);
+
+        return $currentCase;
     }
 
     /**
@@ -81,6 +85,8 @@ class CasesController
         $currentCase->setFollowings([$confirmed_following, $recovered_following]);
 
         $this->saveCase($currentCase);
+
+        return $currentCase;
     }
 
     /**
@@ -116,6 +122,8 @@ class CasesController
         $currentCase->setFollowings([$suspicius_following, $discarted_following]);
 
         $this->saveCase($currentCase);
+
+        return $currentCase;
     }
 
 
@@ -139,6 +147,8 @@ class CasesController
         $currentCase->setFollowings([$suspicius_following, $confirmed_following, $recovered_following]);
 
         $this->saveCase($currentCase); 
+
+        return $currentCase;
     }
 
     /**
@@ -180,7 +190,9 @@ class CasesController
             $recovered_following[1]
         ]);
 
-        $this->saveCase($currentCase); 
+        $this->saveCase($currentCase);
+        
+        return $currentCase;
     }
 
     /**
@@ -215,6 +227,8 @@ class CasesController
         $currentCase->setFollowings([$suspicius_following, $confirmed_following]);
 
         $this->saveCase($currentCase); 
+
+        return $currentCase;
     }
 
     /**
@@ -244,6 +258,8 @@ class CasesController
 
         $this->addNewFollowingToCase($currentCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
         $this->saveCase($currentCase);
+
+        return $currentCase;
     }
 
     /**
@@ -265,6 +281,8 @@ class CasesController
         $currentCase->setFollowings([$suspicius_following, $discarded_following]);
 
         $this->saveCase($currentCase); 
+
+        return $currentCase;
     }
 
     /**
@@ -310,6 +328,8 @@ class CasesController
 
         $this->saveCase($currentCase);  
 
+        return $currentCase;
+
     }
     /**
      * solveSDSDS_12345
@@ -343,6 +363,8 @@ class CasesController
         $currentCase->setfollowings([]);
         $currentCase->setFollowings([$suspicius_following, $confirmed_following, $recovered_following]);
         $this->saveCase($currentCase);  
+
+        return $currentCase;
     }
 
     /**
@@ -357,7 +379,9 @@ class CasesController
        
        $currentCase->setfollowings([]);
        $currentCase->setFollowings($followings[0],$followings[4] );
-       $this->saveCase($currentCase);           
+       $this->saveCase($currentCase);     
+       
+       return $currentCase;
     }
 
     /**
@@ -387,7 +411,8 @@ class CasesController
         $currentCase->setfollowings([]);
         $currentCase->setFollowings([$followings[0], $followings[3]] );
         $this->saveCase($currentCase); 
-        //Crear método.
+
+        return $currentCase;     
     }
     /**
      * solveRCR_123
@@ -401,6 +426,8 @@ class CasesController
          $currentCase->setFollowings([]);
          $currentCase->setFollowings([$followings[1], $followings[2]] );
          $this->saveCase($currentCase); 
+
+         return $currentCase;
 
     }
 
@@ -424,6 +451,8 @@ class CasesController
         $currentCase->setFollowings([]);
         $currentCase->setFollowings([$suspicius_followings[0], $confirmed_followings[0], $recovered_followings[0], $suspicius_followings[1], $confirmed_followings[1], $recovered_followings[1] ]);
         $this->saveCase($currentCase);   
+
+        return $currentCase;
     }
 
    
@@ -442,6 +471,8 @@ class CasesController
         $this->addNewFollowingToCase($currentCase, $dayConfirmed, Constants::HEALTH_STATUS_CONFIRMED);
 
         $this->saveCase($currentCase);  
+
+        return $currentCase;
     }
 
    /**   
@@ -468,6 +499,8 @@ class CasesController
         $currentCase->setFollowings([ $followings[0],  $followings[4]]);
 
         $this->saveCase($currentCase);
+
+        return $currentCase;
     } 
     
 
@@ -483,6 +516,8 @@ class CasesController
         $currentCase->setFollowings([ $followings[0],  $followings[4]]);
 
         $this->saveCase($currentCase);
+
+        return $currentCase;
     }
     
     /**   
@@ -498,6 +533,8 @@ class CasesController
         $currentCase->setFollowings([ $followings[0],  $followings[3]]);
 
         $this->saveCase($currentCase);
+
+        return $currentCase;
     }   
 
    
