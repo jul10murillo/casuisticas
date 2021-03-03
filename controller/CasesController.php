@@ -824,8 +824,22 @@ class CasesController
         $this->deleteCase($followings[5]->getId());
 
         return $cases;
-    }
+    }    
 
+    public function solveCRCRDR_123455(CaseDTO $currentCase){
+
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0],$followings[1], $followings[2], $followings[3], $followings[4]]);
+
+        $arrIdentifiers = [[1,2], [3,4,5]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        $this->deleteCase($followings[5]->getId());        
+
+        return $cases;
+    }
 
     /**
      * Buscar seguimiento por estado
