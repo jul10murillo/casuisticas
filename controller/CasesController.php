@@ -558,7 +558,13 @@ class CasesController
         $arrIdentifiers = [ [1,2], [4,5] ]; 
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
         return $case; 
-    }   
+    }  
+
+    public function solveCSD_123(CaseDTO $currentCase){
+        $arrIdentifiers = [ [1], [2,3] ]; 
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+        return $case; 
+    }
 
    
     /**
@@ -669,8 +675,13 @@ class CasesController
      */
     public function caseDivider($oldCaseDTO, $arrIdentifiers)
     {
+        if(count(oldCaseDTO)==1){
+            $mainCaseDTO = $this->updateOldCase($oldCaseDTO, [$oldCaseDTO->getFollowings()[0]]);
+        }else{
+            $mainCaseDTO = $this->updateOldCase($oldCaseDTO, [$oldCaseDTO->getFollowings()[0], $oldCaseDTO->getFollowings()[1]]);
+        }
         
-        $mainCaseDTO = $this->updateOldCase($oldCaseDTO, [$oldCaseDTO->getFollowings()[0], $oldCaseDTO->getFollowings()[1]]);
+        ;
         $newCasesDTO = $this->createNewCases($oldCaseDTO, $arrIdentifiers);
 
         $cases = array_merge($mainCaseDTO, $newCasesDTO);
