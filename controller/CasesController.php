@@ -856,6 +856,24 @@ class CasesController
         return $currentCase;  
     }
 
+    
+    public function solveCSCRDR_123456(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0],$followings[1], $followings[2], $followings[3]]);
+
+        $arrIdentifiers = [[1], [3,4,5]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        $this->deleteCase($followings[4]->getId()); 
+        $this->deleteCase($followings[5]->getId());        
+
+        return $cases;
+
+    }
+
     /**
      * Buscar seguimiento por estado
      *
@@ -964,7 +982,7 @@ class CasesController
      */
     public function caseDivider($oldCaseDTO, $arrIdentifiers)
     {
-        if (count(oldCaseDTO) == 1) {
+        if (count(oldCaseDTO) =! 1) {
             $mainCaseDTO = $this->updateOldCase($oldCaseDTO, [$oldCaseDTO->getFollowings()[0]]);
         } else {
             $mainCaseDTO = $this->updateOldCase($oldCaseDTO, [$oldCaseDTO->getFollowings()[0], $oldCaseDTO->getFollowings()[1]]);
