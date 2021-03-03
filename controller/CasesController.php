@@ -629,6 +629,23 @@ class CasesController
         return $currentCase;
     }
 
+ 
+    public function solveDS_12(CaseDTO $currentCase){
+        
+        $followings = $currentCase->getFollowings();
+        
+        $dateSuspicius = $this->subtractDaysFromDate($followings[0]->getDate(), '1');
+
+        $this->addNewFollowingToCase($currentCase, $dateSuspicius, Constants::HEALTH_STATUS_SUSPICIOUS);
+
+        $this->saveCase($currentCase);  
+
+        $arrIdentifiers = [ [1,2], [3] ]; 
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $case;        
+
+    }
 
     /**
      * Buscar seguimiento por estado
