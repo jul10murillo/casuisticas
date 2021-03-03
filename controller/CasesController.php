@@ -776,6 +776,19 @@ class CasesController
         return $cases;
     }
 
+    public function solveUCR_112(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[0], $followings[2] );
+
+        $this->deleteCase($followings[1]->getId());       
+        
+        return $currentCase;
+
+    }
+
 
     /**
      * Buscar seguimiento por estado
