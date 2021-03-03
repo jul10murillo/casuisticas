@@ -525,7 +525,7 @@ class CasesController
     * @param CaseDTO $currentCase
     * @return void
     */ 
-    public function SRD_122(CaseDTO $currentCase)
+    public function solveSRD_122(CaseDTO $currentCase)
     {
 
         $followings = $currentCase->getFollowings();
@@ -535,7 +535,18 @@ class CasesController
         $this->saveCase($currentCase);
 
         return $currentCase;
-    }   
+    }  
+
+    /**
+    
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSCRCR_12345(CaseDTO $currentCase){
+        $arrIdentifiers = [ [1,2,3], [4,5] ]; 
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+        return $case;         
+    }
 
    
     /**
