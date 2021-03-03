@@ -810,6 +810,22 @@ class CasesController
         return $cases;
     }
 
+    public function solveSDSDSD_123445(CaseDTO $currentCase){
+
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0],$followings[1], $followings[2], $followings[3]]);
+
+        $arrIdentifiers = [[1,2], [3,4]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        $this->deleteCase($followings[4]->getId());  
+        $this->deleteCase($followings[5]->getId());
+
+        return $cases;
+    }
+
 
     /**
      * Buscar seguimiento por estado
