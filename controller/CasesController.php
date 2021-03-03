@@ -810,7 +810,8 @@ class CasesController
         return $cases;
     }
 
-    public function solveSDSDSD_123445(CaseDTO $currentCase){
+    public function solveSDSDSD_123445(CaseDTO $currentCase)
+    {
 
         $followings = $currentCase->getFollowings();
 
@@ -826,7 +827,8 @@ class CasesController
         return $cases;
     }    
 
-    public function solveCRCRDR_123455(CaseDTO $currentCase){
+    public function solveCRCRDR_123455(CaseDTO $currentCase)
+    {
 
         $followings = $currentCase->getFollowings();
 
@@ -839,6 +841,19 @@ class CasesController
         $this->deleteCase($followings[5]->getId());        
 
         return $cases;
+    }
+
+    public function solveXCXR_1233(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[1],$followings[3]]);
+ 
+        $this->deleteCase($followings[0]->getId());     
+        $this->deleteCase($followings[2]->getId());  
+
+        return $currentCase;  
     }
 
     /**
