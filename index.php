@@ -5,7 +5,7 @@ require_once __DIR__ . "/controller/DataController.php";
 require_once __DIR__ . "/controller/CasesController.php";
 
 $dataController = new DataController();
-$data = $dataController->getData();
+$data = $dataController->init();
 
 main($group_status);
 exit;
