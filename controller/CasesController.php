@@ -542,11 +542,24 @@ class CasesController
      * @param CaseDTO $currentCase
      * @return void
      */
-    public function solveSCRCR_12345(CaseDTO $currentCase){
+    public function solveSCRCR_12345(CaseDTO $currentCase)
+    {
         $arrIdentifiers = [ [1,2,3], [4,5] ]; 
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
         return $case;         
     }
+    
+    /**   
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveCRSD_1234(CaseDTO $currentCase)
+    {
+        $arrIdentifiers = [ [1,2], [4,5] ]; 
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+        return $case; 
+    }   
 
    
     /**
