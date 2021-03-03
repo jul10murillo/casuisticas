@@ -34,14 +34,16 @@ class CaseDTO
      */
     private $activities;
 
-    function __construct($case) {
+
+    function setCase($case) {
         $this->id           = $case[0];
         $this->document     = $case[1];
         $this->status       = $case[6];
         $this->healthStatus = $case[4];
         $this->date         = $case[2];
     }
-    
+
+
     function getFollowings() {
         return $this->followings;
     }
@@ -50,10 +52,36 @@ class CaseDTO
         return $this->activities;
     }
     
+    /**
+     * 
+     * @param FollowingDTO[] $followings
+     */
     function setFollowings($followings) {
+        
         foreach ($followings as $following) {
-            $followingData[] = new FollowingDTO($following);
+            $followingRow = new FollowingDTO();
+            $followingRow->setId($following->getID());
+            $followingRow->setStatus($following->getStatus());
+            $followingRow->setCaseId($following->getCaseId());
+            $followingRow->setDate($following->getDate());
+            $followingData[] = $followingRow;
         }
+
+        $this->followings = $followingData;
+
+    }
+
+    function setOldFollowings($followings)
+    {
+        foreach ($followings as $following) {
+            $followingRow = new FollowingDTO();
+            $followingRow->setId($following[0]);
+            $followingRow->setStatus($following[3]);
+            $followingRow->setCaseId($following[7]);
+            $followingRow->setDate($following[6]);
+            $followingData[] = $followingRow;
+        }
+
         $this->followings = $followingData;
     }
 
@@ -106,12 +134,25 @@ class CaseDTO
     }
     
     
-    function getHealthStatus(): type {
+    public function getHealthStatus()
+    {
         return $this->healthStatus;
     }
-
-    function setHealthStatus(type $healthStatus) {
+    
+    public function setHealthStatus($healthStatus)
+    {
         $this->healthStatus = $healthStatus;
+    }
+    
+    /**
+     * addFollowingsToCase
+     *
+     * @param  FollowingDTO[] $followings
+     * @return void
+     */
+    public function addFollowingsToCase($followings)
+    {
+        
     }
 
 

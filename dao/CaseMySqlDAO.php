@@ -22,11 +22,12 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
         
         $case = parent::query("SELECT * FROM tigo_sent_to_followings WHERE id = " . $id);
         
-        $caseDTO = new CaseDTO($case);
+        $caseDTO = new CaseDTO();
+        $caseDTO->setCase($case);
         
-        $followings[] = parent::query("SELECT * FROM tigo_log_followings WHERE sent_to_following_id = " . $id);
+        $followings = parent::query("SELECT * FROM tigo_log_followings WHERE sent_to_following_id = " . $id);
         
-        $caseDTO->setFollowings($followings);
+        $caseDTO->setOldFollowings($followings);
         
         $activities[] = parent::query("SELECT * FROM tigo_followings WHERE sent_to_following_id = " . $id);
         
@@ -68,13 +69,14 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
      */
     public function update(CaseDTO $case)
     {
-        $case = parent::query("UPDATE tigo_sent_to_followings SET"
-            . " date = " . $case->getDate()
-            . ", document = " . $case->getDocument()
-            . ", status = " . $case->getStatus()
-            . " WHERE id = " . $case->getId());
-
-        return $case;
+        print_r($case);
+//        $case = parent::query("UPDATE tigo_sent_to_followings SET"
+//            . " date = " . $case->getDate()
+//            . ", document = " . $case->getDocument()
+//            . ", status = " . $case->getStatus()
+//            . " WHERE id = " . $case->getId());
+//
+//        return $case;
     }
 
     /**
@@ -86,7 +88,8 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
      */
     public function save($caseDTO)
     {
-        $case = parent::query("SELECT * FROM tigo_sent_to_following WHERE id = " . $id);
-        return $case;
+        print_r($caseDTO);
+//        $case = parent::query("SELECT * FROM tigo_sent_to_following WHERE id = " . $id);
+//        return $case;
     }
 }
