@@ -674,6 +674,25 @@ class CasesController
         return $currentCase;
         
     }
+
+
+   /**   
+    *Eliminación de fallecido
+    * @param CaseDTO $currentCase
+    * @return void
+    */
+    public function solveSFD_122(CaseDTO $currentCase){
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);        
+        $currentCase->setFollowings($followings[0], $followings[2] );
+
+        $this->saveCase($currentCase);
+
+        return $currentCase;
+    }   
+
+
     /**
      * Buscar seguimiento por estado
      *
