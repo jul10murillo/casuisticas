@@ -874,6 +874,19 @@ class CasesController
 
     }
 
+    public function solveACACR_12345(CaseDTO $currentCase){
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[1],$followings[4]]);
+
+        $this->deleteCase($followings[0]->getId()); 
+        $this->deleteCase($followings[2]->getId());   
+        $this->deleteCase($followings[3]->getId()); 
+
+        return $currentCase; 
+    }
+
     /**
      * Buscar seguimiento por estado
      *
