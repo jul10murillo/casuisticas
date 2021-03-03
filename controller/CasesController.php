@@ -803,6 +803,13 @@ class CasesController
 
     }
 
+    public function solveSCRS_1234(CaseDTO $currentCase){
+        $arrIdentifiers = [[1,2,3], [4]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
+
 
     /**
      * Buscar seguimiento por estado
