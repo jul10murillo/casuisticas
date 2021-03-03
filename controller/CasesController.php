@@ -389,7 +389,12 @@ class CasesController
         $this->saveCase($currentCase); 
         //Crear método.
     }
-
+    /**
+     * solveRCR_123
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
     public function solveRCR_123(CaseDTO $currentCase){
 
          $followings = $currentCase->getFollowings();
@@ -399,6 +404,12 @@ class CasesController
 
     }
 
+    /**
+     * solvesolveCRCR_1123
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
     public function solvesolveCRCR_1123(CaseDTO $currentCase){
 
         $followings = $currentCase->getFollowings();
@@ -415,6 +426,79 @@ class CasesController
         $this->saveCase($currentCase);   
     }
 
+   
+    /**     
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSR_12(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+        
+        $dayConfirmed = $followings[0]->getDate();
+        $daySuspicius = $this->subtractDaysFromDate($dayConfirmed, '1');
+        
+        $followings[0].setdate($daySuspicius);
+        $this->addNewFollowingToCase($currentCase, $dayConfirmed, Constants::HEALTH_STATUS_CONFIRMED);
+
+        $this->saveCase($currentCase);  
+    }
+
+   /**   
+    *
+    * @param CaseDTO $currentCase
+    * @return void
+    */
+    public function solveSDSDC_12345(CaseDTO $currentCase)
+    {
+        $arrIdentifiers = [ [1,2], [3,4], [5] ]; 
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+        return $case; 
+        
+    }
+    /**   
+    *
+    * @param CaseDTO $currentCase
+    * @return void
+    */
+    public function solveCRDR_1234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([ $followings[0],  $followings[4]]);
+
+        $this->saveCase($currentCase);
+    } 
+    
+
+   /**   
+    *
+    * @param CaseDTO $currentCase
+    * @return void
+    */
+    public function solveSDSD_1223(CaseDTO $currentCase){
+
+        $followings = $currentCase->getFollowings();
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([ $followings[0],  $followings[4]]);
+
+        $this->saveCase($currentCase);
+    }
+    
+    /**   
+    *
+    * @param CaseDTO $currentCase
+    * @return void
+    */ 
+    public function SRD_122(CaseDTO $currentCase)
+    {
+
+        $followings = $currentCase->getFollowings();
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([ $followings[0],  $followings[3]]);
+
+        $this->saveCase($currentCase);
+    }   
 
    
     /**
