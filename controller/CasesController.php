@@ -585,6 +585,18 @@ class CasesController
 
     }
 
+    public function solveSCUHC_12234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([ $followings[0],  $followings[2],  $followings[3],  $followings[4]]);
+
+        $this->saveCase($currentCase);
+
+        return $currentCase;
+
+    }
+
 
     /**
      * Buscar seguimiento por estado
