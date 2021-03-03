@@ -597,6 +597,25 @@ class CasesController
 
     }
 
+    public function solveSHC_111(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+        
+        $followings[0]->setDate($this->subtractDaysFromDate($followings[1]->getDate(), '1'));
+        $followings[2]->setDate($this->addDaysToDate($followings[1]->getDate(), '1'));
+
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings);
+        
+        
+        $this->saveCase($currentCase);
+
+        return $currentCase;
+
+        
+    }
+
 
     /**
      * Buscar seguimiento por estado
