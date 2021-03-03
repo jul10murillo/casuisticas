@@ -28,7 +28,6 @@ class CasesController
      */
     public function solveSDSD_1234($idOldCase)
     {
-        
         $oldCase = $this->caseDAO->getById($idOldCase);
         $arrIdentifiers = [[1, 2], [3, 4]];
         $cases = $this->caseDivider($oldCase, $arrIdentifiers);
