@@ -648,7 +648,21 @@ class CasesController
 
     }
 
-    public function SVD_122(CaseDTO $currentCase){
+    public function solveSVD_122(CaseDTO $currentCase)
+    {
+
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[0], $followings[2] );
+          
+        $this->saveCase($currentCase);
+
+        return $currentCase;
+        
+    }
+
+    public function solveSHD_122(CaseDTO $currentCase){
 
         $followings = $currentCase->getFollowings();
 
