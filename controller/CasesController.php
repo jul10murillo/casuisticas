@@ -768,6 +768,14 @@ class CasesController
 
     }
 
+    public function solveCRS_123(CaseDTO $currentCase)
+    {
+        $arrIdentifiers = [[1, 2], [3]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
+
 
     /**
      * Buscar seguimiento por estado
