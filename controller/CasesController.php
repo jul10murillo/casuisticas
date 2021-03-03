@@ -566,6 +566,13 @@ class CasesController
         return $case; 
     }
 
+    public function solveSMDSD_12234(CaseDTO $currentCase)
+    {
+        $arrIdentifiers = [ [1,2], [3,4] ]; 
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+        return $case; 
+    }
+
    
     /**
      * Buscar seguimiento por estado
