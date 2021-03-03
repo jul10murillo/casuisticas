@@ -10,16 +10,18 @@ $data = $dataController->init();
 main($group_status);
 exit;
 
-function main($group_status) {
+function main($group_status)
+{
     $response = inicializateData();
     $response = startSolveBadCases($group_status['casos_malos']);
 }
 
-function inicializateData() {
-    
+function inicializateData()
+{
 }
 
-function startSolveBadCases($badCases) {
+function startSolveBadCases($badCases)
+{
     try {
         $caseController = new CasesController();
         $countNoFunctions = 0;
