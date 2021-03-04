@@ -37,9 +37,9 @@ class CaseDTO
     function __construct($case) {
         $this->id           = $case[0];
         $this->document     = $case[1];
-        $this->status       = $case[6];
-        $this->healthStatus = $case[4];
-        $this->date         = $case[2];
+        $this->status       = $case[2];
+        $this->healthStatus = $case[3];
+        $this->date         = $case[4];
     }
     
     function getFollowings() {

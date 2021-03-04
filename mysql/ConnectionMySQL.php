@@ -13,7 +13,6 @@ class ConnectionMySQL {
     }
 
     public function query($sql) {
-        
         if ($this->connection->connect_errno) {
             printf("Connect failed: %s\n", $this->connection->connect_error);
             exit();
@@ -23,7 +22,7 @@ class ConnectionMySQL {
         if (!$result) {
             printf("Errormessage: %s\n", $this->connection->error);
         }
-        return $result->fetch_row();
+        return $result->fetch_all();
     }
 
 }

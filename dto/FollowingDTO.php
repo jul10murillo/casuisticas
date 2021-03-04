@@ -13,9 +13,9 @@ class FollowingDTO
     
     function __construct($following) {
         $this->id     = $following[0];
-        $this->status = $following[3];
-        $this->caseId = $following[7];
-        $this->date   = $following[5];
+        $this->status = $following[1];
+        $this->caseId = $following[2];
+        $this->date   = $following[3];
     }
 
     public function loadFromJson($followingJson)

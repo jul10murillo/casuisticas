@@ -8,6 +8,12 @@
 
 class DataController
 {
+    public function __construct()
+    {
+        $this->caseDAO       = new CaseMySqlDAO();
+        $this->followingDAO  = new FollowingMySqlDAO();
+        $this->activitiesDAO = new ActivitiesMySqlDAO();
+    }
 
     public function init()
     {
@@ -16,7 +22,12 @@ class DataController
         $check_history = $this->checkHistory($cases); //Comprobamos el orden de la historia de los casos
         $check_status  = $this->checkOrder($check_history); //Comprobamos si el caso está bien o hay que corregirlo
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
-        $this->startSolveBadCases($badCases);
+        
+//        $caso['SDSD_1234'] = $group_status['casos_malos']['SDSD_1234'];
+//        $casesDTOS = $this->getCasesDTObyBadCases($group_status['casos_malos']); 
+        $casesDTOS = $this->getCasesDTObyBadCases($group_status['casos_malos']); 
+        
+        $this->startSolveBadCases($casesDTOS);
     }
 
     /**
@@ -107,8 +118,7 @@ class DataController
         foreach ($data as $value) {
             if (isset($group[$value[0]])) {
                 array_push($group[$value[0]], [$value[1], $value[2], $value[3]]);
-            }
-            else {
+            } else {
                 $group[$value[0]] = [];
                 array_push($group[$value[0]], [$value[1], $value[2], $value[3]]);
             }
@@ -156,8 +166,8 @@ class DataController
     /**
      * Comprobar si una fecha es anterior a otra
      * @param $first_date fecha inicial
-     * @param $last_date fecha final
      * @param $num número del ultimo consecutivo de la fecha
+     * @param $last_date fecha final
      * @return Int
      */
     private function checkDates($first_date, $num, $last_date = "")
@@ -190,8 +200,7 @@ class DataController
         foreach ($check_status['casos_malos'] as $key => $value) {
             if (isset($bad_cases[$value])) {
                 array_push($bad_cases[$value], $key);
-            }
-            else {
+            } else {
                 $bad_cases[$value] = [];
                 array_push($bad_cases[$value], $key);
             }
@@ -199,8 +208,7 @@ class DataController
         foreach ($check_status['casos_buenos'] as $key => $value) {
             if (isset($good_cases[$value])) {
                 array_push($good_cases[$value], $key);
-            }
-            else {
+            } else {
                 $good_cases[$value] = [];
                 array_push($good_cases[$value], $key);
             }
@@ -208,8 +216,7 @@ class DataController
         foreach ($check_status['casos_para_dividir'] as $key => $value) {
             if (isset($cases_to_divide[$value])) {
                 array_push($cases_to_divide[$value], $key);
-            }
-            else {
+            } else {
                 $cases_to_divide[$value] = [];
                 array_push($cases_to_divide[$value], $key);
             }
@@ -408,8 +415,7 @@ class DataController
                     foreach ($badCase as $key => $idCase) {
                         try {
                             $response = $caseController->$function($idCase);
-                        }
-                        catch (\Throwable $th) {
+                        } catch (\Throwable $th) {
                             $response = 'Error en la función :' . $function . ' id: ' . $idCase;
                         }
                     }
@@ -419,8 +425,7 @@ class DataController
                     echo '<hr>';
                     echo '<br>';
                     $countFunctions++;
-                }
-                else {
+                } else {
                     echo 'No existe la funcion para el caso: ';
                     print_r($key);
                     echo '<br>';
@@ -438,11 +443,20 @@ class DataController
             echo '<br>';
             echo ' Total Casos solucionados: ';
             print_r($countFunctions);
-        }
-        catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             return 'Error';
         }
         return 'finalizado';
+    }
+    
+    
+    function getCasesDTObyBadCases($cases)
+    {
+        
+        foreach ($cases as $case => $ids) {
+            $caseDTOS[$case] = $this->caseDAO->getByIds($ids);
+        }
+        return $caseDTOS;
     }
 
 }
