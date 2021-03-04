@@ -1126,6 +1126,30 @@ class CasesController
         return $currentCase;       
         
     }
+
+    /**
+     *  Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (456) 
+     *  y eliminar los seguimientos  Sospechoso(3) y Descartado(4)
+     *
+     * @param CaseDTO $currentCase
+     * @return currentCase
+     */
+    public function solveSDSDSCR_1234456(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();         
+
+        $currentCase->setFollowings([]);       
+        $currentCase->setFollowings([$followings[0],$followings[1],$followings[4],$followings[5], $followings[6]]);
+
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());
+
+        $arrIdentifiers = [[1,2], [3,4,5]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+
+    }
     
     /**
      * Buscar seguimiento por estado
