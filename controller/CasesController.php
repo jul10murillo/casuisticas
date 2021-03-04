@@ -28,7 +28,7 @@ class CasesController
      *
      * @param  string $name  -> nombre del caso
      * @param  CaseDTO $arguments
-     * @return void
+     * @return object
      * @author Regmy Nieves
      */
     public function __call($name, $arguments)
@@ -37,26 +37,29 @@ class CasesController
 
         if (!TestController::codeCase($name, $arguments)) {
             $response = [
-                'status' => 'error',
+                'status'  => false,
+                'caseIn'  => $arguments,
                 'message' => 'El caso:' . $arguments . ' no corresponde a la solución seleccionada:' . $function,
             ];
-            return $response;
+            return json_encode($response);
         }
         try {
-            $caseOut = $this->$function($arguments);
+            $caseOut  = $this->$function($arguments);
             $response = [
-                'status' => 'success',
+                'status'  => true,
                 'message' => 'Caso Resuelto',
-                'caseIn' => $arguments,
+                'caseIn'  => $arguments,
                 'caseOut' => $caseOut
             ];
         } catch (\Throwable $th) {
             $response = [
-                'status' => 'error',
+                'status'  => false,
+                'caseIn'  => $arguments,
                 'message' => 'Error a ejecutar la función:' . $function,
+                'error'   => $th
             ];
         }
-        return $response;
+        return json_encode($response);
     }
 
     /**
