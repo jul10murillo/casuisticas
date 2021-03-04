@@ -990,6 +990,25 @@ class CasesController
 
         return $currentCase; 
     }
+
+    /**
+     * Propuesta de solución: Se propone mantener los estados Confimado(1) y Recuperado(3)
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveCSRCR_12333(CaseDTO $currentCase){
+
+        $followings = $currentCase->getFollowings();
+        $currentCase->setFollowings([]); 
+
+        $currentCase->setFollowings([$followings[0],$followings[4]]);
+        $this->deleteCase($followings[1]->getId());
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());      
+
+        return $currentCase;         
+    }
     
     /**
      * Buscar seguimiento por estado
