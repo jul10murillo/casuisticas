@@ -4,7 +4,8 @@
 include 'FollowingDAO.php';
 //use solverCases\ConnectionMySQL;
 
-class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO {
+class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO
+{
 
     /**
      * Retorna un seguimiento dado un id
@@ -29,8 +30,6 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO {
      */
     public function getByStartDate($startDate)
     {
-
-
     }
 
     /**
@@ -42,7 +41,6 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO {
      */
     public function delete($id)
     {
-
     }
 
     /**
@@ -54,7 +52,6 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO {
      */
     public function update($data)
     {
-
     }
 
     /**
@@ -65,10 +62,9 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO {
      * 
      * @return stdClass
      */
-    public static function updateCaseById($id,$caseId)
+    public static function updateCaseById($id, $caseId)
     {
-        $following = parent::query("UPDATE tigo_log_followings SET sent_to_following_id = ".$caseId." WHERE id = " . $id);
+        $following = parent::query("UPDATE tigo_log_followings SET sent_to_following_id = " . $caseId . " WHERE id = " . $id);
         return $following;
     }
 }
-

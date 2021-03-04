@@ -22,12 +22,9 @@ class DataController
         $check_history = $this->checkHistory($cases); //Comprobamos el orden de la historia de los casos
         $check_status  = $this->checkOrder($check_history); //Comprobamos si el caso está bien o hay que corregirlo
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
-        
-//        $caso['SDSD_1234'] = $group_status['casos_malos']['SDSD_1234'];
-//        $casesDTOS = $this->getCasesDTObyBadCases($group_status['casos_malos']); 
-        $casesDTOS = $this->getCasesDTObyBadCases($group_status['casos_malos']); 
-        
-        $this->startSolveBadCases($casesDTOS);
+        $casesDTOS = $this->getCasesDTObyBadCases($group_status['casos_malos']);
+        list($solveCases, $notSolveCases) = $this->startSolveBadCases($casesDTOS);
+        $this->printDashboardCases($solveCases, $notSolveCases);
     }
 
     /**
@@ -398,65 +395,93 @@ class DataController
     }
 
     /**
-     * 
+     * Realiza el barrido de las Causiticas
      * @param type $badCases
      * @return string
+     * @author Regmy Nieves
      */
-    function startSolveBadCases($badCases)
+    function startSolveBadCases($badCodeCases)
     {
         try {
             $caseController   = new CasesController();
-            $countNoFunctions = 0;
-            $countFunctions   = 0;
-
-            foreach ($badCases as $key => $badCase) {
-                $function = 'solve' . $key;
-                if (method_exists($caseController, $function)) {
-                    foreach ($badCase as $key => $idCase) {
-                        try {
-                            $response = $caseController->$function($idCase);
-                        } catch (\Throwable $th) {
-                            $response = 'Error en la función :' . $function . ' id: ' . $idCase;
+            foreach ($badCodeCases as $function => $badCodeCase) {
+                foreach ($badCodeCase as $idCase) {
+                    try {
+                        $response = $caseController->$function($idCase);
+                        if ($response->status) {
+                            $solveCases[] = $response;
+                        } else {
+                            $notSolveCases[] = $response;
                         }
+                    } catch (\Throwable $th) {
+                        $error = [
+                            'status'  => false,
+                            'message' => 'Error en la función :' . $function . ' id: ' . $idCase,
+                            'error'   => $th
+                        ];
+                        $notSolveCases[] = json_encode($error);
                     }
-                    print_r($key);
-                    echo '<br>';
-                    print_r($response);
-                    echo '<hr>';
-                    echo '<br>';
-                    $countFunctions++;
-                } else {
-                    echo 'No existe la funcion para el caso: ';
-                    print_r($key);
-                    echo '<br>';
-                    print_r($badCase);
-                    echo '<hr>';
-                    echo '<br>';
-                    $countNoFunctions++;
                 }
             }
-            echo '<hr>';
-            echo '<br>';
-            echo ' Total Casos sin funciones: ';
-            print_r($countNoFunctions);
-            echo '<hr>';
-            echo '<br>';
-            echo ' Total Casos solucionados: ';
-            print_r($countFunctions);
         } catch (\Throwable $th) {
-            return 'Error';
+            return 'Error General';
         }
-        return 'finalizado';
+        return array($solveCases, $notSolveCases);
     }
-    
-    
+
+    /**
+     * printDashboardCases
+     *
+     * @param  mixed $solveCases
+     * @param  mixed $notSolveCases
+     * @return void
+     */
+    function printDashboardCases($solveCases, $notSolveCases)
+    {
+        echo '<div style="text-align:center"> <h1><b> Correción de Casuísticas </b></h1> <br> <hr> <br><br> </div>';
+        echo '<div id="goodones"> ';
+        echo '<table>';
+        echo '<tr>';
+        echo '<td> Caso de Entrada </td>';
+        echo '<td> Casos Salida </td>';
+        echo '<td> Mensaje </td>';
+        echo '</tr>';
+        foreach ($solveCases as $key => $solveCase) {
+            echo '<tr>';
+            echo '<td>' . $solveCase->caseIn  . '</td>';
+            echo '<td>' . $solveCase->caseOut . '</td>';
+            echo '<td>' . $solveCase->message . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+        echo '</div>';
+        echo '<br> <br> <hr> <br>';
+        echo '<h2> Casos no solucionados </h2>';
+        echo '<br> <br>';
+        echo '<div id="badones"> ';
+        //---------------------------------------------------------//
+        echo '<table>';
+        echo '<tr>';
+        echo '<td> Caso de Entrada </td>';
+        echo '<td> Mensaje </td>';
+        echo '</tr>';
+        foreach ($notSolveCases as $key => $notSolveCase) {
+            echo '<tr>';
+            echo '<td>' . $notSolveCase->caseIn  . '</td>';
+            echo '<td>' . $notSolveCase->message . '</td>';
+            echo '</tr>';
+        }
+        echo '</table>';
+        echo '</div>';
+    }
+
+
     function getCasesDTObyBadCases($cases)
     {
-        
+
         foreach ($cases as $case => $ids) {
             $caseDTOS[$case] = $this->caseDAO->getByIds($ids);
         }
         return $caseDTOS;
     }
-
 }
