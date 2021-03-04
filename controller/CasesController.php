@@ -1300,6 +1300,26 @@ class CasesController
 
         return $currentCase;
     }
+
+    /**
+     * Propuesta de solución: Se propone mantener los estados Confimado(4) y Recuperado(5)
+     *
+     * @param CaseDTO $currentCase
+     * @return currentCase
+     */
+    public function solveZCZCR_12345(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();         
+
+        $currentCase->setFollowings([]);       
+        $currentCase->setFollowings([$followings[3],$followings[4]]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[1]->getId());
+        $this->deleteCase($followings[2]->getId());
+
+        return $currentCase;
+    }
    
     
     /**
