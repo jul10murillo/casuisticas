@@ -8,6 +8,12 @@
 
 class DataController
 {
+    public function __construct()
+    {
+        $this->caseDAO       = new CaseMySqlDAO();
+        $this->followingDAO  = new FollowingMySqlDAO();
+        $this->activitiesDAO = new ActivitiesMySqlDAO();
+    }
 
     public function init()
     {
@@ -16,12 +22,8 @@ class DataController
         $check_history = $this->checkHistory($cases); //Comprobamos el orden de la historia de los casos
         $check_status  = $this->checkOrder($check_history); //Comprobamos si el caso está bien o hay que corregirlo
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
-
-
-
-        list($solveCases, $notSolveCases) =
-            $this->startSolveBadCases($group_status['casos_malos']);
-
+        $casesDTOS = $this->getCasesDTObyBadCases($group_status['casos_malos']);
+        list($solveCases, $notSolveCases) = $this->startSolveBadCases($casesDTOS);
         $this->printDashboardCases($solveCases, $notSolveCases);
     }
 
@@ -161,8 +163,8 @@ class DataController
     /**
      * Comprobar si una fecha es anterior a otra
      * @param $first_date fecha inicial
-     * @param $last_date fecha final
      * @param $num número del ultimo consecutivo de la fecha
+     * @param $last_date fecha final
      * @return Int
      */
     private function checkDates($first_date, $num, $last_date = "")
@@ -471,5 +473,15 @@ class DataController
         }
         echo '</table>';
         echo '</div>';
+    }
+
+
+    function getCasesDTObyBadCases($cases)
+    {
+
+        foreach ($cases as $case => $ids) {
+            $caseDTOS[$case] = $this->caseDAO->getByIds($ids);
+        }
+        return $caseDTOS;
     }
 }

@@ -8,7 +8,7 @@ class ActivityDTO{
     function __construct($activity) {
         $this->id     = $activity[0];
         $this->caseId = $activity[1];
-        $this->date   = $activity[3];
+        $this->date   = $activity[2];
     }
 
     function getId() {
