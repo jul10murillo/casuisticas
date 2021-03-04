@@ -1043,6 +1043,26 @@ class CasesController
 
         return $currentCase;  
     }
+
+    /**
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34) y eliminar el seguimiento con estado de salud Recuperado(4)
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveCRSDR_12344(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $this->deleteCase($followings[4]->getId()); 
+        $currentCase->setFollowings([$followings[0],$followings[1],$followings[2],$followings[3]]);
+
+        $arrIdentifiers = [[1,2], [3,4]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
     
     /**
      * Buscar seguimiento por estado
