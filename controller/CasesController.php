@@ -1045,7 +1045,8 @@ class CasesController
     }
 
     /**
-     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34) y eliminar el seguimiento con estado de salud Recuperado(4)
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34) y eliminar el 
+     * seguimiento con estado de salud Recuperado(4)
      *
      * @param CaseDTO $currentCase
      * @return void
@@ -1062,6 +1063,26 @@ class CasesController
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
         return $cases;
+    }
+
+    /**
+     * Propuesta de solución: Se propone mantener los estados Sospechoso(1) , Confirmado(2) y Recuperado (4)
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveCSCRCR_112234(CaseDTO $currentCase){
+        
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[1],$followings[2],$followings[5]]);
+
+        $this->deleteCase($followings[0]->getId());
+        $this->deleteCase($followings[3]->getId());   
+        $this->deleteCase($followings[4]->getId());    
+
+        return $currentCase;
     }
     
     /**
