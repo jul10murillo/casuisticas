@@ -1281,6 +1281,25 @@ class CasesController
 
         return $cases;
     }
+
+    /**
+     * Propuesta de solución: Se propone mantener los estados Confirmado(1) y Recuperado (2)
+     *
+     * @param CaseDTO $currentCase
+     * @return currentCase
+     */
+    public function solveCRCR_1122(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();         
+
+        $currentCase->setFollowings([]);       
+        $currentCase->setFollowings([$followings[0],$followings[3]]);
+
+        $this->deleteCase($followings[1]->getId());  
+        $this->deleteCase($followings[2]->getId());
+
+        return $currentCase;
+    }
    
     
     /**
