@@ -103,12 +103,14 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
      */
     public function update(CaseDTO $case)
     {
-        $case = parent::query("UPDATE tigo_sent_to_followings SET"
-            . " date = " . $case->getDate()
-            . ", document = " . $case->getDocument()
+        $query = "UPDATE tigo_sent_to_followings SET"
+            . " updated_at = '" . $case->getDate()
+            . "', document = " . $case->getDocument()
             . ", status = " . $case->getStatus()
-            . " WHERE id = " . $case->getId());
-
+            . ", status_id = " . $case->getHealthStatus()
+            . " WHERE id = " . $case->getId();
+        print_r('-------------<br>');
+        $case = parent::queryUpdateOrInsert($query);
         return $case;
     }
 
@@ -119,9 +121,15 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
      * 
      * @return stdClass
      */
-    public function save($caseDTO)
+    public function save($case)
     {
-        $case = parent::query("SELECT * FROM tigo_sent_to_following WHERE id = " . $id);
+        $query = "INSERT INTO tigo_sent_to_followings (updated_at,document,status,status_id) VALUES ("
+            .'"'.$case->getDate().'",'
+            .'"'.$case->getDocument().'",'
+            .'"'.$case->getStatus().'",'
+            .'"'.$case->getHealthStatus().'")';
+        print_r('-------------<br>');
+        $case = parent::queryUpdateOrInsert($query);
         return $case;
     }
 }

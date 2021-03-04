@@ -5,12 +5,24 @@ include 'dao/FollowingMySqlDAO.php';
 include 'dao/ActivitiesMySqlDAO.php';
 include 'dto/CaseDTO.php';
 include 'TestController.php';
+include 'utils/Constants.php';
 
 class CasesController
 {
-
+    /**
+     *
+     * @var CaseMySqlDAO  
+     */
     private $caseDAO;
+    /**
+     *
+     * @var FollowingMySqlDAO 
+     */
     private $followingDAO;
+    /**
+     *
+     * @var ActivitiesMySqlDAO 
+     */
     private $activitiesDAO;
 
 
@@ -1165,7 +1177,14 @@ class CasesController
             $caseDTO->setDocument($oldCaseDTO->getDocument());
 
             $caseDTO->setFollowings($this->getFollowingsByPositions($oldCaseDTO, $groupFollowings));
-
+            
+            $follogingEnd = end($caseDTO->getFollowings());
+            
+            $caseDTO->setHealthStatus($follogingEnd->getStatus());
+            
+            $caseDTO->setDate($follogingEnd->getDate());
+            $caseDTO->setStatus(in_array($follogingEnd->getStatus(), [Constants::HEALTH_STATUS_CONFIRMED, Constants::HEALTH_STATUS_SUSPICIOUS]) ? "1":"0");
+            
             $newCase = $this->caseDAO->save($caseDTO);
 
             $newCasesDTO[] = $newCase;

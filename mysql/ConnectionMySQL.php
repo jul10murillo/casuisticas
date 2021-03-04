@@ -5,9 +5,9 @@ class ConnectionMySQL
 
     private $connection;
     private $host = "localhost";
-    private $user = "emmanuel";
-    private $pass = "desarrollo2020";
-    private $db = "tigo_test_SVEPI";
+    private $user = "root";
+    private $pass = "";
+    private $db = "svepi_prod_test";
 
     public function __construct()
     {
@@ -21,11 +21,32 @@ class ConnectionMySQL
             printf("Connect failed: %s\n", $this->connection->connect_error);
             exit();
         }
+        print_r("---<br>");
+        print_r($sql);
+        print_r("---<br>");
+        
         $result = $this->connection->query($sql);
-
         if (!$result) {
             printf("Errormessage: %s\n", $this->connection->error);
         }
         return $result->fetch_all();
+    }
+
+    public function queryUpdateOrInsert($sql)
+    {
+
+        if ($this->connection->connect_errno) {
+            printf("Connect failed: %s\n", $this->connection->connect_error);
+            exit();
+        }
+        print_r("---<br>");
+        print_r($sql);
+        print_r("---<br>");
+        
+        $result = $this->connection->query($sql);
+        if (!$result) {
+            printf("Errormessage: %s\n", $this->connection->error);
+        }
+        return $result;
     }
 }

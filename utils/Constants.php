@@ -20,6 +20,6 @@ class Constants{
     const HEALTH_STATUS_CONFIRMED = '15';
     const HEALTH_STATUS_CONFIRMED = '16';
     const HEALTH_STATUS_CONFIRMED = '17';*/
- 
+    const HEALTH_STATUS_OPEN = array('1','2'); 
     
 }
