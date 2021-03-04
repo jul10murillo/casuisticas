@@ -1,38 +1,52 @@
 <?php
-class ActivityDTO{
-	
+class ActivityDTO
+{
+
     private $id;
     private $caseId;
     private $date;
 
-    function __construct($activity) {
+    function initByActivity($activity)
+    {
         $this->id     = $activity[0];
         $this->caseId = $activity[1];
         $this->date   = $activity[2];
     }
 
-    function getId() {
+    function initByActivityDTO($activity)
+    {
+        $this->id     = $activity->getId();
+        $this->caseId = $activity->getCaseId();
+        $this->date   = $activity->getDate();
+    }
+
+    function getId()
+    {
         return $this->id;
     }
 
-    function getCaseId() {
+    function getCaseId()
+    {
         return $this->caseId;
     }
 
-    function getDate() {
+    function getDate()
+    {
         return $this->date;
     }
 
-    function setId($id) {
+    function setId($id)
+    {
         $this->id = $id;
     }
 
-    function setCaseId($caseId) {
+    function setCaseId($caseId)
+    {
         $this->caseId = $caseId;
     }
 
-    function setDate($date) {
+    function setDate($date)
+    {
         $this->date = $date;
     }
-
 }

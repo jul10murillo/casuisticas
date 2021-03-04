@@ -7,5 +7,6 @@ class TestController
 
     static function codeCase($code, $caseDTO)
     {
+        return true;
     }
 }

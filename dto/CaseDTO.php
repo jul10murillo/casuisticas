@@ -13,106 +13,125 @@ class CaseDTO
      * @var type 
      */
     private $status;
-    
+
     /**
      * Estado de salud (Sospechoso, DEscartado, Confirmado)
      * @var type 
      */
     private $healthStatus;
     private $date;
-    
+
     /**
      *
      * @var FollowingDTO[] 
      */
     private $followings;
-    
-    
+
+
     /**
      *
      * @var ActivityDTO[] 
      */
     private $activities;
 
-    function __construct($case) {
+    function initByCase($case)
+    {
         $this->id           = $case[0];
         $this->document     = $case[1];
         $this->status       = $case[2];
         $this->healthStatus = $case[3];
         $this->date         = $case[4];
     }
-    
-    function getFollowings() {
+
+    function getFollowings()
+    {
         return $this->followings;
     }
 
-    function getActivities() {
+    function getActivities()
+    {
         return $this->activities;
     }
-    
-    function setFollowings($followings) {
+
+    function setFollowings($followings)
+    {
         foreach ($followings as $following) {
-            $followingData[] = new FollowingDTO($following);
+            $followingOBJ = new FollowingDTO();
+            if (!is_array($following)) {
+                $followingOBJ->initByFollowingDTO($following);
+                $followingData[] = $followingOBJ;
+            } else {
+                $followingOBJ->initByFollowing($following);
+                $followingData[] = $followingOBJ;
+            }
         }
         $this->followings = $followingData;
     }
 
-    function setActivities($activities) {
+    function setActivities($activities)
+    {
         foreach ($activities as $activity) {
-            $activitiesData[] = new ActivityDTO($activity);
+            $activityOBJ = new ActivityDTO();
+            if (!is_array($activity)) {
+                $activitiesData[] = $activityOBJ->initByActivityDTO($activity);
+                $activitiesData[] = $activityOBJ;
+            } else {
+                $activityOBJ->initByActivity($activity);
+                $activitiesData[] = $activityOBJ;
+            }
         }
         $this->activities = $activitiesData;
     }
-    
+
 
     public function setId($id)
     {
         $this->id = $id;
     }
-    
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     public function setDocument($document)
     {
         $this->document = $document;
     }
-    
+
     public function getDocument()
     {
         return $this->document;
     }
-    
+
     public function setStatus($status)
     {
         $this->status = $status;
     }
-    
+
     public function getStatus()
     {
         return $this->status;
     }
-    
+
     public function setDate($date)
     {
         $this->date = $date;
     }
-    
+
     public function getDate()
     {
         return $this->date;
     }
-    
-    
-    function getHealthStatus(): type {
+
+
+    function getHealthStatus()
+    {
         return $this->healthStatus;
     }
 
-    function setHealthStatus(type $healthStatus) {
+    function setHealthStatus($healthStatus)
+    {
         $this->healthStatus = $healthStatus;
     }
-
-
 }

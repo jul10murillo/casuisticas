@@ -10,8 +10,23 @@ class FollowingDTO
     private $caseId;
 
     private $date;
-    
-    function __construct($following) {
+
+    /**
+     * initByFollowingDTO
+     *
+     * @param  FollowingDTO $following
+     * @return void
+     */
+    function initByFollowingDTO($following)
+    {
+        $this->id     = $following->getId();
+        $this->status = $following->getStatus();
+        $this->caseId = $following->getCaseId();
+        $this->date   = $following->getDate();
+    }
+
+    function initByFollowing($following)
+    {
         $this->id     = $following[0];
         $this->status = $following[1];
         $this->caseId = $following[2];
