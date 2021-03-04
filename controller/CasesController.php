@@ -962,7 +962,6 @@ class CasesController
      * @return void
      */
     public function solveCRSRDR_123456(CaseDTO $currentCase){
-
         $followings = $currentCase->getFollowings();
         $currentCase->setFollowings([]);
 
@@ -970,7 +969,26 @@ class CasesController
         $this->deleteCase($followings[1]->getId()); 
         $this->deleteCase($followings[2]->getId()); 
         $this->deleteCase($followings[3]->getId()); 
-        $this->deleteCase($followings[4]->getId());         
+        $this->deleteCase($followings[4]->getId()); 
+        
+        return $currentCase;        
+    }
+
+    /**
+     * Propuesta de solución: Se propone mantener los estados Sospechoso(1) y Descartado(2)
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveCSD_112(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+        $currentCase->setFollowings([]); 
+
+        $currentCase->setFollowings([$followings[1],$followings[2]]);
+        $this->deleteCase($followings[0]->getId());
+
+        return $currentCase; 
     }
     
     /**
