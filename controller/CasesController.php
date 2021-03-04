@@ -484,12 +484,16 @@ class CasesController
         return $currentCase;
     }
 
+
+
     /**
-     * solvesolveCRCR_1123
+     * solvesolveCRCR_1123 /
      *
      * @param CaseDTO $currentCase
      * @return void
      */
+
+    /*
     public function solvesolveCRCR_1123(CaseDTO $currentCase)
     {
 
@@ -507,7 +511,7 @@ class CasesController
         $this->saveCase($currentCase);
 
         return $currentCase;
-    }
+    }*/
 
 
     /**     
@@ -1317,6 +1321,25 @@ class CasesController
         $this->deleteCase($followings[0]->getId());  
         $this->deleteCase($followings[1]->getId());
         $this->deleteCase($followings[2]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Se propone eliminar un seguimiento con estado de salud Confirmado(3) y el estado Recuperado(Ultimo)
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSCRCR_12333(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings(); 
+
+        $currentCase->setFollowings([]);   
+        $currentCase->setFollowings([$followings[0],$followings[1],$followings[2] ]);
+
+        $this->deleteCase($followings[4]->getId());  
+        $this->deleteCase($followings[5]->getId());
 
         return $currentCase;
     }
