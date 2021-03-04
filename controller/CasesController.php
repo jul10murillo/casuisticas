@@ -917,7 +917,7 @@ class CasesController
     }  
  
     /**
-     * Descripción: Se propone mantener los estados Sospechoso(1), Confirmado(2) y Recuperado (3)
+     * Propuesta solución: Se propone mantener los estados Sospechoso(1), Confirmado(2) y Recuperado (3)
      *
      * @param CaseDTO $currentCase
      * @return void
@@ -934,6 +934,27 @@ class CasesController
         
         return $currentCase;
     }    
+
+    /**
+     * Propuesta solución: Se propone dividir en tres casos: Caso 1 (12), Caso 2 (34) y Caso 2 (56) y eliminar estado Sospechoso(5)
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSDSDSCR_1234556(CaseDTO $currentCase){
+
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $this->deleteCase($followings[4]->getId()); 
+        $currentCase->setFollowings([$followings[0],$followings[1],$followings[2],$followings[3], $followings[5], $followings[6]]);
+
+        $arrIdentifiers = [[1,2], [3,4], [5,6] ];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
+    
     /**
      * Buscar seguimiento por estado
      *
