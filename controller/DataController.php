@@ -229,6 +229,7 @@ class DataController
      */
     public function checkOrder($check_history)
     {
+        
         $good_cases      = [];
         $bad_cases       = [];
         $cases_to_divide = [];
