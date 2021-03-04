@@ -1343,6 +1343,71 @@ class CasesController
 
         return $currentCase;
     }
+
+    /**
+     * Propuesta de solución: Se propone eliminar el seguimiento con estado de salud Descartado(1)
+     *
+     * @param CaseDTO $currentCase
+     * @return currentCase
+     */
+    public function solveSDCR_1123(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings(); 
+
+        $currentCase->setFollowings([]);   
+        $currentCase->setFollowings([$followings[0],$followings[2],$followings[3] ]);
+
+        $this->deleteCase($followings[1]->getId());
+
+        return $currentCase;        
+    }
+
+    /**
+     *Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34)
+     *
+     * @param CaseDTO $currentCase
+     * @return cases
+     */
+    public function solveCHCH_1234(CaseDTO $currentCase)
+    {
+        $arrIdentifiers = [[1,2], [3,4] ];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
+
+    /**
+     * Propuesta de solución: Se propone dividir en tres casos: Caso 1 (12), Caso 2 (34) y Caso 2 (56)
+     *
+     * @param CaseDTO $currentCase
+     * @return cases
+     */
+    public function solveCRCRVR_123456(CaseDTO $currentCase)
+    {
+        $arrIdentifiers = [[1,2], [3,4], [5,6] ];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
+
+    /**
+     *  Propuesta de solución: Se propone mantener los estados: solo un Sospechoso(1), Confirmado(2) y Recuperado (3)
+     *
+     * @param CaseDTO $currentCase
+     * @return currentCase
+     */
+    public function solveSCRSR_12334(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings(); 
+
+        $currentCase->setFollowings([]);   
+        $currentCase->setFollowings([$followings[0],$followings[1],$followings[2] ]);
+
+        $this->deleteCase($followings[3]->getId());
+        $this->deleteCase($followings[4]->getId());
+
+        return $currentCase;        
+    }    
    
     
     /**
