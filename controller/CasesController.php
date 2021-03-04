@@ -1226,6 +1226,20 @@ class CasesController
 
         return $currentCase; 
    }
+
+   /**
+    * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (3)
+    *
+    * @param CaseDTO $currentCase
+    * @return void
+    */
+   public function solveCRC_123(CaseDTO $currentCase)
+   {
+        $arrIdentifiers = [[1, 2], [3]];
+        $cases = $this->caseDivider($oldCase, $arrIdentifiers);
+
+        return $cases;
+    }
    
     
     /**
