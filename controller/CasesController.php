@@ -915,7 +915,25 @@ class CasesController
         
         return $currentCase;
     }  
-    
+ 
+    /**
+     * Descripción: Se propone mantener los estados Sospechoso(1), Confirmado(2) y Recuperado (3)
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSCRCR_12233(CaseDTO $currentCase){
+
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0],$followings[1],$followings[4] ]);
+
+        $this->deleteCase($followings[2]->getId()); 
+        $this->deleteCase($followings[3]->getId()); 
+        
+        return $currentCase;
+    }    
     /**
      * Buscar seguimiento por estado
      *
@@ -934,7 +952,7 @@ class CasesController
         return $followingDTO;
     }
 
-    /**
+        /**
      * Buscar los seguimientos de un caso por estado
      *
      * @param array $followings
