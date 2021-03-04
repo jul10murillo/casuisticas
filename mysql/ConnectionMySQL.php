@@ -26,6 +26,6 @@ class ConnectionMySQL
         if (!$result) {
             printf("Errormessage: %s\n", $this->connection->error);
         }
-        return $result->fetch_row();
+        return $result->fetch_all();
     }
 }

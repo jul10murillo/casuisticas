@@ -62,12 +62,11 @@ class CasesController
     /**
      * solveSDSD_1234
      *
-     * @param  int $idOldCase
+     * @param  CaseDTO $oldCase
      * @return void
      */
-    public function solveSDSD_1234($idOldCase)
+    public function solveSDSD_1234($oldCase)
     {
-        $oldCase = $this->caseDAO->getById($idOldCase);
         $arrIdentifiers = [[1, 2], [3, 4]];
         $cases = $this->caseDivider($oldCase, $arrIdentifiers);
 
