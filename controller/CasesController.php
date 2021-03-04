@@ -887,6 +887,20 @@ class CasesController
         return $currentCase; 
     }
 
+    public function solveYCYCR_12345(CaseDTO $currentCase){
+
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[1],$followings[4]]);
+
+        $this->deleteCase($followings[0]->getId()); 
+        $this->deleteCase($followings[2]->getId());   
+        $this->deleteCase($followings[3]->getId()); 
+
+        return $currentCase;         
+    }
+    
     /**
      * Buscar seguimiento por estado
      *
@@ -995,7 +1009,7 @@ class CasesController
      */
     public function caseDivider($oldCaseDTO, $arrIdentifiers)
     {
-        if (count(oldCaseDTO) =! 1) {
+        if (count($oldCaseDTO) == 1) {
             $mainCaseDTO = $this->updateOldCase($oldCaseDTO, [$oldCaseDTO->getFollowings()[0]]);
         } else {
             $mainCaseDTO = $this->updateOldCase($oldCaseDTO, [$oldCaseDTO->getFollowings()[0], $oldCaseDTO->getFollowings()[1]]);
