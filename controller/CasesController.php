@@ -1259,6 +1259,28 @@ class CasesController
 
         return $currentCase; 
     }
+
+    /**
+     * Propuesta de solución: Se propone dividir en tres casos: Caso 1 (12), Caso 2 (34) y Caso 2 (5)
+     *  y eliminar estado Descartado(5)
+     *
+     * @param CaseDTO $currentCase
+     * @return cases
+     */
+    public function solveSDSDSD_123455(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();         
+
+        $currentCase->setFollowings([]);       
+        $currentCase->setFollowings([$followings[0],$followings[1],$followings[2],$followings[3], $followings[4]]);
+
+        $this->deleteCase($followings[5]->getId());    
+
+        $arrIdentifiers = [[1,2], [3,4], [5]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
    
     
     /**
