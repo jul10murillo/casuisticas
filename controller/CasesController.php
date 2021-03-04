@@ -585,13 +585,29 @@ class CasesController
      */
     public function solveSDSD_1223(CaseDTO $currentCase)
     {
-
         $followings = $currentCase->getFollowings();
         $currentCase->setFollowings([]);
         $currentCase->setFollowings([$followings[0],  $followings[4]]);
 
         $this->deleteCase($followings[1]->getId());
         $this->deleteCase($followings[2]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     *  Propuesta de solución: Eliminar el seguimiento(2) Descartado
+     *
+     * @param CaseDTO $currentCase
+     * @return currentCase
+     */
+    public function solveCDR_123(CaseDTO $currentCase){
+
+        $followings = $currentCase->getFollowings();
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0],  $followings[2]]);
+
+        $this->deleteCase($followings[1]->getId());      
 
         return $currentCase;
     }
