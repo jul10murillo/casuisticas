@@ -558,6 +558,26 @@ class CasesController
     }
 
 
+    /**
+     * Propuesta de solución: Se propone mantener los estados Sospechoso(1) y Confirmado(2)
+     * o los estados Sospechoso(2) y Descartado(3)
+     *
+    *  @param CaseDTO $currentCase
+     * @return currentCase
+     */
+    public function solveSCSD_1223(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0],  $followings[1]]);
+
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[4]->getId());
+
+        return $currentCase;
+
+    }
+
     /**   
      *
      * @param CaseDTO $currentCase
