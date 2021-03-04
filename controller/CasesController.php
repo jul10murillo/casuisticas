@@ -1150,6 +1150,26 @@ class CasesController
         return $cases;
 
     }
+
+    /**
+     * Propuesta de solución: Se propone mantener los estados Sospechoso(1), Confimado(3) y Recuperado(4)
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+   public function solveSCSRCR_123444(CaseDTO $currentCase)
+   {
+        $followings = $currentCase->getFollowings();         
+
+        $currentCase->setFollowings([]);       
+        $currentCase->setFollowings([$followings[0],$followings[1],$followings[5]]);
+
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());        
+        $this->deleteCase($followings[4]->getId());  
+
+        return $currentCase;  
+   }
     
     /**
      * Buscar seguimiento por estado
