@@ -11,7 +11,7 @@ class CaseDTO
     private $creation_date;
     private $closing_justification;
     private $novelty;
-    private $responsable_document;
+    private $responsible_document;
     private $create_user_document;
     private $modifier_user_document;
     private $created_at;
@@ -76,9 +76,9 @@ class CaseDTO
         return $this->novelty;
     }
 
-    function getResponsable_document()
+    function getResponsible_document()
     {
-        return $this->responsable_document;
+        return $this->responsible_document;
     }
 
     function getCreate_user_document()
@@ -106,9 +106,9 @@ class CaseDTO
         $this->novelty = $novelty;
     }
 
-    function setResponsable_document($responsable_document)
+    function setResponsible_document($responsible_document)
     {
-        $this->responsable_document = $responsable_document;
+        $this->responsible_document = $responsible_document;
     }
 
     function setCreate_user_document($create_user_document)
@@ -191,7 +191,7 @@ class CaseDTO
         $this->healthStatus           = $case[4];
         $this->novelty                = $case[5];
         $this->status                 = $case[6];
-        $this->responsable_document   = $case[7];
+        $this->responsible_document   = $case[7];
         $this->create_user_document   = $case[8];
         $this->modifier_user_document = $case[9];
     }
@@ -204,7 +204,7 @@ class CaseDTO
         $this->healthStatus           = $case->getHealthStatus();
         $this->novelty                = $case->getNovelty();
         $this->status                 = $case->getStatus();
-        $this->responsable_document   = $case->getResponsable_document();
+        $this->responsible_document   = $case->getResponsible_document();
         $this->create_user_document   = $case->getCreate_user_document();
         $this->modifier_user_document = $case->getModifier_user_document();
     }
@@ -259,7 +259,7 @@ class CaseDTO
             isset($this->healthStatus) ? $this->healthStatus : '""',
             isset($this->novelty) ? $this->novelty : '""',
             isset($this->status) ? $this->status : '""',
-            isset($this->responsable_document) ? $this->responsable_document : '""',
+            isset($this->responsible_document) ? $this->responsible_document : '""',
             isset($this->create_user_document) ? $this->create_user_document : '""',
             isset($this->modifier_user_document) ? $this->modifier_user_document : '""',
         ];
@@ -275,7 +275,7 @@ class CaseDTO
             'healthStatus',
             'novelty',
             'status',
-            'responsable_document',
+            'responsible_document',
             'create_user_document',
             'modifier_user_document',
         ];

@@ -20,10 +20,13 @@ class DataController
         $data          = $this->getData();
         $cases         = $this->groupHistory($data['cases']); //Grupo de estados (Casos)
         $check_history = $this->checkHistory($cases); //Comprobamos el orden de la historia de los casos
+        
         $check_status  = $this->checkOrder($check_history); //Comprobamos si el caso está bien o hay que corregirlo
+        
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
-        $casesDTOS = $this->getCasesDTObyBadCases($group_status['casos_malos']);
-
+        
+        $casesDTOS     = $this->getCasesDTObyBadCases($group_status['casos_malos']);
+        // print_r($casesDTOS);exit;
         // $casesDTOS = $this->getCasesDTObyBadCases($caso);
         list($solveCases, $notSolveCases) = $this->startSolveBadCases($casesDTOS);
         $this->printDashboardCases($solveCases, $notSolveCases);

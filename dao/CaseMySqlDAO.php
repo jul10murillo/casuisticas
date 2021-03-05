@@ -123,14 +123,14 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
      */
     public function save($case)
     {
-        $query = "INSERT INTO tigo_sent_to_followings (document,creation_date,closing_justification,status_id,novelty,status, responsable_document, create_user_document, created_at, updated_at, deleted_at) VALUES ("
+        $query = "INSERT INTO tigo_sent_to_followings (document,creation_date,closing_justification,status_id,novelty,status, responsible_document, create_user_document, created_at, updated_at, deleted_at) VALUES ("
             .'"'.$case->getDate().'",'
             .'"'.$case->getCreation_date().'",'
             .'"'.$case->getClosing_justification().'",'
             .'"'.$case->getHealthStatus().'",'
             .'"'.$case->getNovelty().'",'
             .'"'.$case->getStatus().'",'
-            .'"'.$case->getResponsable_document().'",'
+            .'"'.$case->getResponsible_document().'",'
             .'"'.$case->getCreate_user_document().'",'
             .'"'.$case->getCreated_at().'",'
             .'"'.$case->getUpdated_at().'",'

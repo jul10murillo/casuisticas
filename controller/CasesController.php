@@ -334,14 +334,11 @@ class CasesController
     public function solveRD_12(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
-        $recovered_following = $this->searchFollowingsByStatus($followings, Constants::HEALTH_STATUS_RECOVERED);
-        $discarded_following = $this->searchFollowingByStatus($followings, Constants::HEALTH_STATUS_DISCARDED);
 
-        $recovered_following->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
-        $suspicius_following = $recovered_following;
-
+        $followings[0]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
+        
         $currentCase->setFollowings([]);
-        $currentCase->setFollowings([$suspicius_following, $discarded_following]);
+        $currentCase->setFollowings($followings);
 
         $this->saveCase($currentCase);
 
@@ -1636,13 +1633,13 @@ class CasesController
     public function caseDivider($oldCaseDTO, $arrIdentifiers)
     {
 
-        $mainCaseDTO = $this->updateOldCase($oldCaseDTO[0], [$oldCaseDTO[0]->getFollowings()[0], $oldCaseDTO[0]->getFollowings()[1]]);
+        $mainCaseDTO = $this->updateOldCase($oldCaseDTO, [$oldCaseDTO->getFollowings()[0], $oldCaseDTO->getFollowings()[1]]);
 
-        $newCasesDTO = $this->createNewCases($oldCaseDTO[0], $arrIdentifiers);
+        $newCasesDTO = $this->createNewCases($oldCaseDTO, $arrIdentifiers);
 
         $cases = array_merge($mainCaseDTO, $newCasesDTO);
 
-        $activities  = $oldCaseDTO[0]->getActivities();
+        $activities  = $oldCaseDTO->getActivities();
 
         $this->updateCasesActivities($cases, $activities);
 
@@ -1659,13 +1656,16 @@ class CasesController
     {
         $newCasesDTO = array();
 
-        for ($i = 1; $i <= count($arrIdentifiers); $i++) {
+        for ($i = 1; $i < count($arrIdentifiers); $i++) {
+            // if ($i = 2) {
+            //     echo "test";
+            // }
             $groupFollowings = $arrIdentifiers[$i];
 
             $caseDTO = new CaseDTO();
 
             $caseDTO->initNewByCase($oldCaseDTO);
-
+            
             $caseDTO->setFollowings($this->getFollowingsByPositions($oldCaseDTO, $groupFollowings));
 
             $follogingEnd = end($caseDTO->getFollowings());
