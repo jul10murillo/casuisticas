@@ -414,7 +414,7 @@ class DataController
                 foreach ($badCodeCase as $idCase) {
                     try {
                         $response = $caseController->$function($idCase);
-                        if ($response->status) {
+                        if (json_decode($response)->status) {
                             $solveCases[] = $response;
                         } else {
                             $notSolveCases[] = $response;
