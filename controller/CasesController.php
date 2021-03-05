@@ -56,7 +56,7 @@ class CasesController
             return json_encode($response);
         }
         try {
-            $caseOut  = $this->$function($arguments);
+            $caseOut  = $this->$function($arguments[0]);
             $response = [
                 'status'  => true,
                 'message' => 'Caso Resuelto',
@@ -1756,9 +1756,9 @@ class CasesController
         if (count($caseDTO->getFollowings()) > 0) {
             foreach ($caseDTO->getFollowings() as $followingDTO) {
                 if (is_null($followingDTO->getId())) {
-                    $this->followingDAO->save($followingDTO);
+                    $this->followingDAO->save($followingDTO,$caseDTO);
                 } else {
-                    $this->followingDAO->update($followingDTO);
+                    $this->followingDAO->update($followingDTO,$caseDTO);
                 }
             }
         }

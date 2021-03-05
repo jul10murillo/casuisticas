@@ -8,6 +8,15 @@ class CaseDTO
 {
     private $id;
     private $document;
+    private $creation_date;
+    private $closing_justification;
+    private $novelty;
+    private $responsable_document;
+    private $create_user_document;
+    private $modifier_user_document;
+    private $created_at;
+    private $updated_at;
+    private $deleted_at;
     /**
      * Estado del caso (1,0) = (Abierto, Cerrado)
      * @var type 
@@ -19,28 +28,172 @@ class CaseDTO
      * @var type 
      */
     private $healthStatus;
-    private $date;
 
     /**
      *
      * @var FollowingDTO[] 
      */
     private $followings;
-
-
+    
     /**
      *
      * @var ActivityDTO[] 
      */
     private $activities;
+    
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setDocument($document)
+    {
+        $this->document = $document;
+    }
+
+    public function getDocument()
+    {
+        return $this->document;
+    }
+    
+    function getCreation_date()
+    {
+        return $this->creation_date;
+    }
+
+    function getClosing_justification()
+    {
+        return $this->closing_justification;
+    }
+
+    function getNovelty()
+    {
+        return $this->novelty;
+    }
+
+    function getResponsable_document()
+    {
+        return $this->responsable_document;
+    }
+
+    function getCreate_user_document()
+    {
+        return $this->create_user_document;
+    }
+
+    function getModifier_user_document()
+    {
+        return $this->modifier_user_document;
+    }
+
+    function setCreation_date($creation_date)
+    {
+        $this->creation_date = $creation_date;
+    }
+
+    function setClosing_justification($closing_justification)
+    {
+        $this->closing_justification = $closing_justification;
+    }
+
+    function setNovelty($novelty)
+    {
+        $this->novelty = $novelty;
+    }
+
+    function setResponsable_document($responsable_document)
+    {
+        $this->responsable_document = $responsable_document;
+    }
+
+    function setCreate_user_document($create_user_document)
+    {
+        $this->create_user_document = $create_user_document;
+    }
+
+    function setModifier_user_document($modifier_user_document)
+    {
+        $this->modifier_user_document = $modifier_user_document;
+    }
+    
+    function getCreated_at()
+    {
+        return $this->created_at;
+    }
+
+    function getUpdated_at()
+    {
+        return $this->updated_at;
+    }
+
+    function getDeleted_at()
+    {
+        return $this->deleted_at;
+    }
+
+    function setCreated_at($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    function setUpdated_at($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    function setDeleted_at($deleted_at)
+    {
+        $this->deleted_at = $deleted_at;
+    }
+    
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setDate($date)
+    {
+        $this->date = $date;
+    }
+
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    function getHealthStatus()
+    {
+        return $this->healthStatus;
+    }
+
+    function setHealthStatus($healthStatus)
+    {
+        $this->healthStatus = $healthStatus;
+    }
+    
     function initByCase($case)
     {
-        $this->id           = $case[0];
-        $this->document     = $case[1];
-        $this->status       = $case[2];
-        $this->healthStatus = $case[3];
-        $this->date         = $case[4];
+        $this->id                     = $case[0];
+        $this->document               = $case[1];
+        $this->creation_date          = $case[2];
+        $this->closing_justification  = $case[3];
+        $this->healthStatus           = $case[4];
+        $this->novelty                = $case[5];
+        $this->status                 = $case[6];
+        $this->responsable_document   = $case[7];
+        $this->create_user_document   = $case[8];
+        $this->modifier_user_document = $case[9];
     }
 
     function getFollowings()
@@ -81,57 +234,5 @@ class CaseDTO
             }
         }
         $this->activities = $activitiesData;
-    }
-
-
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    public function setDocument($document)
-    {
-        $this->document = $document;
-    }
-
-    public function getDocument()
-    {
-        return $this->document;
-    }
-
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    public function setDate($date)
-    {
-        $this->date = $date;
-    }
-
-    public function getDate()
-    {
-        return $this->date;
-    }
-
-
-    function getHealthStatus()
-    {
-        return $this->healthStatus;
-    }
-
-    function setHealthStatus($healthStatus)
-    {
-        $this->healthStatus = $healthStatus;
     }
 }
