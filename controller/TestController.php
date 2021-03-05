@@ -51,8 +51,8 @@ class TestController
         try {
             $firstDate = null;
             foreach ($caseDTO->getFollowings() as $key => $following) {
-                if ($firstDate != $following->getDate()) {
-                    $firstDate = $following->getDate();
+                if ($firstDate != $following->getCreated_at()) {
+                    $firstDate = $following->getCreated_at();
                     if ($firstDate == 0) {
                         return false;
                     }

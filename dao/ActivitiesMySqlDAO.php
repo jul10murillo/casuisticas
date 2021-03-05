@@ -37,28 +37,19 @@ class ActivitiesMySqlDAO extends ConnectionMySQL implements ActivitiesDAO {
      */
     public function update($activityDTO)
     {
-        $activity = parent::queryUpdateOrInsert("UPDATE tigo_followings SET (".
-            "document=".$caseDTO->getDocument().",".
-            "status_id=".$followingDTO->getStatus().",".
-            "status=".$status.",".
-            "sent_to_following_id=".$followingDTO->getCaseId().",".
-            "updated_at=".$followingDTO->getDate().") WHERE id = ".$followingDTO->getId()
+        $activity = parent::queryUpdateOrInsert("UPDATE tigo_followings SET ".
+            "sent_to_following_id=".$activityDTO->getCaseId()." WHERE id = ".$activityDTO->getId()
         );
-        return $following;
-        return $following;
+        return $activity;
     }
 
     /**
-     * Actualiza el caso de una actividad de seguimiento
      * 
-     * @param integer $id
-     * @param integer $caseId
-     * 
-     * @return stdClass
+     * @param ActivityDTO $activityDTO
      */
-    public static function updateCaseById($id,$caseId)
+    function save($activityDTO)
     {
-        $following = parent::query("UPDATE tigo_log_followings SET sent_to_following_id = ".$caseId." WHERE id = " . $id);
+        $following = parent::queryUpdateOrInsert("INSERT INTO tigo_followings (".implode(",", $activityDTO->getArrayNameAllProperties()).") VALUES (".implode(",", $activityDTO->getArrayValueAllProperties()).")");
         return $following;
     }
 }

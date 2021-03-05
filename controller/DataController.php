@@ -20,10 +20,13 @@ class DataController
         $data          = $this->getData();
         $cases         = $this->groupHistory($data['cases']); //Grupo de estados (Casos)
         $check_history = $this->checkHistory($cases); //Comprobamos el orden de la historia de los casos
+        
         $check_status  = $this->checkOrder($check_history); //Comprobamos si el caso está bien o hay que corregirlo
+        
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
-        $casesDTOS = $this->getCasesDTObyBadCases($group_status['casos_malos']);
-
+        
+        $casesDTOS     = $this->getCasesDTObyBadCases($group_status['casos_malos']);
+        // print_r($casesDTOS);exit;
         // $casesDTOS = $this->getCasesDTObyBadCases($caso);
         list($solveCases, $notSolveCases) = $this->startSolveBadCases($casesDTOS);
         $this->printDashboardCases($solveCases, $notSolveCases);
@@ -411,7 +414,7 @@ class DataController
                 foreach ($badCodeCase as $idCase) {
                     try {
                         $response = $caseController->$function($idCase);
-                        if ($response->status) {
+                        if (json_decode($response)->status) {
                             $solveCases[] = $response;
                         } else {
                             $notSolveCases[] = $response;
@@ -447,15 +450,16 @@ class DataController
         echo '<div id="goodones"> ';
         echo '<table>';
         echo '<tr>';
-        echo '<td> Caso de Entrada </td>';
-        echo '<td> Casos Salida </td>';
-        echo '<td> Mensaje </td>';
+        echo '<td style="border: 1px solid black;"> Caso de Entrada </td>';
+        echo '<td style="border: 1px solid black;"> Casos Salida </td>';
+        echo '<td style="border: 1px solid black;"> Mensaje </td>';
         echo '</tr>';
         foreach ($solveCases as $key => $solveCase) {
+            $solveCase = json_decode($solveCase);
             echo '<tr>';
-            echo '<td>' . $solveCase->caseIn  . '</td>';
-            echo '<td>' . $solveCase->caseOut . '</td>';
-            echo '<td>' . $solveCase->message . '</td>';
+            echo '<td style="border: 1px solid black;">' . $solveCase->caseIn  . '</td>';
+            echo '<td style="border: 1px solid black;">' . $solveCase->caseOut . '</td>';
+            echo '<td style="border: 1px solid black;">' . $solveCase->message . '</td>';
             echo '</tr>';
         }
         echo '</table>';
@@ -467,13 +471,14 @@ class DataController
         //---------------------------------------------------------//
         echo '<table>';
         echo '<tr>';
-        echo '<td> Caso de Entrada </td>';
-        echo '<td> Mensaje </td>';
+        echo '<td style="border: 1px solid black;"> Caso de Entrada </td>';
+        echo '<td style="border: 1px solid black;"> Mensaje </td>';
         echo '</tr>';
         foreach ($notSolveCases as $key => $notSolveCase) {
+            $notSolveCase = json_decode($notSolveCase);
             echo '<tr>';
-            echo '<td>' . $notSolveCase->caseIn  . '</td>';
-            echo '<td>' . $notSolveCase->message . '</td>';
+            echo '<td style="border: 1px solid black;">' . $notSolveCase->caseIn  . '</td>';
+            echo '<td style="border: 1px solid black;">' . $notSolveCase->message . '</td>';
             echo '</tr>';
         }
         echo '</table>';

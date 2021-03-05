@@ -7,7 +7,7 @@ class ConnectionMySQL
     private $host = "localhost";
     private $user = "root";
     private $pass = "";
-    private $db = "svepi_prod_test";
+    private $db = "svepi_prod_test";  //tigo_test_SVEPI
 
     public function __construct()
     {
@@ -21,7 +21,7 @@ class ConnectionMySQL
             printf("Connect failed: %s\n", $this->connection->connect_error);
             exit();
         }
-        
+
         $result = $this->connection->query($sql);
         if (!$result) {
             printf("Errormessage: %s\n", $this->connection->error);
@@ -39,7 +39,7 @@ class ConnectionMySQL
         print_r("---<br>");
         print_r($sql);
         print_r("---<br>");
-        
+
         $result = $this->connection->query($sql);
         if (!$result) {
             printf("Errormessage: %s\n", $this->connection->error);
