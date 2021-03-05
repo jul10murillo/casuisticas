@@ -43,14 +43,14 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
      */
     public function getByIds($ids)
     {
-        $cases = parent::query("SELECT id, document, status, status_id, creation_date FROM tigo_sent_to_followings WHERE id in (" . join(',', $ids) . ")");
+        $cases = parent::query("SELECT * FROM tigo_sent_to_followings WHERE id in (" . join(',', $ids) . ")");
 
-        $followings = parent::query("SELECT id, status_id, sent_to_following_id, created_at FROM tigo_log_followings WHERE sent_to_following_id in (" . join(',', $ids) . ")");
+        $followings = parent::query("SELECT * FROM tigo_log_followings WHERE sent_to_following_id in (" . join(',', $ids) . ")");
         foreach ($followings as $key => $value) {
             $followingsData[$value[2]][] = $value;
         }
 
-        $activities = parent::query("SELECT id, sent_to_following_id, date FROM tigo_followings WHERE sent_to_following_id in (" . join(',', $ids) . ")");
+        $activities = parent::query("SELECT * FROM tigo_followings WHERE sent_to_following_id in (" . join(',', $ids) . ")");
 
         foreach ($activities as $key => $value) {
             $activitiesData[$value[1]][] = $value;

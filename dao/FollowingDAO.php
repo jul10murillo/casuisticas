@@ -31,15 +31,6 @@ interface FollowingDAO{
     public function delete($id);
 
     /**
-     * Actualiza un following
-     * 
-     * @param array $data
-     * 
-     * @return boolean
-     */
-    public function update($data);
-
-    /**
      * Retorna los following que hay desde una fecha inicial
      * 
      * @param integer $id

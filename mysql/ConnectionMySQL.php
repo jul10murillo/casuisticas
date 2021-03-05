@@ -21,9 +21,6 @@ class ConnectionMySQL
             printf("Connect failed: %s\n", $this->connection->connect_error);
             exit();
         }
-        print_r("---<br>");
-        print_r($sql);
-        print_r("---<br>");
         
         $result = $this->connection->query($sql);
         if (!$result) {
