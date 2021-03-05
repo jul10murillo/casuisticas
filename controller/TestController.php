@@ -48,17 +48,24 @@ class TestController
             }
         }
 
-        $firstDate = null;
-        foreach ($caseDTO->getFollowings() as $key => $following) {
-            if ($firstDate != $following->getDate()) {
-                $firstDate = $following->getDate();
-                $date[] = end($date) + 1;
-            } else {
-                $date[] = end($date);
+        try {
+            $firstDate = null;
+            foreach ($caseDTO->getFollowings() as $key => $following) {
+                if ($firstDate != $following->getDate()) {
+                    $firstDate = $following->getDate();
+                    if ($firstDate == 0) {
+                        return false;
+                    }
+                    $date[] = end($date) + 1;
+                } else {
+                    $date[] = end($date);
+                }
             }
-        }
 
-        if ($datesCode != implode($date)) {
+            if ($datesCode != implode($date)) {
+                return false;
+            }
+        } catch (\Throwable $th) {
             return false;
         }
 
