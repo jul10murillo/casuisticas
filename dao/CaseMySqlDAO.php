@@ -117,17 +117,24 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
     /**
      * Crea un caso
      * 
-     * @param CaseDTO $caseDTO
+     * @param CaseDTO $case
      * 
      * @return stdClass
      */
     public function save($case)
     {
-        $query = "INSERT INTO tigo_sent_to_followings (updated_at,document,status,status_id) VALUES ("
+        $query = "INSERT INTO tigo_sent_to_followings (document,creation_date,closing_justification,status_id,novelty,status, responsable_document, create_user_document, created_at, updated_at, deleted_at) VALUES ("
             .'"'.$case->getDate().'",'
-            .'"'.$case->getDocument().'",'
+            .'"'.$case->getCreation_date().'",'
+            .'"'.$case->getClosing_justification().'",'
+            .'"'.$case->getHealthStatus().'",'
+            .'"'.$case->getNovelty().'",'
             .'"'.$case->getStatus().'",'
-            .'"'.$case->getHealthStatus().'")';
+            .'"'.$case->getResponsable_document().'",'
+            .'"'.$case->getCreate_user_document().'",'
+            .'"'.$case->getCreated_at().'",'
+            .'"'.$case->getUpdated_at().'",'
+            .'"'.$case->getDeleted_at().'")';
         print_r('-------------<br>');
         $case = parent::queryUpdateOrInsert($query);
         return $case;
