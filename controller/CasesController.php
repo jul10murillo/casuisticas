@@ -1803,7 +1803,38 @@ class CasesController
 
     }
 
+    /**
+     * Propuesta de solucion: Dejar seguimiento(2) y seguimiento(4);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveDCDR_1233(CaseDTO $currentCase)
+    {
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[3]);
 
+        $this->deleteCase($followings[0]->getId());
+        $this->deleteCase($followings[2]->getId());    
+
+        $this->saveCase($currentCase);
+
+        return $currentCase;  
+    }
+
+
+    public function solveDCR_123(CaseDTO $currentCase)
+    {
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[2]);
+
+        $this->deleteCase($followings[0]->getId());         
+
+        $this->saveCase($currentCase);
+
+        return $currentCase;  
+
+    }
 
     
     /**
