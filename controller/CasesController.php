@@ -1677,8 +1677,7 @@ class CasesController
         $this->deleteCase($followings[5]->getId());
         $this->deleteCase($followings[6]->getId());
 
-        $this->saveCase($currentCase);
-
+        
         return $currentCase; 
     }
 
@@ -1696,9 +1695,7 @@ class CasesController
 
         $this->deleteCase($followings[1]->getId());
         $this->deleteCase($followings[2]->getId());
-        $this->deleteCase($followings[3]->getId());      
-
-        $this->saveCase($currentCase);
+        $this->deleteCase($followings[3]->getId()); 
 
         return $currentCase; 
 
@@ -1718,9 +1715,7 @@ class CasesController
         $currentCase->setFollowings($followings[0], $followings[3]);
 
         $this->deleteCase($followings[1]->getId());
-        $this->deleteCase($followings[2]->getId());          
-
-        $this->saveCase($currentCase);
+        $this->deleteCase($followings[2]->getId());
 
         return $currentCase; 
     }
@@ -1744,9 +1739,7 @@ class CasesController
         $this->deleteCase($followings[3]->getId());
         $this->deleteCase($followings[4]->getId());
         $this->deleteCase($followings[5]->getId());
-        $this->deleteCase($followings[6]->getId());
-
-        $this->saveCase($currentCase);
+        $this->deleteCase($followings[6]->getId());       
 
         return $currentCase; 
     }    
@@ -1768,8 +1761,6 @@ class CasesController
         $this->deleteCase($followings[2]->getId());
         $this->deleteCase($followings[3]->getId());   
 
-        $this->saveCase($currentCase);
-
         return $currentCase;
 
     }
@@ -1789,9 +1780,7 @@ class CasesController
 
         $this->deleteCase($followings[1]->getId());
         $this->deleteCase($followings[2]->getId());
-        $this->deleteCase($followings[3]->getId());   
-
-        $this->saveCase($currentCase);
+        $this->deleteCase($followings[3]->getId()); 
 
         return $currentCase;
 
@@ -1815,16 +1804,269 @@ class CasesController
         $this->deleteCase($followings[3]->getId());   
         $this->deleteCase($followings[4]->getId());
         $this->deleteCase($followings[5]->getId());
-        $this->deleteCase($followings[6]->getId());  
-
-        $this->saveCase($currentCase);
+        $this->deleteCase($followings[6]->getId()); 
 
         return $currentCase;
 
     }
 
+    /**
+     * Propuesta de solucion: Dejar seguimiento(2) y seguimiento(4);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveDCDR_1233(CaseDTO $currentCase)    
+    {
+        $followings = $currentCase->getFollowings();
+        
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[3]);
 
+        $this->deleteCase($followings[0]->getId());
+        $this->deleteCase($followings[2]->getId()); 
 
+        return $currentCase;  
+    }
+
+     /**
+     * Propuesta de solucion: Dejar seguimiento(2) y seguimiento(3);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveDCR_123(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[2]);
+
+        $this->deleteCase($followings[0]->getId());  
+
+        return $currentCase;  
+
+    }
+    /**
+     * Propuesta de solución: Dejar seguimiento(2) y seguimiento(5);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveFCFCR_12345(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[4]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId());    
+        $this->deleteCase($followings[3]->getId());  
+
+        return $currentCase;  
+
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimiento(2) y seguimiento(7);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveRCRCHCR_1234567(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[6]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId());    
+        $this->deleteCase($followings[3]->getId());    
+        $this->deleteCase($followings[4]->getId());   
+
+        return $currentCase; 
+    }
+
+   /**
+    * Propuesta de solución: Dejar seguimiento(2) y seguimiento(4);
+    *
+    * @param CaseDTO $currentCase
+    * @return CaseDTO
+    */
+    public function solveSCDR_1123(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[3]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId()); 
+
+        return $currentCase; 
+
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimiento(2) y seguimiento(4);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCDR_1234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[3]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId()); 
+
+        return $currentCase; 
+
+    }
+
+    /**
+     *  Propuesta de solución: Dejar seguimiento(2) y seguimiento(6);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCDRDR_123445(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[5]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId()); 
+        $this->deleteCase($followings[3]->getId()); 
+        $this->deleteCase($followings[4]->getId());        
+
+        return $currentCase; 
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimiento(2) y seguimiento(6);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCDRSR_112234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[5]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId()); 
+        $this->deleteCase($followings[3]->getId()); 
+        $this->deleteCase($followings[4]->getId());        
+
+        return $currentCase;
+
+    }
+
+     /**
+     * Propuesta de solución: Dejar seguimiento(2), cambiar el ultimo seguimiento a recuperado 
+     * y elmiminar los seguimientos 1 y 3
+     * 
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCHC_1234(CaseDTO $currentCase)
+    {
+
+        $followings = $currentCase->getFollowings();
+
+        $followings[3]->setStatus(constants::HEALTH_STATUS_RECOVERED);        
+       
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[3]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId());    
+
+        $this->saveCase($currentCase);
+        
+        return $currentCase;
+
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimiento(2) y seguimiento(6);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCRSCR_112334(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[5]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId()); 
+        $this->deleteCase($followings[3]->getId()); 
+        $this->deleteCase($followings[4]->getId());        
+
+        return $currentCase;
+
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimiento(2) y seguimiento(5);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCRSRV_112345(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[4]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId()); 
+        $this->deleteCase($followings[3]->getId()); 
+        $this->deleteCase($followings[6]->getId());        
+
+        return $currentCase;
+    }
+
+    /**
+     *  Propuesta de solución: Cambiar el seguimiento 4 por recuperado
+     *  eliminar el siguimiento 1 y 2
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSDCS_1233(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+       
+        $followings[3]->setStatus(constants::HEALTH_STATUS_RECOVERED);        
+       
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[2], $followings[3]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[1]->getId());    
+
+        $this->saveCase($currentCase);
+        
+        return $currentCase;
+
+    }
+    
     
     /**
      * Buscar seguimiento por estado
