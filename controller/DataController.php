@@ -25,6 +25,7 @@ class DataController
 
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
 
+        // print_r($group_status['casos_malos']);exit;
         $casesDTOS     = $this->getCasesDTObyBadCases($group_status['casos_malos']);
         // $casesDTOS = $this->getCasesDTObyBadCases($caso);
         
@@ -38,7 +39,7 @@ class DataController
      */
     public function getData()
     {
-        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/Extraccion.csv', 'r');
+        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/Extraccion_1759.csv', 'r');
         $i            = 0;
         while (($registro_csv = fgetcsv($csv_archivo)) !== false) {
             $i++;

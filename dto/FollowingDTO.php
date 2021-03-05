@@ -20,7 +20,8 @@ class FollowingDTO
      */
     function initByFollowingDTO($following)
     {
-        $this->id                   = $following->getId();
+        $id = (method_exists($following,"getId")) ? $following->getId() : "" ;
+        $this->id                   = $id;
         $this->document             = $following->getDocument();
         $this->format_id            = $following->getFormatId();
         $this->status_id            = $following->getStatus();
