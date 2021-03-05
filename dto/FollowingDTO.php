@@ -129,4 +129,32 @@ class FollowingDTO
     {
         $this->update_at = $update_at;
     }
+
+    function getArrayValueAllProperties()
+    {
+        return [
+            $this->id,
+            $this->document,
+            $this->format_id,
+            $this->status_id,
+            $this->create_user_document,
+            $this->created_at,
+            $this->update_at,
+            $this->sent_to_following_id,
+        ];
+    }
+
+    function getArrayNameAllProperties()
+    {
+        return [
+            'id',
+            'document',
+            'format_id',
+            'status_id',
+            'create_user_document',
+            'created_at',
+            'update_at',
+            'sent_to_following_id',
+        ];
+    }
 }
