@@ -106,7 +106,8 @@ class CasesController
      */
     public function solveR_1(CaseDTO $currentCase)
     {
-        $date = $this->subtractDaysFromDate($currentCase->getDate(), 1);
+        $followings = $currentCase->getFollowings();
+        $date = $this->subtractDaysFromDate($followings[0]->getDate(), 1);
         $this->addNewFollowingToCase($currentCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
         $this->saveCase($currentCase);
 
@@ -121,7 +122,8 @@ class CasesController
      */
     public function solveD_1(CaseDTO $currentCase)
     {
-        $date = $this->subtractDaysFromDate($currentCase->getDate(), 1);
+        $followings = $currentCase->getFollowings();
+        $date = $this->subtractDaysFromDate($followings[0]->getDate(), 1);
         $this->addNewFollowingToCase($currentCase, $date, Constants::HEALTH_STATUS_SUSPICIOUS);
         $this->saveCase($currentCase);
 
@@ -136,9 +138,8 @@ class CasesController
      */
     public function solveCR_11(CaseDTO $currentCase)
     {
-        $followings = $currentCase->getFollowings();  
-
-        $followings[1]->setDate($this->addDaysToDate($followings[0]->getDate(), '1'));
+        $followings = $currentCase->getFollowings(); 
+        $followings[1]->setDate($this->addDaysToDate($followings[0]->getDate(), 1));
 
         $currentCase->setFollowings([]);
         $currentCase->setFollowings($followings);
@@ -172,7 +173,7 @@ class CasesController
     {
         $followings = $currentCase->getFollowings();       
 
-        $followings[1]->setDate($this->addDaysToDate($followings[0]->getDate(), '1'));
+        $followings[1]->setDate($this->addDaysToDate($followings[0]->getDate(), 1));
 
         $currentCase->setFollowings([]);
         $currentCase->setFollowings($followings);
@@ -193,7 +194,7 @@ class CasesController
     {
         $followings = $currentCase->getFollowings();      
 
-        $followings[0]->setDate($this->subtractDaysFromDate($followings[1]->getDate(), '1'));
+        $followings[0]->setDate($this->subtractDaysFromDate($followings[1]->getDate(), 1));
 
         $currentCase->setFollowings([]);
         $currentCase->setFollowings([$suspicius_following, $confirmed_following, $recovered_following]);
@@ -226,7 +227,7 @@ class CasesController
     {
         $followings = $currentCase->getFollowings();        
 
-        $followings[0]->setDate($this->subtractDaysFromDate($followings[1]->getDate(), '1'));
+        $followings[0]->setDate($this->subtractDaysFromDate($followings[1]->getDate(), 1));
 
         $currentCase->setFollowings([]);
 
@@ -260,7 +261,7 @@ class CasesController
     {
         $followings = $currentCase->getFollowings();       
 
-        $followings[0]->setDate($this->subtractDaysFromDate($followings[1]->getDate(), '1'));
+        $followings[0]->setDate($this->subtractDaysFromDate($followings[1]->getDate(), 1));
 
         $currentCase->setFollowings([]);
         $currentCase->setFollowings([$suspicius_following, $confirmed_following]);
@@ -293,7 +294,7 @@ class CasesController
     {
         $followings = $currentCase->getFollowings();     
 
-        $date =  $this->subtractDaysFromDate($followings[0]->getDate(), '1');
+        $date =  $this->subtractDaysFromDate($followings[0]->getDate(), 1);
 
         $this->addNewFollowingToCase($currentCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
 
@@ -390,7 +391,7 @@ class CasesController
     {
         $followings = $currentCase->getFollowings();       
 
-        $followings[2]->setDate($this->addDaysToDate($followings[1]->getDate(), '1'));  
+        $followings[2]->setDate($this->addDaysToDate($followings[1]->getDate(), 1));  
 
         $currentCase->setfollowings([]);
         $currentCase->setFollowings($followings);
