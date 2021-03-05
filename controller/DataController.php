@@ -414,13 +414,13 @@ class DataController
                 foreach ($badCodeCase as $idCase) {
                     try {
                         $response = $caseController->$function($idCase);
-                        if (json_decode($response)->status) {
+                        if ($response->status) {
                             $solveCases[] = $response;
                         } else {
                             $notSolveCases[] = $response;
                         }
                     } catch (\Throwable $th) {
-                        $error = [
+                        $error = [ 
                             'status'  => false,
                             'message' => 'Error en la función :' . $function . ' id: ' . $idCase,
                             'error'   => $th
