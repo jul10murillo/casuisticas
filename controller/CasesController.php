@@ -1657,8 +1657,7 @@ class CasesController
         $this->deleteCase($followings[5]->getId());
         $this->deleteCase($followings[6]->getId());
 
-        $this->saveCase($currentCase);
-
+        
         return $currentCase; 
     }
 
@@ -1676,9 +1675,7 @@ class CasesController
 
         $this->deleteCase($followings[1]->getId());
         $this->deleteCase($followings[2]->getId());
-        $this->deleteCase($followings[3]->getId());      
-
-        $this->saveCase($currentCase);
+        $this->deleteCase($followings[3]->getId()); 
 
         return $currentCase; 
 
@@ -1698,9 +1695,7 @@ class CasesController
         $currentCase->setFollowings($followings[0], $followings[3]);
 
         $this->deleteCase($followings[1]->getId());
-        $this->deleteCase($followings[2]->getId());          
-
-        $this->saveCase($currentCase);
+        $this->deleteCase($followings[2]->getId());
 
         return $currentCase; 
     }
@@ -1724,9 +1719,7 @@ class CasesController
         $this->deleteCase($followings[3]->getId());
         $this->deleteCase($followings[4]->getId());
         $this->deleteCase($followings[5]->getId());
-        $this->deleteCase($followings[6]->getId());
-
-        $this->saveCase($currentCase);
+        $this->deleteCase($followings[6]->getId());       
 
         return $currentCase; 
     }    
@@ -1748,8 +1741,6 @@ class CasesController
         $this->deleteCase($followings[2]->getId());
         $this->deleteCase($followings[3]->getId());   
 
-        $this->saveCase($currentCase);
-
         return $currentCase;
 
     }
@@ -1769,9 +1760,7 @@ class CasesController
 
         $this->deleteCase($followings[1]->getId());
         $this->deleteCase($followings[2]->getId());
-        $this->deleteCase($followings[3]->getId());   
-
-        $this->saveCase($currentCase);
+        $this->deleteCase($followings[3]->getId()); 
 
         return $currentCase;
 
@@ -1795,48 +1784,12 @@ class CasesController
         $this->deleteCase($followings[3]->getId());   
         $this->deleteCase($followings[4]->getId());
         $this->deleteCase($followings[5]->getId());
-        $this->deleteCase($followings[6]->getId());  
-
-        $this->saveCase($currentCase);
+        $this->deleteCase($followings[6]->getId()); 
 
         return $currentCase;
 
     }
-
-    /**
-     * Propuesta de solucion: Dejar seguimiento(2) y seguimiento(4);
-     *
-     * @param CaseDTO $currentCase
-     * @return CaseDTO
-     */
-    public function solveDCDR_1233(CaseDTO $currentCase)
-    {
-        $currentCase->setFollowings([]);
-        $currentCase->setFollowings($followings[1], $followings[3]);
-
-        $this->deleteCase($followings[0]->getId());
-        $this->deleteCase($followings[2]->getId());    
-
-        $this->saveCase($currentCase);
-
-        return $currentCase;  
-    }
-
-
-    public function solveDCR_123(CaseDTO $currentCase)
-    {
-        $currentCase->setFollowings([]);
-        $currentCase->setFollowings($followings[1], $followings[2]);
-
-        $this->deleteCase($followings[0]->getId());         
-
-        $this->saveCase($currentCase);
-
-        return $currentCase;  
-
-    }
-
-    
+        
     /**
      * Buscar seguimiento por estado
      *
