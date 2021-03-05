@@ -27,6 +27,7 @@ class DataController
         
         $casesDTOS     = $this->getCasesDTObyBadCases($group_status['casos_malos']);
         // $casesDTOS = $this->getCasesDTObyBadCases($caso);
+        
         list($solveCases, $notSolveCases) = $this->startSolveBadCases($casesDTOS);
         $this->printDashboardCases($solveCases, $notSolveCases);
     }
