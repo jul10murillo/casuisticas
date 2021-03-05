@@ -45,28 +45,30 @@ class CasesController
      */
     public function __call($name, $arguments)
     {
+        $arguments = $arguments[0];
+
         $function = 'solve' . $name;
 
         if (!TestController::codeCase($name, $arguments)) {
             $response = [
                 'status'  => false,
-                'caseIn'  => $arguments,
-                'message' => 'El caso:' . $arguments . ' no corresponde a la solución seleccionada:' . $function,
+                'caseIn'  => $arguments->getId(),
+                'message' => 'El caso:' . $arguments->getId() . ' no corresponde a la solución seleccionada:' . $function,
             ];
             return json_encode($response);
         }
         try {
-            $caseOut  = $this->$function($arguments[0]);
+            $caseOut  = $this->$function($arguments);
             $response = [
                 'status'  => true,
                 'message' => 'Caso Resuelto',
-                'caseIn'  => $arguments,
+                'caseIn'  => $arguments->getId(),
                 'caseOut' => $caseOut
             ];
         } catch (\Throwable $th) {
             $response = [
                 'status'  => false,
-                'caseIn'  => $arguments,
+                'caseIn'  => $arguments->getId(),
                 'message' => 'Error a ejecutar la función:' . $function,
                 'error'   => $th
             ];
@@ -408,7 +410,7 @@ class CasesController
         $followings = $currentCase->getFollowings();
         $suspicius_following = $this->searchFollowingByStatus($followings, constants::HEALTH_STATUS_SUSPICIOUS);
         $confirmed_following = $this->searchFollowingByStatus($followings, constants::HEALTH_STATUS_CONFIRMED);
-        $recovered_following = $this->searchFollowingByStatus($followings, constants::HeALTH_STATUS_RECOVERED);
+        $recovered_following = $this->searchFollowingByStatus($followings, constants::HEALTH_STATUS_RECOVERED);
 
         $dateNew = $this->addDaysToDate($recovered_following->getDate(), '1');
 

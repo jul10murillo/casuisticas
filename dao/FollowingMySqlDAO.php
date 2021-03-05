@@ -69,13 +69,7 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO
     {
         $status = in_array($followingDTO->getStatus(), [Constants::HEALTH_STATUS_CONFIRMED, Constants::HEALTH_STATUS_SUSPICIOUS]) ? "1":"0";
         
-        $following = parent::queryUpdateOrInsert("INSERT INTO tigo_log_followings (document, status_id, sent_to_folllowing_id, status, updated_at) VALUES (".
-            $caseDTO->getDocument().",".
-            $followingDTO->getStatus().",".
-            $followingDTO->getCaseId().",".
-            $status.",".
-            $followingDTO->getDate().")"
-        );
+        $following = parent::queryUpdateOrInsert("INSERT INTO tigo_log_followings (".implode(",", $followingDTO->getArrayNameAllProperties()).") VALUES (".implode(",", $followingDTO->getArrayValueAllProperties()).")");
         return $following;
     }
 

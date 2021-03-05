@@ -47,7 +47,7 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
 
         $followings = parent::query("SELECT * FROM tigo_log_followings WHERE sent_to_following_id in (" . join(',', $ids) . ")");
         foreach ($followings as $key => $value) {
-            $followingsData[$value[2]][] = $value;
+            $followingsData[$value[7]][] = $value;
         }
 
         $activities = parent::query("SELECT * FROM tigo_followings WHERE sent_to_following_id in (" . join(',', $ids) . ")");

@@ -263,4 +263,54 @@ class ActivityDTO
         $this->workcenter_id = $workcenter_id;
     }
 
+    function getArrayValueAllProperties()
+    {
+        return [
+            $this->id,
+            $this->caseId,
+            $this->following_type_id,
+            $this->date,
+            $this->time,
+            $this->length,
+            $this->responsable_document,
+            $this->format_id,
+            $this->description,
+            $this->observations,
+            $this->next_following_date,
+            $this->discard_justification,
+            $this->additional_variable,
+            $this->status_id,
+            $this->created_at,
+            $this->updated_at,
+            $this->deleted_at,
+            $this->close_contacts,
+            $this->workcenter_id
+        ];
+    }
+
+    function getArrayNameAllProperties()
+    {
+        return [
+            'id',
+            'caseId',
+            'following_type_id',
+            'date',
+            'time',
+            'length',
+            'responsable_document',
+            'format_id',
+            'description',
+            'observations',
+            'next_following_date',
+            'discard_justification',
+            'additional_variable',
+            'status_id',
+            'created_at',
+            'updated_at',
+            'deleted_at',
+            'close_contacts',
+            'workcenter_id'
+        ];
+    }
+
 }
