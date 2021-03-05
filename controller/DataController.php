@@ -22,9 +22,10 @@ class DataController
         $check_history = $this->checkHistory($cases); //Comprobamos el orden de la historia de los casos
         $check_status  = $this->checkOrder($check_history); //Comprobamos si el caso está bien o hay que corregirlo
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
-//        $casesDTOS = $this->getCasesDTObyBadCases($group_status['casos_malos']); 
-        
-        $casesDTOS = $this->getCasesDTObyBadCases($caso);
+        //        $casesDTOS = $this->getCasesDTObyBadCases($group_status['casos_malos']); 
+        print_r($group_status['casos_malos']);
+        exit;
+        // $casesDTOS = $this->getCasesDTObyBadCases($caso);
         list($solveCases, $notSolveCases) = $this->startSolveBadCases($casesDTOS);
         $this->printDashboardCases($solveCases, $notSolveCases);
     }
@@ -231,7 +232,7 @@ class DataController
      */
     public function checkOrder($check_history)
     {
-        
+
         $good_cases      = [];
         $bad_cases       = [];
         $cases_to_divide = [];
@@ -442,6 +443,8 @@ class DataController
     function printDashboardCases($solveCases, $notSolveCases)
     {
         echo '<div style="text-align:center"> <h1><b> Correción de Casuísticas </b></h1> <br> <hr> <br><br> </div>';
+        echo '<h2> Casos solucionados </h2>';
+        echo '<br> <br>';
         echo '<div id="goodones"> ';
         echo '<table>';
         echo '<tr>';
