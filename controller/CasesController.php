@@ -60,12 +60,32 @@ class CasesController
         try {
             if (method_exists($this, $function)) {
                 $caseOut  = $this->$function($arguments);
-                $response = [
-                    'status'  => true,
-                    'message' => 'Caso Resuelto',
-                    'caseIn'  => $arguments->getId(),
-                    'caseOut' => $caseOut
-                ];
+                if (is_array($caseOut)) {
+                    foreach ($caseOut as $key => $out) {
+                        if (is_object($out)) {
+                            $caseOutIds[] = $out->getId();
+                        } else {
+                            $caseOutIds[] = 0;
+                        }
+                    }
+                    $response = [
+                        'status'  => true,
+                        'message' => 'Caso Resuelto',
+                        'casuistica' => $name,
+                        'caseIn'  => $arguments->getId(),
+                        'caseOut' => implode(" , ", $caseOutIds)
+                    ];
+                } else {
+                    if (is_object($caseOut)) {
+                        $response = [
+                            'status'  => true,
+                            'message' => 'Caso Resuelto',
+                            'casuistica' => $name,
+                            'caseIn'  => $arguments->getId(),
+                            'caseOut' => $caseOut->getId()
+                        ];
+                    }
+                }
             } else {
                 $response = [
                     'status'  => false,
@@ -316,7 +336,7 @@ class CasesController
         $followings[0]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);        
 
         $followings[0]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
-        
+
         $currentCase->setFollowings([]);
         $currentCase->setFollowings($followings);
 
@@ -2093,7 +2113,7 @@ class CasesController
             $caseDTO = new CaseDTO();
 
             $caseDTO->initNewByCase($oldCaseDTO);
-            
+
             $caseDTO->setFollowings($this->getFollowingsByPositions($oldCaseDTO, $groupFollowings));
 
             $follogingEnd = end($caseDTO->getFollowings());
