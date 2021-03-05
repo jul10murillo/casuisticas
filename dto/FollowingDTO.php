@@ -9,7 +9,7 @@ class FollowingDTO
     private $status_id;
     private $create_user_document;
     private $created_at;
-    private $update_at;
+    private $updated_at;
     private $sent_to_following_id;
 
     /**
@@ -129,31 +129,88 @@ class FollowingDTO
     {
         $this->update_at = $update_at;
     }
+    function getFormat_id()
+    {
+        return $this->format_id;
+    }
+
+    function getStatus_id()
+    {
+        return $this->status_id;
+    }
+
+    function getCreate_user_document()
+    {
+        return $this->create_user_document;
+    }
+
+    function getCreated_at()
+    {
+        return $this->created_at;
+    }
+
+    function getUpdated_at()
+    {
+        return $this->updated_at;
+    }
+
+    function getSent_to_following_id()
+    {
+        return $this->sent_to_following_id;
+    }
+
+    function setFormat_id($format_id)
+    {
+        $this->format_id = $format_id;
+    }
+
+    function setStatus_id($status_id)
+    {
+        $this->status_id = $status_id;
+    }
+
+    function setCreate_user_document($create_user_document)
+    {
+        $this->create_user_document = $create_user_document;
+    }
+
+    function setCreated_at($created_at)
+    {
+        $this->created_at = $created_at;
+    }
+
+    function setUpdated_at($updated_at)
+    {
+        $this->updated_at = $updated_at;
+    }
+
+    function setSent_to_following_id($sent_to_following_id)
+    {
+        $this->sent_to_following_id = $sent_to_following_id;
+    }
 
     function getArrayValueAllProperties()
     {
         return [
-            $this->id,
-            $this->document,
-            $this->format_id,
-            $this->status_id,
-            $this->create_user_document,
-            $this->created_at,
-            $this->update_at,
-            $this->sent_to_following_id,
+            isset($this->document) ? $this->document : '""',
+            isset($this->format_id) ? $this->format_id : '""',
+            isset($this->status_id) ? $this->status_id : '""',
+            isset($this->create_user_document) ? $this->create_user_document : '""',
+            isset($this->created_at) ? $this->created_at : '""',
+            isset($this->updated_at) ? $this->update_at : '""',
+            isset($this->sent_to_following_id) ? $this->sent_to_following_id : '""',
         ];
     }
 
     function getArrayNameAllProperties()
     {
         return [
-            'id',
             'document',
             'format_id',
             'status_id',
             'create_user_document',
             'created_at',
-            'update_at',
+            'updated_at',
             'sent_to_following_id',
         ];
     }

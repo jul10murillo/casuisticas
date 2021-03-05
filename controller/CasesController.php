@@ -1653,7 +1653,7 @@ class CasesController
 
             $caseDTO = new CaseDTO();
 
-            $caseDTO->setDocument($oldCaseDTO->getDocument());
+            $caseDTO->initNewByCase($oldCaseDTO);
 
             $caseDTO->setFollowings($this->getFollowingsByPositions($oldCaseDTO, $groupFollowings));
             

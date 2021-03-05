@@ -266,25 +266,25 @@ class ActivityDTO
     function getArrayValueAllProperties()
     {
         return [
-            $this->id,
-            $this->caseId,
-            $this->following_type_id,
-            $this->date,
-            $this->time,
-            $this->length,
-            $this->responsable_document,
-            $this->format_id,
-            $this->description,
-            $this->observations,
-            $this->next_following_date,
-            $this->discard_justification,
-            $this->additional_variable,
-            $this->status_id,
-            $this->created_at,
-            $this->updated_at,
-            $this->deleted_at,
-            $this->close_contacts,
-            $this->workcenter_id
+            isset($this->id) ? $this->id : '""',
+            isset($this->caseId) ? $this->caseId : '""',
+            isset($this->following_type_id) ? $this->following_type_id : '""',
+            isset($this->date) ? $this->date : '""',
+            isset($this->time) ? $this->time : '""',
+            isset($this->length) ? $this->length : '""',
+            isset($this->responsable_document) ? $this->responsable_document : '""',
+            isset($this->format_id) ? $this->format_id : '""',
+            isset($this->description) ? $this->description : '""',
+            isset($this->observations) ? $this->observations : '""',
+            isset($this->next_following_date) ? $this->next_following_date : '""',
+            isset($this->discard_justification) ? $this->discard_justification : '""',
+            isset($this->additional_variable) ? $this->additional_variable : '""',
+            isset($this->status_id) ? $this->status_id : '""',
+            isset($this->created_at) ? $this->created_at : '""',
+            isset($this->updated_at) ? $this->updated_at : '""',
+            isset($this->deleted_at) ? $this->deleted_at : '""',
+            isset($this->close_contacts) ? $this->close_contacts : '""',
+            isset($this->workcenter_id) ? $this->workcenter_id : '""'
         ];
     }
 

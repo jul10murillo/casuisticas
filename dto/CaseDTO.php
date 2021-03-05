@@ -195,7 +195,20 @@ class CaseDTO
         $this->create_user_document   = $case[8];
         $this->modifier_user_document = $case[9];
     }
-
+    
+    function initNewByCase($case)
+    {
+        $this->document               = $case->getDocument();
+        $this->creation_date          = $case->getCreation_date();
+        $this->closing_justification  = $case->getClosing_justification();
+        $this->healthStatus           = $case->getHealthStatus();
+        $this->novelty                = $case->getNovelty();
+        $this->status                 = $case->getStatus();
+        $this->responsable_document   = $case->getResponsable_document();
+        $this->create_user_document   = $case->getCreate_user_document();
+        $this->modifier_user_document = $case->getModifier_user_document();
+    }
+    
     function getFollowings()
     {
         return $this->followings;
@@ -234,5 +247,37 @@ class CaseDTO
             }
         }
         $this->activities = $activitiesData;
+    }
+    
+    function getArrayValueAllProperties()
+    {
+        return [
+            isset($this->id) ? $this->id : '""',
+            isset($this->document) ? $this->document : '""',
+            isset($this->creation_date) ? $this->creation_date : '""',
+            isset($this->closing_justification) ? $this->closing_justification : '""',
+            isset($this->healthStatus) ? $this->healthStatus : '""',
+            isset($this->novelty) ? $this->novelty : '""',
+            isset($this->status) ? $this->status : '""',
+            isset($this->responsable_document) ? $this->responsable_document : '""',
+            isset($this->create_user_document) ? $this->create_user_document : '""',
+            isset($this->modifier_user_document) ? $this->modifier_user_document : '""',
+        ];
+    }
+
+    function getArrayNameAllProperties()
+    {
+        return [
+            'id',
+            'document',
+            'creation_date',
+            'closing_justification',
+            'healthStatus',
+            'novelty',
+            'status',
+            'responsable_document',
+            'create_user_document',
+            'modifier_user_document',
+        ];
     }
 }
