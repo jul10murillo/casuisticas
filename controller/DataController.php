@@ -447,15 +447,16 @@ class DataController
         echo '<div id="goodones"> ';
         echo '<table>';
         echo '<tr>';
-        echo '<td> Caso de Entrada </td>';
-        echo '<td> Casos Salida </td>';
-        echo '<td> Mensaje </td>';
+        echo '<td style="border: 1px solid black;"> Caso de Entrada </td>';
+        echo '<td style="border: 1px solid black;"> Casos Salida </td>';
+        echo '<td style="border: 1px solid black;"> Mensaje </td>';
         echo '</tr>';
         foreach ($solveCases as $key => $solveCase) {
+            $solveCase = json_decode($solveCase);
             echo '<tr>';
-            echo '<td>' . $solveCase->caseIn  . '</td>';
-            echo '<td>' . $solveCase->caseOut . '</td>';
-            echo '<td>' . $solveCase->message . '</td>';
+            echo '<td style="border: 1px solid black;">' . $solveCase->caseIn  . '</td>';
+            echo '<td style="border: 1px solid black;">' . $solveCase->caseOut . '</td>';
+            echo '<td style="border: 1px solid black;">' . $solveCase->message . '</td>';
             echo '</tr>';
         }
         echo '</table>';
@@ -467,13 +468,14 @@ class DataController
         //---------------------------------------------------------//
         echo '<table>';
         echo '<tr>';
-        echo '<td> Caso de Entrada </td>';
-        echo '<td> Mensaje </td>';
+        echo '<td style="border: 1px solid black;"> Caso de Entrada </td>';
+        echo '<td style="border: 1px solid black;"> Mensaje </td>';
         echo '</tr>';
         foreach ($notSolveCases as $key => $notSolveCase) {
+            $notSolveCase = json_decode($notSolveCase);
             echo '<tr>';
-            echo '<td>' . $notSolveCase->caseIn  . '</td>';
-            echo '<td>' . $notSolveCase->message . '</td>';
+            echo '<td style="border: 1px solid black;">' . $notSolveCase->caseIn  . '</td>';
+            echo '<td style="border: 1px solid black;">' . $notSolveCase->message . '</td>';
             echo '</tr>';
         }
         echo '</table>';

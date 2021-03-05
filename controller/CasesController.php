@@ -53,7 +53,7 @@ class CasesController
             $response = [
                 'status'  => false,
                 'caseIn'  => $arguments->getId(),
-                'message' => 'El caso:' . $arguments->getId() . ' no corresponde a la solución seleccionada:' . $function,
+                'message' => 'El caso: ' . $arguments->getId() . ' no corresponde a la solución seleccionada: ' . $function,
             ];
             return json_encode($response);
         }
