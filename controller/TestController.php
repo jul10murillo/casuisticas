@@ -39,22 +39,24 @@ class TestController
         }
 
         if (count($casesCode) != count($caseDTO->getFollowings())) {
-            return false;
+            return 'Cantidad letras Code vs followings: ' . count($casesCode) . ' != ' . count($caseDTO->getFollowings());
         }
 
         foreach ($caseDTO->getFollowings() as $key => $following) {
             if (self::$decode[($following->getStatus())] != $casesCode[$key]) {
-                return false;
+                return 'Codificación no coincide: ' . self::$decode[($following->getStatus())] . " != " . $casesCode[$key];
             }
         }
 
         try {
             $firstDate = null;
             foreach ($caseDTO->getFollowings() as $key => $following) {
-                if ($firstDate != $following->getCreated_at()) {
-                    $firstDate = $following->getCreated_at();
+                $dateObj = new DateTime($following->getCreated_at());
+                $dateDay = $dateObj->format('Y-m-d');
+                if ($firstDate != $dateDay) {
+                    $firstDate = $dateDay;
                     if ($firstDate == 0) {
-                        return false;
+                        return 'Valor de fecha incorrecta: ' . $firstDate;
                     }
                     $date[] = end($date) + 1;
                 } else {
@@ -63,10 +65,10 @@ class TestController
             }
 
             if ($datesCode != implode($date)) {
-                return false;
+                return 'Codificación de fecha no coincide Code vs Followings :  ' . $datesCode . ' != ' . implode($date);
             }
         } catch (\Throwable $th) {
-            return false;
+            return 'Error en la obtención de fechas';
         }
 
         return true;
