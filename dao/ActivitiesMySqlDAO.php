@@ -31,13 +31,21 @@ class ActivitiesMySqlDAO extends ConnectionMySQL implements ActivitiesDAO {
     /**
      * Actualiza un following
      * 
-     * @param array $data
+     * @param ActivityDTO $activityDTO
      * 
      * @return boolean
      */
-    public function update($data)
+    public function update($activityDTO)
     {
-
+        $activity = parent::queryUpdateOrInsert("UPDATE tigo_followings SET (".
+            "document=".$caseDTO->getDocument().",".
+            "status_id=".$followingDTO->getStatus().",".
+            "status=".$status.",".
+            "sent_to_following_id=".$followingDTO->getCaseId().",".
+            "updated_at=".$followingDTO->getDate().") WHERE id = ".$followingDTO->getId()
+        );
+        return $following;
+        return $following;
     }
 
     /**
