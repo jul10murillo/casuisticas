@@ -26,7 +26,6 @@ class DataController
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
         
         $casesDTOS     = $this->getCasesDTObyBadCases($group_status['casos_malos']);
-        // print_r($casesDTOS);exit;
         // $casesDTOS = $this->getCasesDTObyBadCases($caso);
         list($solveCases, $notSolveCases) = $this->startSolveBadCases($casesDTOS);
         $this->printDashboardCases($solveCases, $notSolveCases);
@@ -414,7 +413,7 @@ class DataController
                 foreach ($badCodeCase as $idCase) {
                     try {
                         $response = $caseController->$function($idCase);
-                        if ($response->status) {
+                        if (json_decode($response)->status) {
                             $solveCases[] = $response;
                         } else {
                             $notSolveCases[] = $response;

@@ -1959,9 +1959,6 @@ class CasesController
         $newCasesDTO = array();
 
         for ($i = 1; $i < count($arrIdentifiers); $i++) {
-            // if ($i = 2) {
-            //     echo "test";
-            // }
             $groupFollowings = $arrIdentifiers[$i];
 
             $caseDTO = new CaseDTO();
@@ -1977,9 +1974,9 @@ class CasesController
             $caseDTO->setDate($follogingEnd->getDate());
             $caseDTO->setStatus(in_array($follogingEnd->getStatus(), [Constants::HEALTH_STATUS_CONFIRMED, Constants::HEALTH_STATUS_SUSPICIOUS]) ? "1" : "0");
 
-            $newCase = $this->caseDAO->save($caseDTO);
+            $caseDTO->setId($this->caseDAO->save($caseDTO));
 
-            $newCasesDTO[] = $newCase;
+            $newCasesDTO[] = $caseDTO;
         }
 
         return $newCasesDTO;

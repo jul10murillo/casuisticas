@@ -5,9 +5,9 @@ class ConnectionMySQL
 
     private $connection;
     private $host = "localhost";
-    private $user = "emmanuel";
-    private $pass = "desarrollo2020";
-    private $db = "tigo_test_SVEPI";  //tigo_test_SVEPI
+    private $user = "root";
+    private $pass = "";
+    private $db = "svepi_prod_test";  //tigo_test_SVEPI
 
     public function __construct()
     {
@@ -44,6 +44,6 @@ class ConnectionMySQL
         if (!$result) {
             printf("Errormessage: %s\n", $this->connection->error);
         }
-        return $result;
+        return $this->connection->insert_id;
     }
 }
