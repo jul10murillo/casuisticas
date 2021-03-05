@@ -77,10 +77,10 @@ class CasesController
     }
 
     /**
-     * solveSDSD_1234
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34)
      *
      * @param  CaseDTO $oldCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveSDSD_1234($oldCase)
     {
@@ -91,10 +91,10 @@ class CasesController
     }
 
     /**
-     * solveR_1
+     * Propuesta de solución: Crear un estado de confirmado anterior a la fecha actual.
      * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveR_1(CaseDTO $currentCase)
     {
@@ -106,10 +106,10 @@ class CasesController
     }
 
     /**
-     * solveD_1
+     * Propuesta de solución: Se propone adicionar un seguimiento con estado de salud Sospechoso con fecha anterior a la fecha (1)
      * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveD_1(CaseDTO $currentCase)
     {
@@ -121,10 +121,10 @@ class CasesController
     }
 
     /**
-     * solveCR_11
+     * Propuesta de solución: Actualizar fecha del estado(2) al día siguiente de su fecha actual.
      * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveCR_11(CaseDTO $currentCase)
     {
@@ -144,10 +144,10 @@ class CasesController
     }
 
     /**
-     * solveCRCR_1234
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34)
      * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveCRCR_1234(CaseDTO $currentCase)
     {
@@ -158,10 +158,10 @@ class CasesController
 
 
     /**
-     * solveSD_11
+     * Propuesta de solución: Actualizar fecha del estado(2) al día siguiente de su fecha actual.
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSD_11(CaseDTO $currentCase)
     {
@@ -182,10 +182,10 @@ class CasesController
 
 
     /**
-     * solveSCR_112
+     * Propuesta de solución: Actualizar fecha del estado(1) al día anterior de su fecha actual.
      * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSCR_112(CaseDTO $currentCase)
     {
@@ -206,10 +206,10 @@ class CasesController
     }
 
     /**
-     * solveSDSDSD_123456
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12), Caso 2 (34) y Caso 3 (56)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSDSDSD_123456(CaseDTO $currentCase)
     {
@@ -219,10 +219,10 @@ class CasesController
     }
 
     /**
-     * solveSCRSR_11234
+     * Propuesta de solución: Actualizar fecha del estado(1) al día anterior de su fecha actual.
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSCRSR_11234(CaseDTO $currentCase)
     {
@@ -250,10 +250,10 @@ class CasesController
     }
 
     /**
-     * solveSDCR_1234
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSDCR_1234(CaseDTO $currentCase)
     {
@@ -263,10 +263,10 @@ class CasesController
     }
 
     /**
-     * solveSC_11
+     * Propuesta de solución: Actualizar fecha estado (1) a un dia anterior a la fecha actual
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSC_11(CaseDTO $currentCase)
     {
@@ -286,10 +286,10 @@ class CasesController
     }
 
     /**
-     * solveSDSCR_12345
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (345)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveSDSCR_12345(CaseDTO $currentCase)
     {
@@ -299,10 +299,10 @@ class CasesController
     }
 
     /**
-     * solveF_1 
+     * Propuesta de solución: Crear un estado de confirmado anterior a la fecha actual.
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveF_1(CaseDTO $currentCase)
     {
@@ -318,10 +318,10 @@ class CasesController
     }
 
     /**
-     * solveRD_12
+     * Propuesta de solución: Tratar como un descartado. Es decir, Cambiar el estador Recuperado a Sopechoso.
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveRD_12(CaseDTO $currentCase)
     {
@@ -341,10 +341,10 @@ class CasesController
     }
 
     /**
-     * solveSDS_123
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (3)
      *
      * @param CaseDTO $currentCase     
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveSDS_123(CaseDTO $currentCase)
     {
@@ -353,10 +353,10 @@ class CasesController
         return $cases;
     }
     /**
-     * solveSDSDCR_123456
+     * Propuesta de solución: Se propone dividir en tres casos: Caso 1 (12), Caso 2 (34) y Caso 2 (56)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveSDSDCR_123456(CaseDTO $currentCase)
     {
@@ -367,10 +367,10 @@ class CasesController
 
 
     /**
-     * solveSRD_123
+     * Propuesta de solución: Eliminar el seguimiento(2) Recuperado
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSRD_123(CaseDTO $currentCase)
     {
@@ -387,23 +387,23 @@ class CasesController
         return $currentCase;
     }
     /**
-     * solveSDSDS_12345
+     * Propuesta de solución: Se propone dividir en tres casos: Caso 1 (12), Caso 2 (34) y Caso 2 (5)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveSDSDS_12345(CaseDTO $currentCase)
     {
-        $arrIdentifiers = [[1, 2], [3, 4], [5, 6]];
+        $arrIdentifiers = [[1, 2], [3, 4], [5] ];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
         return $case;
     }
 
     /**
-     * solveSCR_122
+     * Propuesta de solución: Actualizar fecha del Recuperado al dia siguiente
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSCR_122(CaseDTO $currentCase)
     {
@@ -424,10 +424,10 @@ class CasesController
     }
 
     /**
-     * solveSDSD_1123
+     * Propuesta de solución: Se propone mantener los estados Sopechoso(1) y Descartado (3)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSDSD_1123(CaseDTO $currentCase)
     {
@@ -443,10 +443,10 @@ class CasesController
     }
 
     /**
-     * solveSDSDSCR_1234567
+     * Propuesta de solución: Se propone dividir en tres casos: Caso 1 (12), Caso 2 (34) y Caso 2 (567)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveSDSDSCR_1234567(CaseDTO $currentCase)
     {
@@ -457,10 +457,10 @@ class CasesController
 
 
     /**
-     * solveCRCR_1123
+     * Propuesta de solución: Se propone mantener los estados Recuperado(1) y Confirmado(2)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveCRCR_1123(CaseDTO $currentCase)
     {
@@ -476,71 +476,20 @@ class CasesController
         return $currentCase;
     }
     /**
-     * solveRCR_123
+     * Propuesta de solución: Se propone eliminar el seguimiento con estado de salud recuperado(1)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveRCR_123(CaseDTO $currentCase)
     {
 
         $followings = $currentCase->getFollowings();
+
         $currentCase->setFollowings([]);
         $currentCase->setFollowings([$followings[1], $followings[2]]);
 
         $this->deleteCase($followings[0]->getId());
-
-        $followings = $currentCase->getFollowings();
-        $currentCase->setFollowings([]);
-        $currentCase->setFollowings([$followings[1], $followings[2]]);
-        $this->saveCase($currentCase);
-
-        return $currentCase;
-    }
-
-
-
-    /**
-     * solvesolveCRCR_1123 /
-     *
-     * @param CaseDTO $currentCase
-     * @return void
-     */
-
-    /*
-    public function solvesolveCRCR_1123(CaseDTO $currentCase)
-    {
-
-        $followings = $currentCase->getFollowings();
-
-        $suspicius_followings = $this->searchFollowingsByStatus($followings, constants::HEALTH_STATUS_SUSPICIOUS);
-        $confirmed_followings = $this->searchFollowingsByStatus($followings, constants::HEALTH_STATUS_CONFIRMED);
-        $recovered_followings = $this->searchFollowingsByStatus($followings, constants::HeALTH_STATUS_RECOVERED);
-
-        $suspicius_following[0]->setDate($this->subtractDaysFromDate($confirmed_followings[0]->getDate(), '1'));
-        $suspicius_following[1]->setDate($this->subtractDaysFromDate($confirmed_followings[1]->getDate(), '1'));
-
-        $currentCase->setFollowings([]);
-        $currentCase->setFollowings([$suspicius_followings[0], $confirmed_followings[0], $recovered_followings[0], $suspicius_followings[1], $confirmed_followings[1], $recovered_followings[1]]);
-        $this->saveCase($currentCase);
-
-        return $currentCase;
-    }*/
-
-
-    /**     
-     * @param CaseDTO $currentCase
-     * @return void
-     */
-    public function solveSR_12(CaseDTO $currentCase)
-    {
-        $followings = $currentCase->getFollowings();
-
-        $dayConfirmed = $followings[0]->getDate();
-        $daySuspicius = $this->subtractDaysFromDate($dayConfirmed, '1');
-
-        $followings[0] . setdate($daySuspicius);
-        $this->addNewFollowingToCase($currentCase, $dayConfirmed, Constants::HEALTH_STATUS_CONFIRMED);
 
         $this->saveCase($currentCase);
 
@@ -548,9 +497,10 @@ class CasesController
     }
 
     /**   
-     *
+     * Propuesta de solución: Se propone dividir en tres casos: Caso 1 (12), Caso 2 (34) y Caso 3 (5)
+     * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveSDSDC_12345(CaseDTO $currentCase)
     {
@@ -559,9 +509,10 @@ class CasesController
         return $case;
     }
     /**   
-     *
+     *Propuesta de solución: Se propone mantener los estados Confirmado(1) y Recuperado(3)
+     * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveCRDR_1234(CaseDTO $currentCase)
     {
@@ -581,7 +532,7 @@ class CasesController
      * o los estados Sospechoso(2) y Descartado(3)
      *
     *  @param CaseDTO $currentCase
-     * @return currentCase
+     * @return CaseDTO
      */
     public function solveSCSD_1223(CaseDTO $currentCase)
     {
@@ -597,9 +548,10 @@ class CasesController
     }
 
     /**   
-     *
+     * Propuesta de solución: Se propone mantener los estados Sospechoso(1) y Confirmado(2) o los estados Sospechoso(2) y Descartado(3)
+     * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSDSD_1223(CaseDTO $currentCase)
     {
@@ -617,7 +569,7 @@ class CasesController
      *  Propuesta de solución: Eliminar el seguimiento(2) Descartado
      *
      * @param CaseDTO $currentCase
-     * @return currentCase
+     * @return CaseDTO
      */
     public function solveCDR_123(CaseDTO $currentCase){
 
@@ -631,9 +583,10 @@ class CasesController
     }
 
     /**   
-     *
+     * Propueta de solución: Eliminar el seguimiento(2) Recuperado
+     * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSRD_122(CaseDTO $currentCase)
     {
@@ -649,9 +602,10 @@ class CasesController
     }
 
     /**
-    
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (123) y Caso 2 (45)
+     * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveSCRCR_12345(CaseDTO $currentCase)
     {
@@ -661,9 +615,10 @@ class CasesController
     }
 
     /**   
+     *Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveCRSD_1234(CaseDTO $currentCase)
     {
@@ -672,13 +627,25 @@ class CasesController
         return $case;
     }
 
+    /**
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (1) y Caso 2 (23)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
     public function solveCSD_123(CaseDTO $currentCase)
     {
         $arrIdentifiers = [[1], [2, 3]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
         return $case;
     }
-
+ 
+    /**
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
     public function solveSMDSD_12234(CaseDTO $currentCase)
     {
         $arrIdentifiers = [[1, 2], [3, 4]];
@@ -686,6 +653,12 @@ class CasesController
         return $case;
     }
 
+    /**
+     * Propuesta de solución: Se propone mantener los estados Confirmado(1) y Recuperado(3)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveCRDR_1223(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -698,6 +671,12 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: Eliminar el estado(2) Confirmado
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveSCUHC_12234(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -709,6 +688,12 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: Actualizar fechas Sospechoso a fecha anterior y Confirmado a fecha posterior
+    *
+    * @param CaseDTO $currentCase
+    * @return CaseDTO
+    */
     public function solveSHC_111(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -726,6 +711,13 @@ class CasesController
         return $currentCase;
     }
 
+
+    /**
+     * Propuesta de solución: Sospechoso(1) a fecha anterior a su fecha actual. Recuperado (3) a fecha posterior a su fecha actual
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveSCR_111(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -741,7 +733,12 @@ class CasesController
         return $currentCase;
     }
 
-
+    /**
+     * Propuesta de solución: Crear un estado anterior al descartado(1) como sospechoso. El sopechoso(2) actual llevarlo a un nuevo caso
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
     public function solveDS_12(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -758,6 +755,12 @@ class CasesController
         return $cases;
     }
 
+    /**
+     * Prppuesta de solución: Eliminar la reinfección(2)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveSVD_122(CaseDTO $currentCase)
     {
 
@@ -771,6 +774,12 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: Eliminar hospitalización
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveSHD_122(CaseDTO $currentCase)
     {
 
@@ -786,9 +795,10 @@ class CasesController
 
 
     /**   
-     *Eliminación de fallecido
+     * Propuesta de solución: Eliminar el Fallecido(2)
+     * 
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSFD_122(CaseDTO $currentCase)
     {
@@ -803,6 +813,12 @@ class CasesController
         return $currentCase;
     }
 
+   /**
+    * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (3)
+    *
+    * @param CaseDTO $currentCase
+    * @return CaseDTO[]
+    */
     public function solveSDC_123(CaseDTO $currentCase)
     {
         $arrIdentifiers = [[1, 2], [3]];
@@ -811,6 +827,12 @@ class CasesController
         return $cases;
     }
 
+    /**
+     * Propuesta de solución: Se propone mantener los estados Sopechoso(1) y Descartado (3)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveSDSD_1233(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -824,6 +846,12 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (3)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
     public function solveCRS_123(CaseDTO $currentCase)
     {
         $arrIdentifiers = [[1, 2], [3]];
@@ -832,6 +860,12 @@ class CasesController
         return $cases;
     }
 
+    /**
+     * Propuesta de solucion: Se propone eliminar el estado Confirmado uci(1)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveUCR_112(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -844,6 +878,12 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propueta de solucion: Se propone mantener los estados Confirmado(1) y Recuperado (3)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveCRCR_1233(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -857,6 +897,12 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (123) y Caso 2 (4)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
     public function solveSCRS_1234(CaseDTO $currentCase)
     {
         $arrIdentifiers = [[1, 2, 3], [4]];
@@ -865,6 +911,13 @@ class CasesController
         return $cases;
     }
 
+    /**
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34) 
+     * y eliminar los seguimientos con estado de salud Sospechoso(4) y Descartado(5)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
     public function solveSDSDSD_123445(CaseDTO $currentCase)
     {
 
@@ -882,6 +935,12 @@ class CasesController
         return $cases;
     }
 
+    /**
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (345) y eliminar los estados con fecha(5)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
     public function solveCRCRDR_123455(CaseDTO $currentCase)
     {
 
@@ -898,6 +957,13 @@ class CasesController
         return $cases;
     }
 
+
+    /**
+     * Propuesta de solución: Se propone mantener los estados Confirmado(2) y Recuperado (3)
+    *
+    * @param CaseDTO $currentCase
+    * @return CaseDTO
+    */
     public function solveXCXR_1233(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -912,6 +978,12 @@ class CasesController
     }
 
 
+    /**
+     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (1) y Caso 2 (234) y eliminar Descartardo(5) y Recuperado(6)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
     public function solveCSCRDR_123456(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -928,6 +1000,12 @@ class CasesController
         return $cases;
     }
 
+    /**
+     * Propuesta de solución: Se propone mantener los estados Confimado(2) y Recuperado(5)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveACACR_12345(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -942,6 +1020,13 @@ class CasesController
         return $currentCase;
     }
 
+
+    /**
+     * Propuesta de solución: Se propone mantener los estados Confimado(2) y Recuperado(5)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveYCYCR_12345(CaseDTO $currentCase)
     {
 
@@ -957,6 +1042,13 @@ class CasesController
         return $currentCase;
     }
 
+
+    /**
+    * Propuesta de solución: Se propone mantener los estados Confimado(2), Confirmado uci(3) y recuperado(5)
+    *
+    * @param CaseDTO $currentCase
+    * @return CaseDTO
+    */
    public function solveUCUCR_12345(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -974,7 +1066,7 @@ class CasesController
      * Propuesta solución: Se propone mantener los estados Sospechoso(1), Confirmado(2) y Recuperado (3)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSCRCR_12233(CaseDTO $currentCase){
 
@@ -993,7 +1085,7 @@ class CasesController
      * Propuesta solución: Se propone dividir en tres casos: Caso 1 (12), Caso 2 (34) y Caso 2 (56) y eliminar estado Sospechoso(5)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveSDSDSCR_1234556(CaseDTO $currentCase){
 
@@ -1013,7 +1105,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Confirmado(1) y Recuperado (6)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveCRSRDR_123456(CaseDTO $currentCase){
         $followings = $currentCase->getFollowings();
@@ -1032,7 +1124,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Sospechoso(1) y Descartado(2)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveCSD_112(CaseDTO $currentCase)
     {
@@ -1049,7 +1141,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Confimado(1) y Recuperado(3)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveCSRCR_12333(CaseDTO $currentCase){
 
@@ -1068,7 +1160,7 @@ class CasesController
      * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveSDSC_1234(CaseDTO $currentCase)
     {
@@ -1083,7 +1175,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Sospechoso(1), Confirmado(3) y Recuperado (4)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSDCSR_12344(CaseDTO $currentCase){
 
@@ -1103,7 +1195,7 @@ class CasesController
      * seguimiento con estado de salud Recuperado(4)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO[]
      */
     public function solveCRSDR_12344(CaseDTO $currentCase)
     {
@@ -1123,7 +1215,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Sospechoso(1) , Confirmado(2) y Recuperado (4)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveCSCRCR_112234(CaseDTO $currentCase){
         
@@ -1143,7 +1235,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Confirmado(1) y Recuperado(2)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveCRDRDR_123334(CaseDTO $currentCase)
     {
@@ -1165,7 +1257,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Confimado(1) y Recuperado(3)
      *
      * @param CaseDTO $currentCase
-     * @return currentCase;
+     * @return CaseDTO;
      */
     public function solveCRCR_1223(CaseDTO $currentCase)
     {
@@ -1186,7 +1278,7 @@ class CasesController
      *  y eliminar los seguimientos  Sospechoso(3) y Descartado(4)
      *
      * @param CaseDTO $currentCase
-     * @return currentCase
+     * @return CaseDTO[]
      */
     public function solveSDSDSCR_1234456(CaseDTO $currentCase)
     {
@@ -1209,7 +1301,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Sospechoso(1), Confimado(3) y Recuperado(4)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
    public function solveSCSRCR_123444(CaseDTO $currentCase)
    {
@@ -1229,7 +1321,7 @@ class CasesController
     * Propuesta de solución: Se propone mantener los estados Sospechoso(3) y Recuperado(4)
     *
     * @param CaseDTO $currentCase
-    * @return currentCase
+    * @return CaseDTO
     */
    public function solveSRDSD_12234(CaseDTO $currentCase)
    {
@@ -1249,7 +1341,7 @@ class CasesController
     * Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (3)
     *
     * @param CaseDTO $currentCase
-    * @return void
+    * @return CaseDTO[]
     */
    public function solveCRC_123(CaseDTO $currentCase)
    {
@@ -1263,7 +1355,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Confirmado(1) y Recuperado(2)
      *
      * @param CaseDTO $currentCase
-     * @return currentCase
+     * @return CaseDTO
      */
     public function solveCRCR_1222(CaseDTO $currentCase)
     {
@@ -1283,7 +1375,7 @@ class CasesController
      *  y eliminar estado Descartado(5)
      *
      * @param CaseDTO $currentCase
-     * @return cases
+     * @return CaseDTO[]
      */
     public function solveSDSDSD_123455(CaseDTO $currentCase)
     {
@@ -1304,7 +1396,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Confirmado(1) y Recuperado (2)
      *
      * @param CaseDTO $currentCase
-     * @return currentCase
+     * @return CaseDTO
      */
     public function solveCRCR_1122(CaseDTO $currentCase)
     {
@@ -1323,7 +1415,7 @@ class CasesController
      * Propuesta de solución: Se propone mantener los estados Confimado(4) y Recuperado(5)
      *
      * @param CaseDTO $currentCase
-     * @return currentCase
+     * @return CaseDTO
      */
     public function solveZCZCR_12345(CaseDTO $currentCase)
     {
@@ -1343,7 +1435,7 @@ class CasesController
      * Propuesta de solución: Se propone eliminar un seguimiento con estado de salud Confirmado(3) y el estado Recuperado(Ultimo)
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSCRCR_12333(CaseDTO $currentCase)
     {
@@ -1362,7 +1454,7 @@ class CasesController
      * Propuesta de solución: Se propone eliminar el seguimiento con estado de salud Descartado(1)
      *
      * @param CaseDTO $currentCase
-     * @return currentCase
+     * @return CaseDTO
      */
     public function solveSDCR_1123(CaseDTO $currentCase)
     {
@@ -1380,7 +1472,7 @@ class CasesController
      *Propuesta de solución: Se propone dividir en dos casos: Caso 1 (12) y Caso 2 (34)
      *
      * @param CaseDTO $currentCase
-     * @return cases
+     * @return CaseDTO[]
      */
     public function solveCHCH_1234(CaseDTO $currentCase)
     {
@@ -1394,7 +1486,7 @@ class CasesController
      * Propuesta de solución: Se propone dividir en tres casos: Caso 1 (12), Caso 2 (34) y Caso 2 (56)
      *
      * @param CaseDTO $currentCase
-     * @return cases
+     * @return CaseDTO[]
      */
     public function solveCRCRVR_123456(CaseDTO $currentCase)
     {
@@ -1408,7 +1500,7 @@ class CasesController
      *  Propuesta de solución: Se propone mantener los estados: solo un Sospechoso(1), Confirmado(2) y Recuperado (3)
      *
      * @param CaseDTO $currentCase
-     * @return currentCase
+     * @return CaseDTO
      */
     public function solveSCRSR_12334(CaseDTO $currentCase)
     {
