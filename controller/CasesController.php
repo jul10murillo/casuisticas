@@ -1951,7 +1951,7 @@ class CasesController
     }
 
     /**
-     * Undocumented function
+     * Propuesta de solución: Dejar seguimiento(2) y seguimiento(6);
      *
      * @param CaseDTO $currentCase
      * @return CaseDTO
@@ -1971,7 +1971,103 @@ class CasesController
         return $currentCase;
 
     }
+
+     /**
+     * Propuesta de solución: Dejar seguimiento(2), cambiar el ultimo seguimiento a recuperado 
+     * y elmiminar los seguimientos 1 y 3
+     * 
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCHC_1234(CaseDTO $currentCase)
+    {
+
+        $followings = $currentCase->getFollowings();
+
+        $followings[3]->setStatus(constants::HEALTH_STATUS_RECOVERED);        
+       
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[3]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId());    
+
+        $this->saveCase($currentCase);
         
+        return $currentCase;
+
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimiento(2) y seguimiento(6);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCRSCR_112334(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[5]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId()); 
+        $this->deleteCase($followings[3]->getId()); 
+        $this->deleteCase($followings[4]->getId());        
+
+        return $currentCase;
+
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimiento(2) y seguimiento(5);
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCRSRV_112345(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[1], $followings[4]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[2]->getId()); 
+        $this->deleteCase($followings[3]->getId()); 
+        $this->deleteCase($followings[6]->getId());        
+
+        return $currentCase;
+    }
+
+    /**
+     *  Propuesta de solución: Cambiar el seguimiento 4 por recuperado
+     *  eliminar el siguimiento 1 y 2
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSDCS_1233(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+       
+        $followings[3]->setStatus(constants::HEALTH_STATUS_RECOVERED);        
+       
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings($followings[2], $followings[3]);
+
+        $this->deleteCase($followings[0]->getId());  
+        $this->deleteCase($followings[1]->getId());    
+
+        $this->saveCase($currentCase);
+        
+        return $currentCase;
+
+    }
+    
+    
     /**
      * Buscar seguimiento por estado
      *
