@@ -2794,7 +2794,7 @@ class CasesController
      * Propuesta de solución: Dejar los seguimientos 1, 5 y 7
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSDSDCCR_1234567(CaseDTO $currentCase)
     {
@@ -2811,6 +2811,185 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     *Propuesta de solución: Eliminar el seguimiento 2
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSSD_112(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[2]]);
+
+        $this->deleteCase($followings[1]->getId());
+
+        return $currentCase;        
+    }
+
+    /**
+     * Propuesta de solución: Eliminar seguimiento 3 y 4
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCRSR_11234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[1], $followings[4]]);
+
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());
+        
+        return $currentCase;  
+
+    }
+    
+    /**
+     * Propuesta de solución: Eliminar seguimiento 1
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSSCR_1123(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[2], $followings[3]]);
+
+        $this->deleteCase($followings[1]->getId());       
+        
+        return $currentCase;  
+    }
+
+
+   /**
+    * Propuesta de solución: Eliminar seguimiento 4
+    *
+    * @param CaseDTO $currentCase
+    * @return CaseDTO
+    */
+    public function solveSCHCR_12345(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[1], $followings[2], $followings[4]]);
+
+        $this->deleteCase($followings[3]->getId());       
+        
+        return $currentCase; 
+
+    }
+
+   /**
+    * Propuesta de solución: Eliminar seguimiento 3
+    *
+    * @param CaseDTO $currentCase
+    * @return void
+    */
+    public function solveSCRR_1233(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[1], $followings[3]]);
+
+        $this->deleteCase($followings[2]->getId());       
+        
+        return $currentCase; 
+    }
+
+
+    /**
+     * Propuesta de solución: Dividir en dos casos y eliminar seguimiento 5
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
+    public function solveSDSCCR_123445(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[1], $followings[2], $followings[3],$followings[5] ]);
+
+        $this->deleteCase($followings[4]->getId());  
+
+        $arrIdentifiers = [[1, 2], [3, 4, 5]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+
+    }
+
+    /**
+     * Propuesta de solución: Eliminar seguimientos del medio.
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSDSDSDD_1234567(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[6]]);
+
+        $this->deleteCase($followings[1]->getId());       
+        $this->deleteCase($followings[2]->getId());       
+        $this->deleteCase($followings[3]->getId());       
+        $this->deleteCase($followings[4]->getId());       
+        $this->deleteCase($followings[5]->getId());       
+        
+        return $currentCase; 
+
+    }
+
+    /**
+     * Propuesta de solución: Eliminar seguimientos del medio.
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSSSD_1112(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[3]]);
+
+        $this->deleteCase($followings[1]->getId());       
+        $this->deleteCase($followings[2]->getId());  
+        
+        return $currentCase; 
+
+    }
+
+    /**
+     * Propuesta de solución: Eliminar seguimiento  3 y 4
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCCCR_11234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[1], $followings[4]]);
+
+        $this->deleteCase($followings[2]->getId());       
+        $this->deleteCase($followings[3]->getId());  
+        
+        return $currentCase; 
+
+    }
 
 
 
