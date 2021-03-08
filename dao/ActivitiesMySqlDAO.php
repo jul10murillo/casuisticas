@@ -1,7 +1,8 @@
 <?php
 include 'ActivitiesDAO.php';
 
-class ActivitiesMySqlDAO extends ConnectionMySQL implements ActivitiesDAO {
+class ActivitiesMySqlDAO extends ConnectionMySQL implements ActivitiesDAO
+{
 
     /**
      * Retorna un seguimiento dado un id
@@ -25,7 +26,6 @@ class ActivitiesMySqlDAO extends ConnectionMySQL implements ActivitiesDAO {
      */
     public function delete($id)
     {
-
     }
 
     /**
@@ -37,12 +37,10 @@ class ActivitiesMySqlDAO extends ConnectionMySQL implements ActivitiesDAO {
      */
     public function update($activityDTO)
     {
-        if( is_null($activityDTO)){
-            echo 'here';
-        }
-        $activity = parent::queryUpdateOrInsert("UPDATE tigo_followings SET ".
-            "sent_to_following_id=".$activityDTO->getCaseId()." WHERE id = ".$activityDTO->getId()
+        $activity = parent::queryUpdateOrInsert(
+            "UPDATE tigo_followings SET sent_to_following_id=" . $activityDTO->getCaseId() . " WHERE id = " . $activityDTO->getId()
         );
+
         return $activity;
     }
 
@@ -52,8 +50,7 @@ class ActivitiesMySqlDAO extends ConnectionMySQL implements ActivitiesDAO {
      */
     function save($activityDTO)
     {
-        $following = parent::queryUpdateOrInsert("INSERT INTO tigo_followings (".implode(",", $activityDTO->getArrayNameAllProperties()).") VALUES (".implode(",", $activityDTO->getArrayValueAllProperties()).")");
+        $following = parent::queryUpdateOrInsert("INSERT INTO tigo_followings (" . implode(",", $activityDTO->getArrayNameAllProperties()) . ") VALUES (" . implode(",", $activityDTO->getArrayValueAllProperties()) . ")");
         return $following;
     }
 }
-

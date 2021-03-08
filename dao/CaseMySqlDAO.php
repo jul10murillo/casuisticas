@@ -46,7 +46,7 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
         $cases = parent::query("SELECT * FROM tigo_sent_to_followings WHERE id in (" . join(',', $ids) . ")");
 
         $followings = parent::query("SELECT * FROM tigo_log_followings WHERE sent_to_following_id in (" . join(',', $ids) . ")");
-        foreach ($followings as $key => $value) {
+        foreach ($followings as $value) {
             $followingsData[$value[7]][] = $value;
         }
 
@@ -56,7 +56,7 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
             $activitiesData[$value[1]][] = $value;
         }
 
-        foreach ($cases as $key => $value) {
+        foreach ($cases as $value) {
 
             $caseDTO = new CaseDTO();
             $caseDTO->initByCase($value);
@@ -105,11 +105,11 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
     {
         $query = "UPDATE tigo_sent_to_followings SET"
             . " updated_at = '" . $case->getUpdated_at()
-            . "', document = " . $case->getDocument()
-            . ", status = " . $case->getStatus()
-            . ", status_id = " . $case->getHealthStatus()
-            . " WHERE id = " . $case->getId();
-        print_r('-------------<br>');
+            . "', document = " .  $case->getDocument()
+            . ", status = "    .  $case->getStatus()
+            . ", status_id = " .  $case->getHealthStatus()
+            . " WHERE id = "   .  $case->getId();
+        // print_r('-------------<br>');
         $case = parent::queryUpdateOrInsert($query);
         return $case;
     }
@@ -124,18 +124,18 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
     public function save($case)
     {
         $query = "INSERT INTO tigo_sent_to_followings (document,creation_date,closing_justification,status_id,novelty,`status`, responsible_document, create_user_document, created_at, updated_at, deleted_at) VALUES ("
-            .'"'.$case->getDocument().'",'
-            .'"'.$case->getCreation_date().'",'
-            .'"'.$case->getClosing_justification().'",'
-            .'"'.$case->getHealthStatus().'",'
-            .'"'.$case->getNovelty().'",'
-            .'"'.$case->getStatus().'",'
-            .'"'.$case->getResponsible_document().'",'
-            .'"'.$case->getCreate_user_document().'",'
-            .'"'.$case->getCreated_at().'",'
-            .'"'.$case->getUpdated_at().'",'
-            .'"'.$case->getDeleted_at().'")';
-        print_r('-------------<br>');
+            . '"' . $case->getDocument() . '",'
+            . '"' . $case->getCreation_date() . '",'
+            . '"' . $case->getClosing_justification() . '",'
+            . '"' . $case->getHealthStatus() . '",'
+            . '"' . $case->getNovelty() . '",'
+            . '"' . $case->getStatus() . '",'
+            . '"' . $case->getResponsible_document() . '",'
+            . '"' . $case->getCreate_user_document() . '",'
+            . '"' . $case->getCreated_at() . '",'
+            . '"' . $case->getUpdated_at() . '",'
+            . '"' . $case->getDeleted_at() . '")';
+        // print_r('-------------<br>');
         $case = parent::queryUpdateOrInsert($query);
         return $case;
     }

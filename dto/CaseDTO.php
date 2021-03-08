@@ -34,13 +34,13 @@ class CaseDTO
      * @var FollowingDTO[] 
      */
     private $followings;
-    
+
     /**
      *
      * @var ActivityDTO[] 
      */
     private $activities;
-    
+
     public function setId($id)
     {
         $this->id = $id;
@@ -60,7 +60,7 @@ class CaseDTO
     {
         return $this->document;
     }
-    
+
     function getCreation_date()
     {
         return $this->creation_date;
@@ -120,7 +120,7 @@ class CaseDTO
     {
         $this->modifier_user_document = $modifier_user_document;
     }
-    
+
     function getCreated_at()
     {
         return $this->created_at;
@@ -150,7 +150,7 @@ class CaseDTO
     {
         $this->deleted_at = $deleted_at;
     }
-    
+
 
     public function setStatus($status)
     {
@@ -181,7 +181,7 @@ class CaseDTO
     {
         $this->healthStatus = $healthStatus;
     }
-    
+
     function initByCase($case)
     {
         $this->id                     = $case[0];
@@ -194,8 +194,11 @@ class CaseDTO
         $this->responsible_document   = $case[7];
         $this->create_user_document   = $case[8];
         $this->modifier_user_document = $case[9];
+        $this->created_at             = $case[10];
+        $this->updated_at             = $case[11];
+        $this->deleted_at             = $case[12];
     }
-    
+
     function initNewByCase($case)
     {
         $this->document               = $case->getDocument();
@@ -207,8 +210,11 @@ class CaseDTO
         $this->responsible_document   = $case->getResponsible_document();
         $this->create_user_document   = $case->getCreate_user_document();
         $this->modifier_user_document = $case->getModifier_user_document();
+        $this->created_at             = $case->getCreated_at();
+        $this->updated_at             = $case->getUpdated_at();
+        $this->deleted_at             = $case->getDeleted_at();
     }
-    
+
     function getFollowings()
     {
         return $this->followings;
@@ -248,7 +254,7 @@ class CaseDTO
         }
         $this->activities = $activitiesData;
     }
-    
+
     function getArrayValueAllProperties()
     {
         return [

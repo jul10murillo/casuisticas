@@ -25,10 +25,11 @@ class DataController
 
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
 
-        print_r($group_status['casos_malos']);exit;
+        // print_r($group_status['casos_malos']);
+        // exit;
         $casesDTOS     = $this->getCasesDTObyBadCases($group_status['casos_malos']);
         // $casesDTOS = $this->getCasesDTObyBadCases($caso);
-        
+
         list($solveCases, $notSolveCases) = $this->startSolveBadCases($casesDTOS);
         $this->printDashboardCases($solveCases, $notSolveCases);
     }
@@ -39,7 +40,7 @@ class DataController
      */
     public function getData()
     {
-        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/RExtraccion_2323.csv', 'r');
+        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/OExtraccion_1915.csv', 'r');
         $i            = 0;
         while (($registro_csv = fgetcsv($csv_archivo)) !== false) {
             $i++;
@@ -421,9 +422,9 @@ class DataController
                             $notSolveCases[] = $response;
                         }
                     } catch (\Throwable $th) {
-                        $error = [ 
+                        $error = [
                             'status'  => false,
-                            'message' => 'Error en la función :' . $function . ' id: ' . $idCase,
+                            'message' => 'Error en la función :' . $function . ' id: ' . $idCase->getId(),
                             'error'   => $th
                         ];
                         $notSolveCases[] = json_encode($error);
@@ -494,6 +495,9 @@ class DataController
         }
         echo '</table>';
         echo '</div>';
+
+        echo '<br> <br> Casos Solucionados Totales:' . count($solveCases);
+        echo '<br> <br> Casos No solucionados Totales:' . count($notSolveCases);
     }
 
 
