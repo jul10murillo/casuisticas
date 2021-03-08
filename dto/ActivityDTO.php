@@ -15,6 +15,8 @@ class ActivityDTO
     private $next_following_date;
     private $discard_justification;
     private $additional_variable;
+    private $create_user_document;
+    private $modifier_user_document;
     private $status_id;
     private $created_at;
     private $updated_at;
@@ -25,25 +27,27 @@ class ActivityDTO
 
     function initByActivity($activity)
     {
-        $this->id                    = $activity[0];
-        $this->caseId                = $activity[1];
-        $this->following_type_id     = $activity[2];
-        $this->date                  = $activity[3];
-        $this->time                  = $activity[4];
-        $this->length                = $activity[5];
-        $this->responsable_document  = $activity[6];
-        $this->format_id             = $activity[7];
-        $this->description           = $activity[8];
-        $this->observations          = $activity[9];
-        $this->next_following_date   = $activity[10];
+        $this->id = $activity[0];
+        $this->caseId = $activity[1];
+        $this->following_type_id = $activity[2];
+        $this->date = $activity[3];
+        $this->time = $activity[4];
+        $this->length = $activity[5];
+        $this->responsable_document = $activity[6];
+        $this->format_id = $activity[7];
+        $this->description = $activity[8];
+        $this->observations = $activity[9];
+        $this->next_following_date = $activity[10];
         $this->discard_justification = $activity[11];
-        $this->additional_variable   = $activity[12];
-        $this->status_id             = $activity[13];
-        $this->created_at            = $activity[14];
-        $this->updated_at            = $activity[15];
-        $this->deleted_at            = $activity[16];
-        $this->close_contacts        = $activity[17];
-        $this->workcenter_id         = $activity[18];
+        $this->additional_variable = $activity[12];
+        $this->status_id = $activity[13];
+        $this->create_user_document = $activity[14];
+        $this->modifier_user_document = $activity[15];
+        $this->created_at = $activity[16];
+        $this->updated_at = $activity[17];
+        $this->deleted_at = $activity[18];
+        $this->close_contacts = $activity[19];
+        $this->workcenter_id = $activity[20];
     }
     
     /**
@@ -52,25 +56,49 @@ class ActivityDTO
      */
     function initByActivityDTO($activity)
     {
-        $this->id                    = $activity->getId();
-        $this->caseId                = $activity->getCaseId();
-        $this->following_type_id     = $activity->getFollowing_type_id();
-        $this->date                  = $activity->getDate();
-        $this->time                  = $activity->getTime();
-        $this->length                = $activity->getLength();
-        $this->responsable_document  = $activity->getResponsable_document();
-        $this->format_id             = $activity->getFormat_id();
-        $this->description           = $activity->getDescription();
-        $this->observations          = $activity->getObservations();
-        $this->next_following_date   = $activity->getNext_following_date();
-        $this->discard_justification = $activity->getDiscard_justification();
-        $this->additional_variable   = $activity->getAdditional_variable();
-        $this->status_id             = $activity->getStatus_id();
-        $this->created_at            = $activity->getCreated_at();
-        $this->updated_at            = $activity->getUpdated_at();
-        $this->deleted_at            = $activity->getDeleted_at();
-        $this->close_contacts        = $activity->getClose_contacts();
-        $this->workcenter_id         = $activity->getWorkcenter_id();
+        $this->id                       = $activity->getId();
+        $this->caseId                   = $activity->getCaseId();
+        $this->following_type_id        = $activity->getFollowing_type_id();
+        $this->date                     = $activity->getDate();
+        $this->time                     = $activity->getTime();
+        $this->length                   = $activity->getLength();
+        $this->responsable_document     = $activity->getResponsable_document();
+        $this->format_id                = $activity->getFormat_id();
+        $this->description              = $activity->getDescription();
+        $this->observations             = $activity->getObservations();
+        $this->next_following_date      = $activity->getNext_following_date();
+        $this->discard_justification    = $activity->getDiscard_justification();
+        $this->additional_variable      = $activity->getAdditional_variable();
+        $this->status_id                = $activity->getStatus_id();
+        $this->create_user_document     = $activity->getCreateUserDocument();
+        $this->modifier_user_document   = $activity->getModifierUserDocument();
+        $this->created_at               = $activity->getCreated_at();
+        $this->updated_at               = $activity->getUpdated_at();
+        $this->deleted_at               = $activity->getDeleted_at();
+        $this->close_contacts           = $activity->getClose_contacts();
+        $this->workcenter_id            = $activity->getWorkcenter_id();
+    }
+    
+
+
+    function getModifierUserDocument()
+    {
+        return $this->modifier_user_document;
+    }
+
+    function setModifierUserDocument($document)
+    {
+        $this->modifier_user_document = $document;
+    }
+
+    function getCreateUserDocument()
+    {
+        return $this->create_user_document;
+    }
+
+    function setCreateUserDocument($document)
+    {
+        $this->create_user_document = $document;
     }
 
     function getId()

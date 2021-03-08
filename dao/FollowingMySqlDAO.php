@@ -37,10 +37,11 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO
      * 
      * @param integer $id
      * 
-     * @return boolean
+     * @return void
      */
     public function delete($id)
     {
+        parent::query("DELETE FROM tigo_log_followings WHERE id = " . $id);        
     }
 
     /**
@@ -68,8 +69,11 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO
     public function save($followingDTO, $caseDTO)
     {
         $status = in_array($followingDTO->getStatus(), [Constants::HEALTH_STATUS_CONFIRMED, Constants::HEALTH_STATUS_SUSPICIOUS]) ? "1":"0";
-        
+            
         $following = parent::queryUpdateOrInsert("INSERT INTO tigo_log_followings (".implode(",", $followingDTO->getArrayNameAllProperties()).") VALUES (".implode(",", $followingDTO->getArrayValueAllProperties()).")");
+
+        echo "INSERT INTO tigo_log_followings (".implode(",", $followingDTO->getArrayNameAllProperties()).") VALUES (".implode(",", $followingDTO->getArrayValueAllProperties()).")";
+        
         return $following;
     }
 
@@ -84,11 +88,12 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO
     public function update($followingDTO, $caseDTO)
     {
         $following = parent::queryUpdateOrInsert("UPDATE tigo_log_followings SET ".
-            "document=".$caseDTO->getDocument().",".
+            //"document=".$caseDTO->getDocument().",".
             "status_id=".$followingDTO->getStatus().",".
             "sent_to_following_id=".$followingDTO->getCaseId().",".
             "updated_at='".$followingDTO->getDate()."' WHERE id = ".$followingDTO->getId()
         );
+
         return $following;
     }
 }

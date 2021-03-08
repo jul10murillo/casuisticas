@@ -23,8 +23,12 @@ class ConnectionMySQL
         }
 
         $result = $this->connection->query($sql);
+        if(is_bool($result)){
+            $asas = 'aqui';
+        }
         if (!$result) {
             printf("Errormessage: %s\n", $this->connection->error);
+            printf($sql);
         }
         return $result->fetch_all();
     }

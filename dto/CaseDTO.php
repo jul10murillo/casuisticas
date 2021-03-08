@@ -162,14 +162,14 @@ class CaseDTO
         return $this->status;
     }
 
-    public function setDate($date)
+    public function setDate($updated_at)
     {
-        $this->date = $date;
+        $this->updated_at = $updated_at;
     }
 
-    public function getDate()
+    public function getUpdateAt()
     {
-        return $this->date;
+        return $this->updated_at;
     }
 
     function getHealthStatus()
@@ -239,7 +239,7 @@ class CaseDTO
         foreach ($activities as $activity) {
             $activityOBJ = new ActivityDTO();
             if (!is_array($activity)) {
-                $activitiesData[] = $activityOBJ->initByActivityDTO($activity);
+                $activityOBJ->initByActivityDTO($activity);
                 $activitiesData[] = $activityOBJ;
             } else {
                 $activityOBJ->initByActivity($activity);
