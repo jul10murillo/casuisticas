@@ -2637,7 +2637,6 @@ class CasesController
         return $currentCase;
     }
 
-<<<<<<< HEAD
     /**
      * Propuesta de solución: Eliminar los seguimientos del medio.
      * SD_15
@@ -2679,10 +2678,6 @@ class CasesController
 
     
     
-=======
-
-
->>>>>>> af0643e1aedb39fa312a3f1493c332908de41a0b
     /**
      * Buscar seguimiento por estado
      *
