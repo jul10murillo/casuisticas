@@ -2586,7 +2586,7 @@ class CasesController
      * Propuesta de solución: Eliminar el seguimiento 1
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSDD_123(CaseDTO $currentCase)
     {
@@ -2604,7 +2604,7 @@ class CasesController
      * Propuesta de solución: Eliminar seguimiento del medio.
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSSD_123(CaseDTO $currentCase)
     {
@@ -2618,6 +2618,12 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: Eliminar seguimiento del medio.
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
     public function solveSDD_122(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
@@ -2626,6 +2632,45 @@ class CasesController
         $currentCase->setFollowings([$followings[0], $followings[2]]);
 
         $this->deleteCase($followings[1]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar los seguimientos del medio.
+     * SD_15
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSDSDD_12345(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[4]]);
+
+        $this->deleteCase($followings[1]->getId());
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar el seguimiento Confirmado(3)
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCCR_1234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[1], $following[3]]);
+
+        $this->deleteCase($followings[2]->getId());  
 
         return $currentCase;
     }
