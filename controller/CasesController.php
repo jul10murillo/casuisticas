@@ -1991,7 +1991,7 @@ class CasesController
 
         $followings = $currentCase->getFollowings();
 
-        $followings[3]->setStatus(constants::HEALTH_STATUS_RECOVERED);
+        $followings[3]->setStatus(Constants::HEALTH_STATUS_RECOVERED);
 
         $currentCase->setFollowings([]);
         $currentCase->setFollowings($followings[1], $followings[3]);
@@ -2057,7 +2057,7 @@ class CasesController
     {
         $followings = $currentCase->getFollowings();
 
-        $followings[3]->setStatus(constants::HEALTH_STATUS_RECOVERED);
+        $followings[3]->setStatus(Constants::HEALTH_STATUS_RECOVERED);
 
         $currentCase->setFollowings([]);
         $currentCase->setFollowings($followings[2], $followings[3]);
@@ -3055,6 +3055,110 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: Dejar el primer y último following
+     * CR_12
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     * @author Regmy Nieves
+     */
+    function solveCSRSRSRDDR_1123456777(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        $this->deleteCase($currentCase->followings[5]->getId());
+        $this->deleteCase($currentCase->followings[6]->getId());
+        $this->deleteCase($currentCase->followings[7]->getId());
+        $this->deleteCase($currentCase->followings[8]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Dejar el primer y último following
+     * CR_12
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     * @author Regmy Nieves
+     */
+    function solveCSSCRSCR_11122334(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        $this->deleteCase($currentCase->followings[5]->getId());
+        $this->deleteCase($currentCase->followings[6]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Cambiar el estado del primer following a sospechoso
+     * SD_12
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     * @author Regmy Nieves
+     */
+    function solveDR_12(CaseDTO $currentCase)
+    {
+        $currentCase->followings[0]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
+        $this->saveCase($currentCase);
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar el primer following
+     * SD_12
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     * @author Regmy Nieves
+     */
+    function solveDSD_112(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[0]->getId());
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar el primer following y el ultimo following
+     * SD_12
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     * @author Regmy Nieves
+     */
+    function solveDSDS_1122(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[0]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Cambiar el estado del primer following y el estado del último following
+     * Eliminar los followings restantes.
+     * SD_12
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     * @author Regmy Nieves
+     */
+    function solveDSSCD_11233(CaseDTO $currentCase)
+    {
+        $currentCase->followings[0]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
+        $this->deleteCase($currentCase->followings[1]->getId());
+        unset($currentCase->followings[1]);
+        $this->deleteCase($currentCase->followings[2]->getId());
+        unset($currentCase->followings[2]);
+        $this->deleteCase($currentCase->followings[3]->getId());
+        unset($currentCase->followings[3]);
+
+        $this->saveCase($currentCase);
+
+        return $currentCase;
+    }
 
 
 
