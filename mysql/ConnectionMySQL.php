@@ -5,8 +5,8 @@ class ConnectionMySQL
 
     private $connection;
     private $host = "localhost";
-    private $user = "root";
-    private $pass = "";
+    private $user = "esteban";
+    private $pass = "PASSWORD";
     private $db = "svepi_prod_test";  //tigo_test_SVEPI
 
     public function __construct()
