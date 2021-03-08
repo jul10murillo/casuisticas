@@ -2739,11 +2739,10 @@ class CasesController
 
         if (count($caseDTO->getFollowings()) > 0) {
             foreach ($caseDTO->getFollowings() as $followingDTO) {
-                if (is_null($followingDTO->getId())) {
-                   /*Verificar que llege el id de la insercion */
+                if (is_null($followingDTO->getId())) {                  
                    $newFollowing =  $this->followingDAO->save($followingDTO, $caseDTO);
                     if($originalFollowing!= null){
-                        $this->followingDAO->clonePhoto($originalFollowing, $newFollowing->id);
+                        $this->followingDAO->clonePhoto($originalFollowing, $newFollowing);
                     }
                 } else {
                     $this->followingDAO->update($followingDTO, $caseDTO);
