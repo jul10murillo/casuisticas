@@ -2868,24 +2868,7 @@ class CasesController
     }
 
 
-   /**
-    * Propuesta de solución: Eliminar seguimiento 4
-    *
-    * @param CaseDTO $currentCase
-    * @return CaseDTO
-    */
-    public function solveSCHCR_12345(CaseDTO $currentCase)
-    {
-        $followings = $currentCase->getFollowings();
-
-        $currentCase->setFollowings([]);
-        $currentCase->setFollowings([$followings[0], $followings[1], $followings[2], $followings[4]]);
-
-        $this->deleteCase($followings[3]->getId());       
-        
-        return $currentCase; 
-
-    }
+  
 
    /**
     * Propuesta de solución: Eliminar seguimiento 3
@@ -2990,6 +2973,45 @@ class CasesController
         return $currentCase; 
 
     }
+
+    /**
+     * Propuesta de solución: Eliminar seguimiento 3
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSCCR_1123(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[1], $followings[4]]);
+            
+        $this->deleteCase($followings[3]->getId());  
+        
+        return $currentCase; 
+    }
+
+    /**
+     * Propuesta de solución: Cambiar el seguimiento fecha al día anterior.
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveCSR_112(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+        $followings[1]->setDate($this->subtractDaysFromDate($followings[0]->getDate(), 1));
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings($followings);
+
+        $this->saveCase($currentCase);
+
+        return $currentCase;        
+    }
+
+    
 
 
 
