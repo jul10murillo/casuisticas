@@ -41,7 +41,7 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO
      */
     public function delete($id)
     {
-        parent::query("DELETE FROM tigo_log_followings WHERE id = " . $id);        
+        parent::query("DELETE FROM tigo_log_followings WHERE id = " . $id);
     }
 
     /**
@@ -68,12 +68,10 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO
      */
     public function save($followingDTO, $caseDTO)
     {
-        $status = in_array($followingDTO->getStatus(), [Constants::HEALTH_STATUS_CONFIRMED, Constants::HEALTH_STATUS_SUSPICIOUS]) ? "1":"0";
-            
-        $following = parent::queryUpdateOrInsert("INSERT INTO tigo_log_followings (".implode(",", $followingDTO->getArrayNameAllProperties()).") VALUES (".implode(",", $followingDTO->getArrayValueAllProperties()).")");
+        $status = in_array($followingDTO->getStatus(), [Constants::HEALTH_STATUS_CONFIRMED, Constants::HEALTH_STATUS_SUSPICIOUS]) ? "1" : "0";
 
-        echo "INSERT INTO tigo_log_followings (".implode(",", $followingDTO->getArrayNameAllProperties()).") VALUES (".implode(",", $followingDTO->getArrayValueAllProperties()).")";
-        
+        $following = parent::queryUpdateOrInsert("INSERT INTO tigo_log_followings (" . implode(",", $followingDTO->getArrayNameAllProperties()) . ") VALUES (" . implode(",", $followingDTO->getArrayValueAllProperties()) . ")");
+
         return $following;
     }
 
@@ -87,27 +85,26 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO
      */
     public function update($followingDTO, $caseDTO)
     {
-        $following = parent::queryUpdateOrInsert("UPDATE tigo_log_followings SET ".
-            //"document=".$caseDTO->getDocument().",".
-            "status_id=".$followingDTO->getStatus().",".
-            "sent_to_following_id=".$followingDTO->getCaseId().",".
-            "updated_at='".$followingDTO->getDate()."' WHERE id = ".$followingDTO->getId()
+        $following = parent::queryUpdateOrInsert(
+            "UPDATE tigo_log_followings SET " .
+                //"document=".$caseDTO->getDocument().",".
+                "status_id=" . $followingDTO->getStatus() . "," .
+                "sent_to_following_id=" . $followingDTO->getCaseId() . "," .
+                "updated_at='" . $followingDTO->getDate() . "' WHERE id = " . $followingDTO->getId()
         );
 
         return $following;
     }
 
 
-    public function clonePhoto($originalFollowing, $idNewFollowing){
-        
+    public function clonePhoto($originalFollowing, $idNewFollowing)
+    {
+
         $resultTigoField =  parent::queryUpdateOrInsert("INSERT INTO tigo_SVEPI.tigo_fields 
         (`id_table`, `table`, `field`, `value`, `created_at`, `updated_at`)
         SELECT '$idNewFollowing', `table`, `field`, `value`, `created_at`, `updated_at` 
         FROM tigo_SVEPI.tigo_fields AS tf WHERE tf.id_table = $originalFollowing");
 
-        return $resultTigoField;   
-
+        return $resultTigoField;
     }
-
-    
 }
