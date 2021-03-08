@@ -40,7 +40,7 @@ class DataController
      */
     public function getData()
     {
-        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/OExtraccion_1915.csv', 'r');
+        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/OExtraccion_1915CorregidoLosCamposVacios.csv', 'r');
         $i            = 0;
         while (($registro_csv = fgetcsv($csv_archivo)) !== false) {
             $i++;
@@ -52,6 +52,10 @@ class DataController
 
         foreach ($data as $row => $value) {
             $data[$row] = explode(';', $value[0]);
+            if ($data[$row][0] == null || $data[$row][0] == "" ||  !isset($data[$row][0]) || is_null($data[$row][0])) {
+                echo 'falla al leer valor en el csv.. Fila: ' . $row . ' Data: ' . $data;
+                exit;
+            }
         }
 
         $new_data           = [];
@@ -447,6 +451,7 @@ class DataController
     function printDashboardCases($solveCases, $notSolveCases)
     {
         echo '<div style="text-align:center"> <h1><b> Correción de Casuísticas </b></h1> <br> <hr> <br><br> </div>';
+        echo 'Casos Solucionados Totales:' . count($solveCases) . '<br> <br>';
         echo '<h2> Casos solucionados </h2>';
         echo '<br> <br>';
         echo '<div id="goodones"> ';
@@ -469,6 +474,7 @@ class DataController
         echo '</table>';
         echo '</div>';
         echo '<br> <br> <hr> <br>';
+        echo 'Casos No solucionados Totales:' . count($notSolveCases) . '<br> <br> ';
         echo '<h2> Casos no solucionados </h2>';
         echo '<br> <br>';
         echo '<div id="badones"> ';
@@ -495,9 +501,6 @@ class DataController
         }
         echo '</table>';
         echo '</div>';
-
-        echo '<br> <br> Casos Solucionados Totales:' . count($solveCases);
-        echo '<br> <br> Casos No solucionados Totales:' . count($notSolveCases);
     }
 
 

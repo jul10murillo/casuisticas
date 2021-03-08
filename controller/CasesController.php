@@ -2577,7 +2577,7 @@ class CasesController
         $this->deleteCase($followings[1]->getId());
         $this->deleteCase($followings[2]->getId());
 
-        return $currentCase;    
+        return $currentCase;
     }
 
     /**
@@ -2666,9 +2666,9 @@ class CasesController
         $followings = $currentCase->getFollowings();
 
         $currentCase->setFollowings([]);
-        $currentCase->setFollowings([$followings[0], $followings[1], $following[3]]);
+        $currentCase->setFollowings([$followings[0], $followings[1], $followings[3]]);
 
-        $this->deleteCase($followings[2]->getId());  
+        $this->deleteCase($followings[2]->getId());
 
         return $currentCase;
     }
@@ -2679,14 +2679,15 @@ class CasesController
      * @param CaseDTO $currentCase
      * @return CaseDTO
      */
-    public function solveSR_12(CaseDTO $currentCase){
+    public function solveSR_12(CaseDTO $currentCase)
+    {
 
         $followings = $currentCase->getFollowings();
 
         $followings[0]->setStatus(Constants::HEALTH_STATUS_CONFIRMED);
 
         $currentCase->setFollowings([]);
-        $currentCase->setFollowings($followings);     
+        $currentCase->setFollowings($followings);
 
         $this->saveCase($currentCase);
 
@@ -2704,10 +2705,10 @@ class CasesController
         $followings = $currentCase->getFollowings();
 
         $currentCase->setFollowings([]);
-        $currentCase->setFollowings([$followings[0], $followings[2], $following[4]]);
+        $currentCase->setFollowings([$followings[0], $followings[2], $followings[4]]);
 
-        $this->deleteCase($followings[1]->getId());  
-        $this->deleteCase($followings[3]->getId());  
+        $this->deleteCase($followings[1]->getId());
+        $this->deleteCase($followings[3]->getId());
 
         return $currentCase;
     }
@@ -2723,10 +2724,10 @@ class CasesController
         $followings = $currentCase->getFollowings();
 
         $currentCase->setFollowings([]);
-        $currentCase->setFollowings([$followings[0], $followings[2], $following[4]]);
+        $currentCase->setFollowings([$followings[0], $followings[2], $followings[4]]);
 
-        $this->deleteCase($followings[1]->getId());  
-        $this->deleteCase($followings[3]->getId());  
+        $this->deleteCase($followings[1]->getId());
+        $this->deleteCase($followings[3]->getId());
 
         return $currentCase;
     }
@@ -2749,7 +2750,6 @@ class CasesController
         $this->saveCase($currentCase);
 
         return $currentCase;
-
     }
 
     /**
@@ -2760,12 +2760,12 @@ class CasesController
      */
     public function solveSCCR_1223(CaseDTO $currentCase)
     {
-        $followings = $currentCase->getFollowings();       
+        $followings = $currentCase->getFollowings();
 
         $currentCase->setFollowings([]);
-        $currentCase->setFollowings([$following[0],$following[1],$following[3]]);
+        $currentCase->setFollowings([$followings[0], $followings[1], $followings[3]]);
 
-        $this->deleteCase($followings[2]->getId());        
+        $this->deleteCase($followings[2]->getId());
 
         return $currentCase;
     }
@@ -2778,17 +2778,16 @@ class CasesController
      */
     public function solveSDDSD_12234(CaseDTO $currentCase)
     {
-        $followings = $currentCase->getFollowings();       
+        $followings = $currentCase->getFollowings();
 
         $currentCase->setFollowings([]);
-        $currentCase->setFollowings([$following[0],$following[4]]);
+        $currentCase->setFollowings([$followings[0], $followings[4]]);
 
-        $this->deleteCase($followings[1]->getId());        
-        $this->deleteCase($followings[2]->getId());        
+        $this->deleteCase($followings[1]->getId());
+        $this->deleteCase($followings[2]->getId());
         $this->deleteCase($followings[3]->getId());
 
         return $currentCase;
-
     }
 
     /**
@@ -2799,23 +2798,22 @@ class CasesController
      */
     public function solveSDSDCCR_1234567(CaseDTO $currentCase)
     {
-        $followings = $currentCase->getFollowings();       
+        $followings = $currentCase->getFollowings();
 
         $currentCase->setFollowings([]);
-        $currentCase->setFollowings([$following[0],$following[4],$following[6] ]);
+        $currentCase->setFollowings([$followings[0], $followings[4], $followings[6]]);
 
-        $this->deleteCase($followings[1]->getId());        
-        $this->deleteCase($followings[2]->getId());        
+        $this->deleteCase($followings[1]->getId());
+        $this->deleteCase($followings[2]->getId());
         $this->deleteCase($followings[3]->getId());
         $this->deleteCase($followings[5]->getId());
 
         return $currentCase;
-
     }
 
 
-    
-    
+
+
     /**
      * Buscar seguimiento por estado
      *
