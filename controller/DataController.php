@@ -25,8 +25,8 @@ class DataController
 
         $group_status  = $this->groupByStatus($check_status); //Agrupamos los casos por estado
 
-        // print_r($group_status['casos_malos']);
-        // exit;
+        print_r($group_status['casos_malos']);
+        exit;
         $casesDTOS     = $this->getCasesDTObyBadCases($group_status['casos_malos']);
         // $casesDTOS = $this->getCasesDTObyBadCases($caso);
 
@@ -40,7 +40,7 @@ class DataController
      */
     public function getData()
     {
-        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/OExtraccion_1915CorregidoLosCamposVacios.csv', 'r');
+        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/OExtraccion_1526.csv', 'r');
         $i            = 0;
         while (($registro_csv = fgetcsv($csv_archivo)) !== false) {
             $i++;
@@ -247,6 +247,9 @@ class DataController
 
         foreach ($check_history as $case => $history) {
             switch ($history) {
+                case 'C_1':
+                    $good_cases[$case] = $history;
+                    break;
                 case 'S_1':
                     $good_cases[$case] = $history;
                     break;

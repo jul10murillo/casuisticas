@@ -90,7 +90,8 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO
                 //"document=".$caseDTO->getDocument().",".
                 "status_id=" . $followingDTO->getStatus() . "," .
                 "sent_to_following_id=" . $followingDTO->getCaseId() . "," .
-                "updated_at='" . $followingDTO->getDate() . "' WHERE id = " . $followingDTO->getId()
+                "created_at='" . $followingDTO->getDate() . "'," .
+                "updated_at='" . $followingDTO->getUpdated_at() . "' WHERE id = " . $followingDTO->getId()
         );
 
         return $following;

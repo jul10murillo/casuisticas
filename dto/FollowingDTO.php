@@ -108,7 +108,7 @@ class FollowingDTO
 
     function getDate()
     {
-        return $this->update_at;
+        return $this->created_at;
     }
 
     function setId($id)
@@ -126,9 +126,9 @@ class FollowingDTO
         $this->sent_to_following_id = $sent_to_following_id;
     }
 
-    function setDate($update_at)
+    function setDate($created_at)
     {
-        $this->update_at = $update_at;
+        $this->created_at = $created_at;
     }
     function getFormat_id()
     {
