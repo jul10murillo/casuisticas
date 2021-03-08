@@ -37,6 +37,9 @@ class ActivitiesMySqlDAO extends ConnectionMySQL implements ActivitiesDAO {
      */
     public function update($activityDTO)
     {
+        if( is_null($activityDTO)){
+            echo 'here';
+        }
         $activity = parent::queryUpdateOrInsert("UPDATE tigo_followings SET ".
             "sent_to_following_id=".$activityDTO->getCaseId()." WHERE id = ".$activityDTO->getId()
         );

@@ -104,7 +104,7 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
     public function update(CaseDTO $case)
     {
         $query = "UPDATE tigo_sent_to_followings SET"
-            . " updated_at = '" . $case->getDate()
+            . " updated_at = '" . $case->getUpdated_at()
             . "', document = " . $case->getDocument()
             . ", status = " . $case->getStatus()
             . ", status_id = " . $case->getHealthStatus()
@@ -123,8 +123,8 @@ class CaseMySqlDAO extends ConnectionMySQL implements CaseDAO
      */
     public function save($case)
     {
-        $query = "INSERT INTO tigo_sent_to_followings (document,creation_date,closing_justification,status_id,novelty,status, responsible_document, create_user_document, created_at, updated_at, deleted_at) VALUES ("
-            .'"'.$case->getDate().'",'
+        $query = "INSERT INTO tigo_sent_to_followings (document,creation_date,closing_justification,status_id,novelty,`status`, responsible_document, create_user_document, created_at, updated_at, deleted_at) VALUES ("
+            .'"'.$case->getDocument().'",'
             .'"'.$case->getCreation_date().'",'
             .'"'.$case->getClosing_justification().'",'
             .'"'.$case->getHealthStatus().'",'

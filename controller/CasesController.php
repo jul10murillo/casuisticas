@@ -2616,6 +2616,10 @@ class CasesController
         $activities  = $oldCaseDTO->getActivities();
 
         $this->updateCasesActivities($cases, $activities);
+        
+        foreach ($cases as $case) {            
+            $this->saveCase($case );
+        }
 
         return $newCasesDTO;
     }
@@ -2645,13 +2649,35 @@ class CasesController
 
             $caseDTO->setDate($follogingEnd->getDate());
             $caseDTO->setStatus(in_array($follogingEnd->getStatus(), [Constants::HEALTH_STATUS_CONFIRMED, Constants::HEALTH_STATUS_SUSPICIOUS]) ? "1" : "0");
-
+            $caseDTO->setCreated_at($caseDTO->getFollowings()[0]->getCreateAt());
+            
             $caseDTO->setId($this->caseDAO->save($caseDTO));
+
+            $this->updateFollowingsByCaseId($caseDTO);            
 
             $newCasesDTO[] = $caseDTO;
         }
 
         return $newCasesDTO;
+    }
+    
+    
+    /**
+     * updateFollowingsByCaseId
+     *
+     * @param  CaseDTO $caseDTO
+     * @return void
+     */
+    public function updateFollowingsByCaseId(&$caseDTO)
+    {
+        $arrFollowings = [];
+        $followings = $caseDTO->getFollowings();
+        foreach ($followings as $following) {
+            $following->setCaseId($caseDTO->getId());
+            $arrFollowings[] = $following;
+        }        
+        $caseDTO->setFollowings($arrFollowings);
+
     }
 
     /**
@@ -2673,7 +2699,7 @@ class CasesController
     /**
      * 
      * @param CaseDTO $oldCaseDTO
-     * @param FollowingDTO $followingsDTO
+     * @param FollowingDTO[] $followingsDTO
      */
     public function updateOldCase($oldCaseDTO, $followingsDTO)
     {
@@ -2683,10 +2709,13 @@ class CasesController
 
         $caseDTO->setDocument($oldCaseDTO->getDocument());
         $caseDTO->setStatus($oldCaseDTO->getStatus());
+        $caseDTO->setCreated_at($followingsDTO[0]->getCreated_at());
 
         $this->changeCaseToLastFollowing($caseDTO, $followingsDTO);
 
         $this->caseDAO->update($caseDTO);
+        $arr[] = $caseDTO;
+        return $arr;
     }
 
     /**
@@ -2713,15 +2742,14 @@ class CasesController
         foreach ($caseevert as $case) {
             $tmpActivities = [];
             foreach ($activities as $k => $activity) {
-                if ($activity->getDate() >= $case->getDate()) {
+                if ($activity->getCreated_at() >= $case->getCreated_at()) {
                     $activity->setCaseId($case->getId());
                     $tmpActivities[] = $activity;
                     unset($activities[$k]);
                 }
             }
             $case->setActivities($tmpActivities);
-
-            $this->saveCase($case);
+            
         }
     }   
 
@@ -2731,6 +2759,12 @@ class CasesController
      */
     public function saveCase($caseDTO, $originalFollowing = null)
     {
+        if(!$caseDTO->getId() || is_null($caseDTO->getId()) || $caseDTO->getId() == '' || $caseDTO->getId() == " "){
+            $this->caseDAO->save($caseDTO);
+        }else{
+            $this->caseDAO->update($caseDTO);
+        }
+                
         if (count($caseDTO->getActivities()) > 0) {
             foreach ($caseDTO->getActivities() as $activityDTO) {
                 $this->activitiesDAO->update($activityDTO);
@@ -2750,6 +2784,7 @@ class CasesController
             }
         }
     }
+
     public function deleteCase($IdFollowing)
     {
         $this->followingDAO->delete($IdFollowing);
