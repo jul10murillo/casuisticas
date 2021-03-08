@@ -33,13 +33,13 @@ class CaseDTO
      *
      * @var FollowingDTO[] 
      */
-    private $followings;
+    public $followings;
 
     /**
      *
      * @var ActivityDTO[] 
      */
-    private $activities;
+    public $activities;
 
     public function setId($id)
     {
