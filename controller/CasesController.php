@@ -3080,7 +3080,7 @@ class CasesController
     {
         $dateTime = new DateTime($date);
         $resultDate = $dateTime->add(new DateInterval('P' . $number_of_days . 'D'));
-        $resultDate = $resultDate->format('Y-m-d');
+        $resultDate = $resultDate->format('Y-m-d H:m:s');
 
         return $resultDate;
     }
