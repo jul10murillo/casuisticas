@@ -2743,7 +2743,7 @@ class CasesController
                    /*Verificar que llege el id de la insercion */
                    $newFollowing =  $this->followingDAO->save($followingDTO, $caseDTO);
                     if($originalFollowing!= null){
-                        $this->followingDAO->clonePhoto($originalFollowing, $newFollowing);
+                        $this->followingDAO->clonePhoto($originalFollowing, $newFollowing->id);
                     }
                 } else {
                     $this->followingDAO->update($followingDTO, $caseDTO);
