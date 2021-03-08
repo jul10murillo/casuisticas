@@ -2794,7 +2794,7 @@ class CasesController
      * Propuesta de solución: Dejar los seguimientos 1, 5 y 7
      *
      * @param CaseDTO $currentCase
-     * @return void
+     * @return CaseDTO
      */
     public function solveSDSDCCR_1234567(CaseDTO $currentCase)
     {
@@ -2809,6 +2809,44 @@ class CasesController
         $this->deleteCase($followings[5]->getId());
 
         return $currentCase;
+    }
+
+    /**
+     *Propuesta de solución: Eliminar el seguimiento 2
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSSD_112(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[2]]);
+
+        $this->deleteCase($followings[1]->getId());
+
+        return $currentCase;        
+    }
+
+    /**
+     * Propuesta de solución: Eliminar seguimiento 3 y 4
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCRSR_11234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setFollowings([$followings[0], $followings[1], $followings[4]]);
+
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());
+        
+        return $currentCase;  
+
     }
 
 
