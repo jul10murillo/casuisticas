@@ -3652,7 +3652,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[3]->getId());
         unset($currentCase->followings[3]);
         
-        $arrIdentifiers = [[1, 2], [3, 4, 5]];
+        $arrIdentifiers = [[0, 2], [4, 5, 6]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
         return $cases;
@@ -5012,7 +5012,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[5]->getId());
         unset($currentCase->followings[5]);
 
-        $arrIdentifiers = [[1, 2], [3, 4]];
+        $arrIdentifiers = [[0, 3], [4, 6]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
         return $cases;
