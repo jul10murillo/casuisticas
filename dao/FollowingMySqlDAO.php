@@ -117,10 +117,11 @@ class FollowingMySqlDAO extends ConnectionMySQL implements FollowingDAO
     public function clonePhoto($originalFollowing, $idNewFollowing)
     {
 
-        $resultTigoField =  parent::queryUpdateOrInsert("INSERT INTO tigo_SVEPI.tigo_fields 
+        $resultTigoField =  parent::queryUpdateOrInsert("INSERT INTO tigo_fields 
         (`id_table`, `table`, `field`, `value`, `created_at`, `updated_at`)
         SELECT '$idNewFollowing', `table`, `field`, `value`, `created_at`, `updated_at` 
-        FROM tigo_SVEPI.tigo_fields AS tf WHERE tf.id_table = $originalFollowing");
+        FROM tigo_fields AS tf WHERE tf.id_table = $originalFollowing
+        AND tf.table = 'log_following' ");
 
         return $resultTigoField;
     }
