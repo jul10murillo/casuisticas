@@ -4121,14 +4121,33 @@ class CasesController
         $currentCase->setFollowings([]);
         $currentCase->setfollowings([$followings[0], $followings[1],  $followings[4], $followings[5], $followings[6]]);
 
-        $this->deleteCase($currentCase->followings[2]->getId());
-        $this->deleteCase($currentCase->followings[3]->getId());
-
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());
 
         $arrIdentifiers = [[1, 2], [3, 4, 5]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
         return $cases;
+    }
+
+    /**
+     * Propuesta de solución: Dejar sospechoso(1), confirmado (5) y recuperado (6)
+     * SCR_156.
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSDSDCCDR_12345566(CaseDTO $currentCase)
+    {
+        //Las posiciones que no se eliminan son  0 , 5, 7
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        $this->deleteCase($currentCase->followings[6]->getId());
+        $this->deleteCase($currentCase->followings[8]->getId());
+
+        return $currentCase;
     }
 
 
