@@ -145,7 +145,7 @@ class CasesController
     {
         $followings = $currentCase->getFollowings();
         $date = $this->subtractDaysFromDate($followings[0]->getDate(), 1);
-        $this->addNewFollowingToCase($followings[0]->getId(), $currentCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
+        $this->addNewFollowingToCase($followings[0], $currentCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
         $this->saveCase($currentCase);
 
         return $currentCase;
@@ -161,7 +161,7 @@ class CasesController
     {
         $followings = $currentCase->getFollowings();
         $date = $this->subtractDaysFromDate($followings[0]->getDate(), 1);
-        $this->addNewFollowingToCase($followings[0]->getId(), $currentCase, $date, Constants::HEALTH_STATUS_SUSPICIOUS);
+        $this->addNewFollowingToCase($followings[0], $currentCase, $date, Constants::HEALTH_STATUS_SUSPICIOUS);
         $this->saveCase($currentCase);
 
         return $currentCase;
@@ -333,7 +333,7 @@ class CasesController
 
         $date =  $this->subtractDaysFromDate($followings[0]->getDate(), 1);
 
-        $this->addNewFollowingToCase($followings[0]->getId(), $currentCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
+        $this->addNewFollowingToCase($followings[0], $currentCase, $date, Constants::HEALTH_STATUS_CONFIRMED);
 
         $this->saveCase($currentCase);
 
@@ -3831,7 +3831,7 @@ class CasesController
         $this->deleteCase($followings[7]->getId());
 
         $currentCase->setFollowings([]);
-        $currentCase->setfollowings([$followings[0],$followings[1], $followings[3],  $followings[5], $followings[8]]);     
+        $currentCase->setfollowings([$followings[0], $followings[1], $followings[3],  $followings[5], $followings[8]]);
 
         $arrIdentifiers = [[1, 2, 3], [4, 5]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
@@ -4208,20 +4208,23 @@ class CasesController
      * Crea un seguimiento nuevo asociado al caso existente
      * 
      * @param CaseDTO $caseDTO
+     * @param FollowingDTO $originalFollowing
      * @return void
      */
     public function addNewFollowingToCase($originalFollowing, &$caseDTO, $date, $status)
     {
-        $followingDTO = new FollowingDTO();
-        $followingDTO->setCaseId($caseDTO->getId());
+        $followingDTO = new FollowingDTO;
+        $followingDTO->setDocument($originalFollowing->getDocument());
+        $followingDTO->setFormat_id($originalFollowing->getFormat_id());
+        $followingDTO->setSent_to_following_id($originalFollowing->getSent_to_following_id());
+        $followingDTO->setCreate_user_document($originalFollowing->getCreate_user_document());
+
         $followingDTO->setDate($date);
         $followingDTO->setStatus($status);
 
         $followings = $caseDTO->getFollowings();
         array_unshift($followings, $followingDTO);
         $caseDTO->setFollowings($followings);
-
-        $this->saveCase($caseDTO, $originalFollowing);
     }
 
     // Función nueva de borrado físico

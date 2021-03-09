@@ -426,6 +426,14 @@ class DataController
                         if (json_decode($response)->status) {
                             $solveCases[] = $response;
                         } else {
+                            if (is_null($response)) {
+                                echo 'stop here';
+                                exit;
+                            }
+                            if (is_null(json_encode($response)) || $response == "") {
+                                echo 'stop here';
+                                exit;
+                            }
                             $notSolveCases[] = $response;
                         }
                     } catch (\Throwable $th) {
