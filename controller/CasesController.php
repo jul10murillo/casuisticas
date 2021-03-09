@@ -2435,7 +2435,7 @@ class CasesController
      * @return CaseDTO
      * @author Regmy
      */
-  public function solveRR_11(CaseDTO $currentCase)
+    public function solveRR_11(CaseDTO $currentCase)
     {
         $currentCase->followings[0]->setStatus(Constants::HEALTH_STATUS_CONFIRMED);
         $currentCase->followings[0]->setDate($this->subtractDaysFromDate($currentCase->followings[1]->getDate(), 1));
@@ -2452,7 +2452,7 @@ class CasesController
      * @return CaseDTO
      * @author Regmy
      */
-  public function solveRR_12(CaseDTO $currentCase)
+    public function solveRR_12(CaseDTO $currentCase)
     {
         $currentCase->followings[0]->setStatus(Constants::HEALTH_STATUS_CONFIRMED);
         $this->saveCase($currentCase);
@@ -2468,7 +2468,7 @@ class CasesController
      * @return CaseDTO
      * @author Regmy
      */
-  public function solveSCCR_1112(CaseDTO $currentCase)
+    public function solveSCCR_1112(CaseDTO $currentCase)
     {
         $this->deleteCase($currentCase->followings[0]->getId());
         $this->deleteCase($currentCase->followings[1]->getId());
@@ -3062,7 +3062,7 @@ class CasesController
      * @return CaseDTO
      * @author Regmy Nieves
      */
-  public function solveCSRSRSRDDR_1123456777(CaseDTO $currentCase)
+    public function solveCSRSRSRDDR_1123456777(CaseDTO $currentCase)
     {
         $this->deleteCase($currentCase->followings[1]->getId());
         $this->deleteCase($currentCase->followings[2]->getId());
@@ -4147,7 +4147,6 @@ class CasesController
         $this->deleteCase($currentCase->followings[3]->getId());
         $this->deleteCase($currentCase->followings[4]->getId());
         $this->deleteCase($currentCase->followings[6]->getId());
-        $this->deleteCase($currentCase->followings[8]->getId());
 
         return $currentCase;
     }
@@ -4457,7 +4456,7 @@ class CasesController
     {
         $this->deleteCase($currentCase->followings[1]->getId());
         $this->deleteCase($currentCase->followings[2]->getId());
-        
+
         return $currentCase;
     }
     /**
@@ -4472,7 +4471,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[2]->getId());
         $this->deleteCase($currentCase->followings[3]->getId());
         $this->deleteCase($currentCase->followings[4]->getId());
-        
+
         return $currentCase;
     }
 
@@ -4490,7 +4489,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[4]->getId());
         $this->deleteCase($currentCase->followings[5]->getId());
         $this->deleteCase($currentCase->followings[6]->getId());
-        
+
         return $currentCase;
     }
 
@@ -4507,7 +4506,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[3]->getId());
         $this->deleteCase($currentCase->followings[4]->getId());
         $this->deleteCase($currentCase->followings[5]->getId());
-        
+
         return $currentCase;
     }
 
@@ -4524,10 +4523,10 @@ class CasesController
         $this->deleteCase($currentCase->followings[3]->getId());
         $this->deleteCase($currentCase->followings[4]->getId());
         $this->deleteCase($currentCase->followings[5]->getId());
-        
+
         return $currentCase;
     }
-    
+
     /**
      * Propuesta de solución: Dejar seguimientos 1,5,6
      *
@@ -4539,7 +4538,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[1]->getId());
         $this->deleteCase($currentCase->followings[2]->getId());
         $this->deleteCase($currentCase->followings[3]->getId());
-        
+
         return $currentCase;
     }
 
@@ -4554,7 +4553,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[1]->getId());
         $this->deleteCase($currentCase->followings[2]->getId());
         $this->deleteCase($currentCase->followings[3]->getId());
-        
+
         return $currentCase;
     }
 
@@ -4569,7 +4568,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[1]->getId());
         $this->deleteCase($currentCase->followings[2]->getId());
         $this->deleteCase($currentCase->followings[3]->getId());
-        
+
         return $currentCase;
     }
 
@@ -4584,7 +4583,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[1]->getId());
         $this->deleteCase($currentCase->followings[2]->getId());
         $this->deleteCase($currentCase->followings[3]->getId());
-        
+
         return $currentCase;
     }
 
@@ -4602,10 +4601,10 @@ class CasesController
         $this->deleteCase($currentCase->followings[4]->getId());
         $this->deleteCase($currentCase->followings[5]->getId());
         $this->deleteCase($currentCase->followings[6]->getId());
-        
+
         return $currentCase;
     }
-    
+
     /**
      * Propuesta de solución: Dejar seguimientos 1,5
      *
@@ -4619,7 +4618,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[3]->getId());
         $this->deleteCase($currentCase->followings[4]->getId());
         $this->deleteCase($currentCase->followings[5]->getId());
-        
+
         return $currentCase;
     }
 
@@ -4636,10 +4635,10 @@ class CasesController
         $followings[0]->setStatus(Constants::HEALTH_STATUS_CONFIRMED);
 
         $this->deleteCase($followings[1]->getId());
-        
+
         return $currentCase;
     }
-        
+
     /**
      * Propuesta de solución: Dejar seguimientos 1,4
      *
@@ -4650,7 +4649,7 @@ class CasesController
     {
         $this->deleteCase($currentCase->followings[1]->getId());
         $this->deleteCase($currentCase->followings[2]->getId());
-        
+
         return $currentCase;
     }
 
@@ -4666,7 +4665,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[2]->getId());
         $this->deleteCase($currentCase->followings[3]->getId());
         $this->deleteCase($currentCase->followings[4]->getId());
-        
+
         return $currentCase;
     }
 
