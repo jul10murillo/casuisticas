@@ -3413,6 +3413,7 @@ class CasesController
 
         $currentCase->setFollowings([]);
         $currentCase->setfollowings($followings);
+        $this->saveCase($currentCase);
 
         return $currentCase;
     }
@@ -4184,7 +4185,7 @@ class CasesController
     {
         $dateTime = new DateTime($date);
         $resultDate = $dateTime->sub(new DateInterval('P' . $numberOfDays . 'D'));
-        $resultDate = $resultDate->format('Y-m-d');
+        $resultDate = $resultDate->format('Y-m-d H:m:s');
 
         return $resultDate;
     }
