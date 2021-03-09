@@ -3011,7 +3011,144 @@ class CasesController
         return $currentCase;        
     }
 
+    /**
+     * Propuesta de solución: Eliminar 2,3,4
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSDDSD_11122(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+
+        return $currentCase;
+    }
     
+    /**
+     * Propuesta de solución: Eliminar 2,3,4,5
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSSSSSCR_1123456(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar 2,3,4,5
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SSSSSD_123456(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar 2,3
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SSSCR_11123(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar 2,4
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SSCCR_11223(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar 2,3,4
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SSSSD_11112(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar 2,3,4
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDDDD_12345(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar 2,3,4,5
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDDDDD_122222(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+
+        return $currentCase;
+    }
+
+
+    /**
+     * Propuesta de solución: Eliminar 2,3,4,5,6
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDDDDDD_1222222(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        $this->deleteCase($currentCase->followings[5]->getId());
+
+        return $currentCase;
+    }
 
 
 
