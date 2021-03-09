@@ -4410,6 +4410,62 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: SD_24
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveCSRDR_12345(CaseDTO $currentCase)
+    {        
+        // Posiciones que no se eliminan 1 y 3
+        $this->deleteCase($currentCase->followings[0]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: SCR_145
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSDSCRR_123455(CaseDTO $currentCase)
+    {             
+        // Posiciones que no se eliminan 0, 3 y 5
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: SD_-1 1 CR_24
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveDCCR_1234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $followings[2]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
+        $followings[2]->setDate($this->subtractDaysFromDate( $followings[0]->getdate(), 1));
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[2], $followings[0], $followings[1], $followings[3]]);
+
+        $this->saveCase($currentCase);
+
+        $arrIdentifiers = [[1, 2], [3, 4]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+
+    }
 
 
     /**
