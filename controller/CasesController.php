@@ -3652,7 +3652,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[3]->getId());
         unset($currentCase->followings[3]);
 
-        $arrIdentifiers = [[1, 2], [3, 4, 5]];
+        $arrIdentifiers = [[0, 2], [4, 5, 6]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
         return $cases;
@@ -4254,7 +4254,6 @@ class CasesController
     {
 
         $this->deleteCase($currentCase->followings[1]->getId());
-
         return $currentCase;
     }
 
@@ -4475,9 +4474,77 @@ class CasesController
         return $cases;
     }
 
-    public function solveCRSRDR_123456()
+    /**
+     * Propuesta de solución: SD_16
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveCRSRDR_123456(CaseDTO $currentCase)
     {
+        $followings = $currentCase->getFollowings();
+
+        $followings[0]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
+        $followings[5]->setStatus(constants::HEALTH_STATUS_DISCARDED);
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[0], $followings[5]]);
+
+        $this->saveCase($currentCase);
+
+        $this->deleteCase($followings[1]->getId());
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());
+        $this->deleteCase($followings[4]->getId());
+
+        return $currentCase;
     }
+
+    /**
+     * Propuesta de solución: SD_16
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveCRSSDRR_1234566(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $followings[0]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
+        $followings[6]->setStatus(constants::HEALTH_STATUS_DISCARDED);
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[0], $followings[6]]);
+
+        $this->saveCase($currentCase);
+
+        $this->deleteCase($followings[1]->getId());
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());
+        $this->deleteCase($followings[4]->getId());
+        $this->deleteCase($followings[5]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: SCR_134
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveCSCSR_11234(CaseDTO $currentCase)
+    {
+        /**Dejar valores 1,2,4 */
+        $this->deleteCase($followings[0]->getId());
+        $this->deleteCase($followings[3]->getId());
+
+        return $currentCase;
+    }
+
+
+
+
 
 
     /**
@@ -5028,11 +5095,11 @@ class CasesController
      * @param CaseDTO $currentCase
      * @return CaseDTO
      */
-    public function solveCSDSD_12345(CaseDTO $currentCase)
-    {
+    // public function solveCSDSD_12345(CaseDTO $currentCase)
+    // {
 
-        return $cases;
-    }
+    //     // return $cases;
+    // }
 
     /**
      * Propuesta de solución:
