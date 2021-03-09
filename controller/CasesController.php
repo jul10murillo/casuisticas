@@ -3651,7 +3651,7 @@ class CasesController
         unset($currentCase->followings[1]);
         $this->deleteCase($currentCase->followings[3]->getId());
         unset($currentCase->followings[3]);
-        
+
         $arrIdentifiers = [[1, 2], [3, 4, 5]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
@@ -4426,7 +4426,7 @@ class CasesController
      * @return CaseDTO
      */
     public function solveCSRDR_12345(CaseDTO $currentCase)
-    {        
+    {
         // Posiciones que no se eliminan 1 y 3
         $this->deleteCase($currentCase->followings[0]->getId());
         $this->deleteCase($currentCase->followings[2]->getId());
@@ -4442,7 +4442,7 @@ class CasesController
      * @return CaseDTO
      */
     public function solveSDSCRR_123455(CaseDTO $currentCase)
-    {             
+    {
         // Posiciones que no se eliminan 0, 3 y 5
         $this->deleteCase($currentCase->followings[1]->getId());
         $this->deleteCase($currentCase->followings[2]->getId());
@@ -4462,7 +4462,7 @@ class CasesController
         $followings = $currentCase->getFollowings();
 
         $followings[2]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
-        $followings[2]->setDate($this->subtractDaysFromDate( $followings[0]->getdate(), 1));
+        $followings[2]->setDate($this->subtractDaysFromDate($followings[0]->getdate(), 1));
 
         $currentCase->setFollowings([]);
         $currentCase->setfollowings([$followings[2], $followings[0], $followings[1], $followings[3]]);
@@ -4473,7 +4473,6 @@ class CasesController
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
         return $cases;
-
     }
 
 
@@ -4963,7 +4962,7 @@ class CasesController
         unset($currentCase->followings[1]);
 
         $this->saveCase($currentCase);
-        
+
         return $currentCase;
     }
 
@@ -5042,10 +5041,9 @@ class CasesController
 
         $currentCase->followings[3]->setStatus(Constants::HEALTH_STATUS_DISCARDED);
 
-        $arrIdentifiers = [[1, 2], [3, 4],[5,6,7]];
+        $arrIdentifiers = [[1, 2], [3, 4], [5, 6, 7]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
         return $cases;
     }
-
 }
