@@ -3636,17 +3636,26 @@ class CasesController
     }
 
     /** Propuesta de solución: Dejar seguimientos 4,5,6
-     *
+     * SD_12 SCR_456
      * @param CaseDTO $currentCase
      * @return CaseDTO
      */
     public function solveSCRSRVR_1123456(CaseDTO $currentCase)
     {
-        $this->deleteCase($currentCase->followings[1]->getId());
-        $this->deleteCase($currentCase->followings[2]->getId());
-        $this->deleteCase($currentCase->followings[3]->getId());
+        $currentCase->followings[2]->setStatus(Constants::HEALTH_STATUS_DISCARDED);
+        $currentCase->followings[4]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
+        $currentCase->followings[5]->setStatus(Constants::HEALTH_STATUS_CONFIRMED);
+        $currentCase->followings[6]->setStatus(Constants::HEALTH_STATUS_RECOVERED);
 
-        return $currentCase;
+        $this->deleteCase($currentCase->followings[1]->getId());
+        unset($currentCase->followings[1]);
+        $this->deleteCase($currentCase->followings[3]->getId());
+        unset($currentCase->followings[3]);
+        
+        $arrIdentifiers = [[1, 2], [4, 5, 6]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
     }
 
     /**
@@ -4410,6 +4419,62 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: SD_24
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveCSRDR_12345(CaseDTO $currentCase)
+    {        
+        // Posiciones que no se eliminan 1 y 3
+        $this->deleteCase($currentCase->followings[0]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: SCR_145
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSDSCRR_123455(CaseDTO $currentCase)
+    {             
+        // Posiciones que no se eliminan 0, 3 y 5
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: SD_-1 1 CR_24
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveDCCR_1234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $followings[2]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
+        $followings[2]->setDate($this->subtractDaysFromDate( $followings[0]->getdate(), 1));
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[2], $followings[0], $followings[1], $followings[3]]);
+
+        $this->saveCase($currentCase);
+
+        $arrIdentifiers = [[1, 2], [3, 4]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+
+    }
 
 
     /**
@@ -4895,7 +4960,10 @@ class CasesController
         $followings[0]->setStatus(Constants::HEALTH_STATUS_CONFIRMED);
 
         $this->deleteCase($followings[1]->getId());
+        unset($currentCase->followings[1]);
 
+        $this->saveCase($currentCase);
+        
         return $currentCase;
     }
 
@@ -4930,7 +4998,7 @@ class CasesController
     }
 
     /**
-     * Propuesta de solución: Dejar seguimientos 1,5
+     * Propuesta de solución: 
      *
      * @param CaseDTO $currentCase
      * @return CaseDTO
@@ -4938,12 +5006,46 @@ class CasesController
     public function solveSSSDCCR_1223456(CaseDTO $currentCase)
     {
         $this->deleteCase($currentCase->followings[1]->getId());
+        unset($currentCase->followings[1]);
         $this->deleteCase($currentCase->followings[2]->getId());
+        unset($currentCase->followings[2]);
         $this->deleteCase($currentCase->followings[5]->getId());
+        unset($currentCase->followings[5]);
 
         $arrIdentifiers = [[1, 2], [3, 4]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
         return $cases;
     }
+
+    /**
+     * Propuesta de solución:
+     *  SD_12 SD_12  SD_13 SD_45
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveCSDSD_12345(CaseDTO $currentCase)
+    {
+
+        return $cases;
+    }
+
+    /**
+     * Propuesta de solución:
+     *  SD_12 SD_3 +1  CHR_456
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSDSCHCR_1233456(CaseDTO $currentCase)
+    {
+        $currentCase->followings[3]->setDate($this->addDaysToDate($currentCase->followings[3]->getDate(), 1));
+
+        $currentCase->followings[3]->setStatus(Constants::HEALTH_STATUS_DISCARDED);
+
+        $arrIdentifiers = [[1, 2], [3, 4],[5,6,7]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
+
 }
