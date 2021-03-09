@@ -3633,9 +3633,6 @@ class CasesController
         $this->deleteCase($currentCase->followings[2]->getId());
         $this->deleteCase($currentCase->followings[3]->getId());
         $this->deleteCase($currentCase->followings[4]->getId());
-        $this->deleteCase($currentCase->followings[5]->getId());
-        $this->deleteCase($currentCase->followings[6]->getId());
-        $this->deleteCase($currentCase->followings[7]->getId());
 
         return $currentCase;
     }
@@ -3828,14 +3825,13 @@ class CasesController
     {
         $followings = $currentCase->getFollowings();
 
-        $currentCase->setFollowings([]);
-        $currentCase->setfollowings([$followings[0], $followings[3],  $followings[5], $followings[8]]);
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[4]->getId());
+        $this->deleteCase($followings[6]->getId());
+        $this->deleteCase($followings[7]->getId());
 
-        $this->deleteCase($currentCase->followings[1]->getId());
-        $this->deleteCase($currentCase->followings[2]->getId());
-        $this->deleteCase($currentCase->followings[4]->getId());
-        $this->deleteCase($currentCase->followings[6]->getId());
-        $this->deleteCase($currentCase->followings[7]->getId());
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[0],$followings[1], $followings[3],  $followings[5], $followings[8]]);     
 
         $arrIdentifiers = [[1, 2, 3], [4, 5]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
