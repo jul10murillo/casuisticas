@@ -3598,7 +3598,166 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: Dejar sospechoso(1), confirmado(2) y recuperado(6)
+     * SCR_126
+     *
+     *  @param CaseDTO $currentCase
+     *  @return CaseDTO
+     */
+    public function solveSCCCCR_123456(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
 
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Dividir en dos casos y elminar los casos 2,3,5,7,8
+     * SCR_124 SD_67
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
+    public function solveSCCCRSRDR_123345677(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[0], $followings[3],  $followings[5], $followings[8] ]);
+
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        $this->deleteCase($currentCase->followings[6]->getId());
+        $this->deleteCase($currentCase->followings[7]->getId());
+
+        $arrIdentifiers = [[1, 2, 3], [4, 5]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
+
+    /**
+     * Propuesta de solución: Dejar sospechoso(1), confirmado(2) y recuperado(3)
+     * SCR_123
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCCDCR_112223(CaseDTO $currentCase)
+    {
+       //Las posiciones que no se eliminan son  0, 2 ,5
+       $this->deleteCase($currentCase->followings[1]->getId());
+       $this->deleteCase($currentCase->followings[3]->getId());
+       $this->deleteCase($currentCase->followings[4]->getId());
+
+       return $currentCase;
+
+    }
+
+    /**
+     * Propuesta de solución: Dejar sospechoso 5 y descartado 6
+     * SD_56
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSCDRSDDR_11234566(CaseDTO $currentCase)
+    {
+        //Las posiciones que no se eliminan son  4 y 6
+       $this->deleteCase($currentCase->followings[0]->getId());
+       $this->deleteCase($currentCase->followings[1]->getId());
+       $this->deleteCase($currentCase->followings[2]->getId());
+       $this->deleteCase($currentCase->followings[3]->getId());
+       $this->deleteCase($currentCase->followings[5]->getId());
+       $this->deleteCase($currentCase->followings[7]->getId());
+
+       return $currentCase;       
+    }
+
+    /**
+     * Propuesta de solución: Dejar sospechoso 1, confirmado 2 y recuperado 7 
+     * SCR_127
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSCRSSDRDR_123456667(CaseDTO $currentCase)
+    {
+        //Las posiciones que no se eliminan son  0 , 1, 8
+       $this->deleteCase($currentCase->followings[2]->getId());
+       $this->deleteCase($currentCase->followings[3]->getId());
+       $this->deleteCase($currentCase->followings[4]->getId());
+       $this->deleteCase($currentCase->followings[5]->getId());
+       $this->deleteCase($currentCase->followings[6]->getId());
+       $this->deleteCase($currentCase->followings[7]->getId());
+
+       return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Dejar sospechoso 1, confirmado 2 y recuperado 6
+     * SCR_126
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSDCCRR_123456(CaseDTO $currentCase)
+    {
+          //Las posiciones que no se eliminan son  0 , 1, 5
+       $this->deleteCase($currentCase->followings[2]->getId());
+       $this->deleteCase($currentCase->followings[3]->getId());
+       $this->deleteCase($currentCase->followings[4]->getId());     
+
+       return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Dejar sospechoso 1, confirmado 3 y recuperado 5
+     * SCR_135
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSDCSCR_123345(CaseDTO $currentCase)
+    {
+            //Las posiciones que no se eliminan son  0 , 2, 5
+       $this->deleteCase($currentCase->followings[1]->getId());
+       $this->deleteCase($currentCase->followings[3]->getId());
+       $this->deleteCase($currentCase->followings[4]->getId());     
+
+       return $currentCase;
+    }
+
+    /**
+    *  Propuesta de solución: Dividir en dos casos y elimianr el seguimiento 3
+     * SD_12  SCR456
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
+    public function solveSDDDSCR_1223456(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[0], $followings[1],  $followings[4], $followings[5], $followings[6] ]);
+
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+      
+
+        $arrIdentifiers = [[1, 2], [3 , 4, 5]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+        
+    } 
+
+   
     /**
      * Buscar seguimiento por estado
      *
