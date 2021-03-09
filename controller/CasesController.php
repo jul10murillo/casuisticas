@@ -4475,8 +4475,8 @@ class CasesController
         return $cases;
     }
 
-    public function solveCRSRDR_123456(){
-        
+    public function solveCRSRDR_123456()
+    {
     }
 
 
@@ -5002,7 +5002,8 @@ class CasesController
 
     /**
      * Propuesta de solución: 
-     *
+     *SD_12 CR_12
+     *SD_13 CR_46
      * @param CaseDTO $currentCase
      * @return CaseDTO
      */
@@ -5015,7 +5016,7 @@ class CasesController
         $this->deleteCase($currentCase->followings[5]->getId());
         unset($currentCase->followings[5]);
 
-        $arrIdentifiers = [[1, 2], [3, 4]];
+        $arrIdentifiers = [[0, 3], [4, 6]];
         $cases = $this->caseDivider($currentCase, $arrIdentifiers);
 
         return $cases;
