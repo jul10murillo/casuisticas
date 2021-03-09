@@ -4231,7 +4231,7 @@ class CasesController
     public function solveSSCR_1122(CaseDTO $currentCase)
     {
         $followings = $currentCase->getFollowings();
-        $followings[3]->setDate($this->addDaysToDate($followings[0]->getDate(), 1));
+        $followings[3]->setDate($this->addDaysToDate($followings[2]->getDate(), 1));
 
         $currentCase->setFollowings([]);
         $currentCase->setfollowings([$followings[0], $followings[2],  $followings[3]]);
@@ -4474,6 +4474,10 @@ class CasesController
 
         return $cases;
 
+    }
+
+    public function solveCRSRDR_123456(){
+        
     }
 
 
