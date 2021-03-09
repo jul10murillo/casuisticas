@@ -40,9 +40,9 @@ class DataController
      */
     public function getData()
     {
-        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/OExtraccion_1915CorregidoLosCamposVacios.csv', 'r');
+        $csv_archivo  = fopen(dirname(__DIR__, 1) . '/assets/import/ExtraccionTIGOPROD20210309_1459.csv', 'r');
         $i            = 0;
-        while (($registro_csv = fgetcsv($csv_archivo)) !== false) {
+        while (($registro_csv = fgetcsv($csv_archivo, 0, ";")) !== false) {
             $i++;
             if ($i > 1) {
                 $data[] = $registro_csv;
@@ -51,7 +51,25 @@ class DataController
         fclose($csv_archivo);
 
         foreach ($data as $row => $value) {
-            $data[$row] = explode(';', $value[0]);
+            /* if ($row == 5799) {
+                echo 'stop';
+            }
+            if (count($value) > 1) {
+                foreach ($value as $key => $rowRepeat) {
+                    if ($key > 0) {
+                        $value[0] .= $rowRepeat;
+                    }
+                }
+            } */
+
+            // $data[$row] = explode(';', $value[0]);
+
+            $data[$row] = $value;
+
+            // if ($data[$row][0] == 64) {
+            //     echo 'stop';
+            // }
+
             if ($data[$row][0] == null || $data[$row][0] == "" ||  !isset($data[$row][0]) || is_null($data[$row][0])) {
                 echo 'falla al leer valor en el csv.. Fila: ' . $row . ' Data: ' . $data;
                 exit;
@@ -60,7 +78,10 @@ class DataController
 
         $new_data           = [];
         $new_data['people'] = [];
-        foreach ($data as $row) {
+        foreach ($data as $key => $row) {
+            // if ($key == 5799) {
+            //     echo 'stop';
+            // }
             if (is_numeric($row[0])) {
                 $new_data['cases'][$row[0]] = [$row[1], $row[2], $this->classifyCases($row[4]), $this->classifyCases($row[5])];
                 if (!isset($new_data['people'][$row[1]])) {
@@ -247,6 +268,30 @@ class DataController
 
         foreach ($check_history as $case => $history) {
             switch ($history) {
+                case 'VR_12':
+                    $good_cases[$case] = $history;
+                    break;
+                case 'SHCR_1234':
+                    $good_cases[$case] = $history;
+                    break;
+                case 'SCHCR_12345':
+                    $good_cases[$case] = $history;
+                    break;
+                case 'SCF_123':
+                    $good_cases[$case] = $history;
+                    break;
+                case 'HR_12':
+                    $good_cases[$case] = $history;
+                    break;
+                case 'HCR_123':
+                    $good_cases[$case] = $history;
+                    break;
+                case 'H_1':
+                    $good_cases[$case] = $history;
+                    break;
+                case 'CUHR_1234':
+                    $good_cases[$case] = $history;
+                    break;
                 case 'C_1':
                     $good_cases[$case] = $history;
                     break;
