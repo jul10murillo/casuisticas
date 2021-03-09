@@ -601,7 +601,7 @@ class CasesController
      * @param CaseDTO $currentCase
      * @return CaseDTO
      */
-    public function solveD_122(CaseDTO $currentCase)
+    public function solveSRD_122(CaseDTO $currentCase)
     {
 
         $followings = $currentCase->getFollowings();
@@ -4260,6 +4260,39 @@ class CasesController
     }
 
 
+    /**
+     * Propuesta de solución. Eliminar el caso de la mitad
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSRD_123(CaseDTO $currentCase){
+
+        $this->deleteCase($currentCase->followings[1]->getId());      
+
+        return $currentCase;
+    }
+
+
+    public function solveSCCCR_11112(CaseDTO $currentCase)
+
+    {
+        $followings = $currentCase->getFollowings();        
+        $followings[0]->setDate($this->subtractDaysFromDate($followings[1]->getDate(), 1));
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[0], $followings[1],  $followings[4] ]);
+
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());        
+
+        $this->saveCase($currentCase);
+
+        return $currentCase;
+    }
+
+
+    
     /**
      * Buscar seguimiento por estado
      *
