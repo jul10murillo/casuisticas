@@ -3598,6 +3598,225 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: Dejar seguimientos 2, 4,5,6,7
+     * SCR_124
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SCCRRRRR_12344444(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        $this->deleteCase($currentCase->followings[5]->getId());
+        $this->deleteCase($currentCase->followings[6]->getId());
+        return $currentCase;
+    }
+
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 3,4,5,6,7,8
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SCRSDDRRR_123456777(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        $this->deleteCase($currentCase->followings[5]->getId());
+        $this->deleteCase($currentCase->followings[6]->getId());
+        $this->deleteCase($currentCase->followings[7]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 4,5,6
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SCRSRVR_1123456(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[0]->getId());
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,2,6
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SCRVR_123445(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        
+        return $currentCase;
+    }
+
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,4,9
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SCSCCSRDR_111233345(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        $this->deleteCase($currentCase->followings[5]->getId());
+        $this->deleteCase($currentCase->followings[6]->getId());
+        $this->deleteCase($currentCase->followings[7]->getId());
+        
+        return $currentCase;
+    }
+
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,2,3,6
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SCUHCR_122345(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[4]->getId());
+        $this->deleteCase($currentCase->followings[5]->getId());
+        
+        return $currentCase;
+    }
+
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,3,5
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDCRR_12344(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,3,5
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDCRR_12344(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        
+        return $currentCase;
+    }    
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,3,6
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDCRSR_123456(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,6
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDDDSD_122234(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[4]->getId());
+        
+        return $currentCase;
+    }
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,4
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDDS_1122(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,5,6
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDDSCR_122345(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,5,6
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDDSCR_123334(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        
+        return $currentCase;
+    }
+
+
+    /**
+     * Propuesta de solución: Dejar seguimientos 1,5
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function SDDSD_12334(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        
+        return $currentCase;
+    }
+
 
     /**
      * Buscar seguimiento por estado
