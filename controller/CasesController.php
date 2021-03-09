@@ -4150,6 +4150,114 @@ class CasesController
         return $currentCase;
     }
 
+    /**
+     * Propuesta de solución: Dividir en dos casos
+     * SD_12 SCR_679
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
+    public function solveSDSDSSCRR_123456789(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[0], $followings[1],  $followings[5], $followings[6], $followings[8]]);
+
+        $this->deleteCase($followings[2]->getId());
+        $this->deleteCase($followings[3]->getId());
+        $this->deleteCase($followings[4]->getId());
+        $this->deleteCase($followings[7]->getId());
+
+        $arrIdentifiers = [[1, 2], [3, 4, 5]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+
+    }
+
+    /**
+     * Propuesta de solución: Dejar sospechoso(1), confirmado(5) y recuperado(6)
+     * SCR_156
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO
+     */
+    public function solveSDSSCRRR_12334566(CaseDTO $currentCase)
+    {
+        //Las posiciones que no se eliminan son  0 , 4, 6
+        $this->deleteCase($currentCase->followings[1]->getId());
+        $this->deleteCase($currentCase->followings[2]->getId());
+        $this->deleteCase($currentCase->followings[3]->getId());
+        $this->deleteCase($currentCase->followings[5]->getId());     
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución:Dividir en dos y eliminar el seguimiento 2
+     * SD_12 SD_34
+     *
+     * @param CaseDTO $currentCase
+     * @return CaseDTO[]
+     */
+    public function solveSRDCR_12234(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();
+        
+        $followings[3]->setStatus(Constants::HEALTH_STATUS_SUSPICIOUS);
+        $followings[4]->setStatus(Constants::HEALTH_STATUS_DISCARDED);
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[0], $followings[2],  $followings[3], $followings[4] ]);
+
+        $this->deleteCase($followings[1]->getId());
+
+        $this->saveCase($currentCase);
+
+        $arrIdentifiers = [[1, 2], [3, 4]];
+        $cases = $this->caseDivider($currentCase, $arrIdentifiers);
+
+        return $cases;
+    }
+
+    /**
+     * Propuesta de solución: Eliminar los Seguimientos 1 y 2
+     * CR_12
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSHCR_1112(CaseDTO $currentCase)
+    {
+        $this->deleteCase($currentCase->followings[0]->getId());
+        $this->deleteCase($currentCase->followings[1]->getId());
+
+        return $currentCase;
+    }
+
+    /**
+     * Propuesta de solución: 
+     * SCR_12 2+1
+     *
+     * @param CaseDTO $currentCase
+     * @return void
+     */
+    public function solveSSCR_1122(CaseDTO $currentCase)
+    {
+        $followings = $currentCase->getFollowings();        
+        $followings[3]->setDate($this->addDaysToDate($followings[0]->getDate(), 1));
+
+        $currentCase->setFollowings([]);
+        $currentCase->setfollowings([$followings[0], $followings[2],  $followings[3] ]);
+
+        $this->deleteCase($followings[1]->getId());
+
+        $this->saveCase($currentCase);
+
+        return $currentCase;
+    }
+
 
     /**
      * Buscar seguimiento por estado
